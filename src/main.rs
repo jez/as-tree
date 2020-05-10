@@ -46,6 +46,7 @@ impl fmt::Display for PathTrie {
 }
 
 fn main() {
+    // TODO(jez) stdin or file, -h/--help
     let mut trie = PathTrie::default();
     for path_buf in io::stdin()
         .lock()
@@ -56,5 +57,5 @@ fn main() {
         trie.insert(&path_buf)
     }
 
-    print!("{}", trie);
+    print!(".\n{}", trie);
 }
