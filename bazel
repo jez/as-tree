@@ -1,0 +1,93 @@
+#!/bin/bash
+
+#
+# ./bazel
+#
+# Reads the BAZEL_VERSION variable in the WORKSPACE file and executes the
+# corresponding Bazel version. Downloads and installs it if needed.
+#
+
+set -euo pipefail
+
+if [ "${LOCAL_BAZEL_OVERRIDE:-}" != "" ]; then
+  exec "$LOCAL_BAZEL_OVERRIDE" "$@"
+fi
+
+old_pwd="$PWD"
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+if ! [ -f WORKSPACE ]; then
+  echo >&2 "Didn't find the workspace"
+  exit 1
+fi
+
+repo_root="$PWD"
+cd "$old_pwd"
+
+workspace_contents=$(< "$repo_root/WORKSPACE")
+
+bazel_version_regex='BAZEL_VERSION = "([^"]+)"'
+if [[ $workspace_contents =~ $bazel_version_regex ]]; then
+  export BAZEL_VERSION="${BASH_REMATCH[1]}"
+else
+  echo >&2 "$0: Failed to extract BAZEL_VERSION from WORKSPACE"
+  exit 1
+fi
+
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+bazel_bin_loc="${bazel_bin_loc:-$XDG_CACHE_HOME/bazel_binaries}"
+bazel_exec_path="$bazel_bin_loc/$BAZEL_VERSION/bin/bazel-real"
+
+if [ -f "$bazel_exec_path" ]; then
+  exec "$bazel_exec_path" "$@"
+fi
+
+# ----- slow path -----
+
+echo >&2 "No cached Bazel v$BAZEL_VERSION found, installing..."
+
+case "$(uname -s)" in
+  Linux)  bazel_launcher_platform_name='linux'  ;;
+  Darwin) bazel_launcher_platform_name='darwin' ;;
+  *) echo >&2 "Your platform $(uname -s) is unsupported, sorry" && exit 1 ;;
+esac
+
+bazel_installer_sha_regex="BAZEL_INSTALLER_VERSION_${bazel_launcher_platform_name}_SHA = \"([^\"]+)\""
+if [[ $workspace_contents =~ $bazel_installer_sha_regex ]]; then
+  export expected_sha="${BASH_REMATCH[1]}"
+else
+  echo >&2 "$0: Failed to extract Bazel version from WORKSPACE"
+  exit 1
+fi
+
+BUILD_DIR="$(mktemp -d)"
+export BUILD_DIR
+mkdir -p "$BUILD_DIR"
+
+(
+  set -euo pipefail
+  cd "$BUILD_DIR"
+  echo "$PWD"
+
+  installer_name="bazel-${BAZEL_VERSION}-installer-${bazel_launcher_platform_name}-x86_64.sh"
+  BAZEL_REMOTE_SOURCE="${BAZEL_REMOTE_SOURCE:-https://github.com/bazelbuild/bazel/releases/download}"
+  BAZEL_INSTALLER_PATH="${BAZEL_INSTALLER_PATH:-$BAZEL_REMOTE_SOURCE/${BAZEL_VERSION}/$installer_name}"
+
+  curl -O -L "$BAZEL_INSTALLER_PATH"
+
+  actual_sha="$(shasum -a 256 "$installer_name" | awk '{print $1}')"
+  if [ "$actual_sha" != "$expected_sha" ]; then
+    echo >&2 "Installer checksum mismatch:"
+    echo >&2 "  Expected: $expected_sha"
+    echo >&2 "  Actual:   $actual_sha"
+    echo >&2 "To accept this mismatch, update the SHA in the WORKSPACE file and re-run."
+    exit 1
+  fi
+
+  chmod +x "$installer_name"
+  mkdir -p "$bazel_bin_loc"
+  "./${installer_name}" --base="${bazel_bin_loc}/${BAZEL_VERSION}" --bin="${bazel_bin_loc}/${BAZEL_VERSION}/bin_t"
+)
+rm -rf "$BUILD_DIR"
+
+exec "$bazel_exec_path" "$@"

@@ -4,4 +4,5 @@ rust_binary(
     name = "as-tree",
     srcs = ["main.rs"],
     deps = [],
+    visibility = ["//visibility:public"],
 )
