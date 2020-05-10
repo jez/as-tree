@@ -1,0 +1,503 @@
+.
+├── ast
+│   ├── ArgParsing.cc
+│   ├── ArgParsing.h
+│   ├── Helpers.cc
+│   ├── Helpers.h
+│   ├── TreeCopying.cc
+│   ├── TreeSanityChecks.cc
+│   ├── Trees.cc
+│   ├── Trees.h
+│   ├── ast.h
+│   ├── desugar
+│   │   ├── Desugar.cc
+│   │   ├── Desugar.h
+│   │   └── test
+│   │       └── desugar_test.cc
+│   ├── substitute
+│   │   ├── Substitute.cc
+│   │   └── substitute.h
+│   ├── treemap
+│   │   └── treemap.h
+│   └── verifier
+│       ├── Verifier.cc
+│       └── verifier.h
+├── cfg
+│   ├── CFG.cc
+│   ├── CFG.h
+│   ├── Instructions.cc
+│   ├── Instructions.h
+│   └── builder
+│       ├── builder.h
+│       ├── builder_entry.cc
+│       ├── builder_finalize.cc
+│       └── builder_walk.cc
+├── class_flatten
+│   ├── class_flatten.cc
+│   └── class_flatten.h
+├── common
+│   ├── ConstExprStr.h
+│   ├── Counters.cc
+│   ├── Counters.h
+│   ├── Counters_impl.h
+│   ├── Exception.h
+│   ├── FileOps.h
+│   ├── FileSystem.cc
+│   ├── FileSystem.h
+│   ├── JSON.cc
+│   ├── JSON.h
+│   ├── Levenstein.cc
+│   ├── Levenstein.h
+│   ├── Random.cc
+│   ├── Random.h
+│   ├── Subprocess.cc
+│   ├── Subprocess.h
+│   ├── Timer.cc
+│   ├── Timer.h
+│   ├── backtrace.cc
+│   ├── common.cc
+│   ├── common.h
+│   ├── concurrency
+│   │   ├── ConcurrentQueue.h
+│   │   ├── WorkerPool.h
+│   │   ├── WorkerPoolImpl.cc
+│   │   └── WorkerPoolImpl.h
+│   ├── crypto_hashing
+│   │   └── crypto_hashing.h
+│   ├── formatting.h
+│   ├── kvstore
+│   │   ├── KeyValueStore-emscripten.cc
+│   │   ├── KeyValueStore.cc
+│   │   ├── KeyValueStore.h
+│   │   └── test
+│   │       └── kvstore_test.cc
+│   ├── os
+│   │   ├── emscripten.cc
+│   │   ├── linux.cc
+│   │   ├── mac.cc
+│   │   ├── os.cc
+│   │   └── os.h
+│   ├── sort.h
+│   ├── statsd
+│   │   ├── statsd-emscripten.cc
+│   │   ├── statsd.cc
+│   │   └── statsd.h
+│   ├── test
+│   │   └── common_test.cc
+│   ├── typecase.h
+│   └── web_tracer_framework
+│       ├── tracing.cc
+│       └── tracing.h
+├── core
+│   ├── AutocorrectSuggestion.cc
+│   ├── AutocorrectSuggestion.h
+│   ├── Context.cc
+│   ├── Context.h
+│   ├── DebugOnlyCheck.h
+│   ├── Error.cc
+│   ├── Error.h
+│   ├── ErrorFlusher.cc
+│   ├── ErrorFlusher.h
+│   ├── ErrorQueue.cc
+│   ├── ErrorQueue.h
+│   ├── ErrorQueueMessage.h
+│   ├── Files.cc
+│   ├── Files.h
+│   ├── GlobalState.cc
+│   ├── GlobalState.h
+│   ├── GlobalSubstitution.h
+│   ├── Hashing.h
+│   ├── Loc.cc
+│   ├── Loc.h
+│   ├── LocalVariable.cc
+│   ├── LocalVariable.h
+│   ├── NameHash.cc
+│   ├── NameHash.h
+│   ├── NameRef.h
+│   ├── Names.cc
+│   ├── Names.h
+│   ├── StrictLevel.h
+│   ├── SymbolRef.h
+│   ├── Symbols.cc
+│   ├── Symbols.h
+│   ├── TypeConstraint.cc
+│   ├── TypeConstraint.h
+│   ├── TypePtr.h
+│   ├── Types.h
+│   ├── TypesAndOrigins.cc
+│   ├── Unfreeze.cc
+│   ├── Unfreeze.h
+│   ├── core.h
+│   ├── errors
+│   │   ├── cfg.h
+│   │   ├── desugar.h
+│   │   ├── errors.h
+│   │   ├── infer.h
+│   │   ├── internal.h
+│   │   ├── namer.h
+│   │   ├── parser.h
+│   │   ├── plugin.h
+│   │   ├── resolver.h
+│   │   └── rewriter.h
+│   ├── lsp
+│   │   ├── PreemptionTaskManager.cc
+│   │   ├── PreemptionTaskManager.h
+│   │   ├── Query.cc
+│   │   ├── Query.h
+│   │   ├── QueryResponse.cc
+│   │   ├── QueryResponse.h
+│   │   ├── Task.h
+│   │   ├── TypecheckEpochManager.cc
+│   │   └── TypecheckEpochManager.h
+│   ├── proto
+│   │   ├── proto.cc
+│   │   └── proto.h
+│   ├── serialize
+│   │   ├── pickler.h
+│   │   ├── serialize.cc
+│   │   ├── serialize.h
+│   │   └── test
+│   │       └── serialize_test.cc
+│   ├── test
+│   │   └── core_test.cc
+│   ├── tools
+│   │   └── generate_names.cc
+│   └── types
+│       ├── calls.cc
+│       ├── printing.cc
+│       ├── subtyping.cc
+│       ├── typemaps.cc
+│       └── types.cc
+├── definition_validator
+│   ├── validator.cc
+│   ├── validator.h
+│   ├── variance.cc
+│   └── variance.h
+├── emscripten
+│   └── main.cc
+├── infer
+│   ├── SigSuggestion.cc
+│   ├── SigSuggestion.h
+│   ├── environment.cc
+│   ├── environment.h
+│   ├── infer.h
+│   ├── inference.cc
+│   ├── inference.h
+│   └── test
+│       └── infer_test.cc
+├── local_vars
+│   ├── local_vars.cc
+│   └── local_vars.h
+├── main
+│   ├── autogen
+│   │   ├── autogen.cc
+│   │   ├── autogen.h
+│   │   ├── autoloader.cc
+│   │   ├── autoloader.h
+│   │   ├── subclasses.cc
+│   │   └── subclasses.h
+│   ├── cache
+│   │   ├── cache-orig.cc
+│   │   ├── cache.cc
+│   │   └── cache.h
+│   ├── lsp
+│   │   ├── DefLocSaver.cc
+│   │   ├── DefLocSaver.h
+│   │   ├── ErrorReporter.cc
+│   │   ├── ErrorReporter.h
+│   │   ├── LSPConfiguration.cc
+│   │   ├── LSPConfiguration.h
+│   │   ├── LSPFileUpdates.cc
+│   │   ├── LSPFileUpdates.h
+│   │   ├── LSPIndexer.cc
+│   │   ├── LSPIndexer.h
+│   │   ├── LSPInput.cc
+│   │   ├── LSPInput.h
+│   │   ├── LSPMessage.cc
+│   │   ├── LSPMessage.h
+│   │   ├── LSPOutput.cc
+│   │   ├── LSPOutput.h
+│   │   ├── LSPPreprocessor.cc
+│   │   ├── LSPPreprocessor.h
+│   │   ├── LSPTask.cc
+│   │   ├── LSPTask.h
+│   │   ├── LSPTypechecker.cc
+│   │   ├── LSPTypechecker.h
+│   │   ├── LSPTypecheckerCoordinator.cc
+│   │   ├── LSPTypecheckerCoordinator.h
+│   │   ├── LocalVarFinder.cc
+│   │   ├── LocalVarFinder.h
+│   │   ├── LocalVarSaver.cc
+│   │   ├── LocalVarSaver.h
+│   │   ├── NextMethodFinder.cc
+│   │   ├── NextMethodFinder.h
+│   │   ├── ShowOperation.cc
+│   │   ├── ShowOperation.h
+│   │   ├── UndoState.cc
+│   │   ├── UndoState.h
+│   │   ├── json_enums.h
+│   │   ├── json_types.cc
+│   │   ├── json_types.h
+│   │   ├── lsp.cc
+│   │   ├── lsp.h
+│   │   ├── lsp_helpers.cc
+│   │   ├── lsp_messages_gen_helpers.cc
+│   │   ├── lsp_messages_gen_helpers.h
+│   │   ├── notifications
+│   │   │   ├── cancel_request.cc
+│   │   │   ├── cancel_request.h
+│   │   │   ├── exit.cc
+│   │   │   ├── exit.h
+│   │   │   ├── initialized.cc
+│   │   │   ├── initialized.h
+│   │   │   ├── notifications.h
+│   │   │   ├── sorbet_fence.cc
+│   │   │   ├── sorbet_fence.h
+│   │   │   ├── sorbet_pause.cc
+│   │   │   ├── sorbet_pause.h
+│   │   │   ├── sorbet_resume.cc
+│   │   │   ├── sorbet_resume.h
+│   │   │   ├── sorbet_workspace_edit.cc
+│   │   │   └── sorbet_workspace_edit.h
+│   │   ├── protocol.cc
+│   │   ├── request_dispatch.cc
+│   │   ├── requests
+│   │   │   ├── code_action.cc
+│   │   │   ├── code_action.h
+│   │   │   ├── completion.cc
+│   │   │   ├── completion.h
+│   │   │   ├── definition.cc
+│   │   │   ├── definition.h
+│   │   │   ├── document_highlight.cc
+│   │   │   ├── document_highlight.h
+│   │   │   ├── document_symbol.cc
+│   │   │   ├── document_symbol.h
+│   │   │   ├── get_counters.cc
+│   │   │   ├── get_counters.h
+│   │   │   ├── hover.cc
+│   │   │   ├── hover.h
+│   │   │   ├── initialize.cc
+│   │   │   ├── initialize.h
+│   │   │   ├── references.cc
+│   │   │   ├── references.h
+│   │   │   ├── requests.h
+│   │   │   ├── shutdown.cc
+│   │   │   ├── shutdown.h
+│   │   │   ├── signature_help.cc
+│   │   │   ├── signature_help.h
+│   │   │   ├── sorbet_error.cc
+│   │   │   ├── sorbet_error.h
+│   │   │   ├── sorbet_read_file.cc
+│   │   │   ├── sorbet_read_file.h
+│   │   │   ├── type_definition.cc
+│   │   │   ├── type_definition.h
+│   │   │   ├── workspace_symbols.cc
+│   │   │   └── workspace_symbols.h
+│   │   ├── test
+│   │   │   ├── error_reporter_test.cc
+│   │   │   ├── generate_lsp_messages_test.cc
+│   │   │   ├── lsp_file_updates_test.cc
+│   │   │   ├── lsp_preprocessor_test.cc
+│   │   │   └── lsp_test.cc
+│   │   ├── tools
+│   │   │   ├── generate_lsp_messages.cc
+│   │   │   ├── generate_lsp_messages.h
+│   │   │   ├── make_lsp_types.cc
+│   │   │   └── make_lsp_types.h
+│   │   ├── watchman
+│   │   │   ├── WatchmanProcess.cc
+│   │   │   └── WatchmanProcess.h
+│   │   ├── wrapper.cc
+│   │   └── wrapper.h
+│   ├── main.cc
+│   ├── options
+│   │   ├── ConfigParser.cc
+│   │   ├── ConfigParser.h
+│   │   ├── options.cc
+│   │   ├── options.h
+│   │   └── test
+│   │       └── options_test.cc
+│   ├── pipeline
+│   │   ├── ProgressIndicator.cc
+│   │   ├── ProgressIndicator.h
+│   │   ├── pipeline.cc
+│   │   ├── pipeline.h
+│   │   └── semantic_extension
+│   │       ├── DefaultImplementation.cc
+│   │       └── SemanticExtension.h
+│   ├── realmain.cc
+│   └── realmain.h
+├── namer
+│   ├── configatron
+│   │   ├── configatron.cc
+│   │   └── configatron.h
+│   ├── namer.cc
+│   ├── namer.h
+│   └── test
+│       └── namer_test.cc
+├── parser
+│   ├── Builder.cc
+│   ├── Builder.h
+│   ├── Dedenter.h
+│   ├── Node.cc
+│   ├── Node.h
+│   ├── Parser.cc
+│   ├── parser.h
+│   ├── test
+│   │   └── parser_test.cc
+│   └── tools
+│       └── generate_ast.cc
+├── payload
+│   ├── binary
+│   │   ├── binary.h
+│   │   ├── empty.cc
+│   │   └── tools
+│   │       └── gen_state_payload.cc
+│   ├── otherwise_compdb_bugs_out.cc
+│   ├── payload.cc
+│   ├── payload.h
+│   └── text
+│       ├── nopopulate.cc
+│       ├── populate.cc
+│       ├── text.h
+│       └── tools
+│           └── generate_payload.cc
+├── plugin
+│   ├── Plugins.cc
+│   ├── Plugins.h
+│   ├── SubprocessTextPlugin.cc
+│   └── SubprocessTextPlugin.h
+├── rbi
+│   └── tools
+│       └── generate_procs.cc
+├── resolver
+│   ├── CorrectTypeAlias.cc
+│   ├── CorrectTypeAlias.h
+│   ├── GlobalPass.cc
+│   ├── resolver.cc
+│   ├── resolver.h
+│   ├── type_syntax.cc
+│   └── type_syntax.h
+├── rewriter
+│   ├── AttrReader.cc
+│   ├── AttrReader.h
+│   ├── ClassNew.cc
+│   ├── ClassNew.h
+│   ├── Cleanup.cc
+│   ├── Cleanup.h
+│   ├── Command.cc
+│   ├── Command.h
+│   ├── DSLBuilder.cc
+│   ├── DSLBuilder.h
+│   ├── DefaultArgs.cc
+│   ├── DefaultArgs.h
+│   ├── Delegate.cc
+│   ├── Delegate.h
+│   ├── Flatfiles.cc
+│   ├── Flatfiles.h
+│   ├── Flatten.cc
+│   ├── Flatten.h
+│   ├── Initializer.cc
+│   ├── Initializer.h
+│   ├── InterfaceWrapper.cc
+│   ├── InterfaceWrapper.h
+│   ├── Mattr.cc
+│   ├── Mattr.h
+│   ├── Minitest.cc
+│   ├── Minitest.h
+│   ├── MixinEncryptedProp.cc
+│   ├── MixinEncryptedProp.h
+│   ├── ModuleFunction.cc
+│   ├── ModuleFunction.h
+│   ├── Private.cc
+│   ├── Private.h
+│   ├── Prop.cc
+│   ├── Prop.h
+│   ├── ProtobufDescriptorPool.cc
+│   ├── ProtobufDescriptorPool.h
+│   ├── Rails.cc
+│   ├── Rails.h
+│   ├── Regexp.cc
+│   ├── Regexp.h
+│   ├── SelfNew.cc
+│   ├── SelfNew.h
+│   ├── SigRewriter.cc
+│   ├── SigRewriter.h
+│   ├── Struct.cc
+│   ├── Struct.h
+│   ├── TEnum.cc
+│   ├── TEnum.h
+│   ├── TypeMembers.cc
+│   ├── TypeMembers.h
+│   ├── Util.cc
+│   ├── Util.h
+│   ├── rewriter.cc
+│   └── rewriter.h
+├── sorbet_version
+│   ├── sorbet_version.c
+│   └── sorbet_version.h
+├── test
+│   ├── LSPTest.cc
+│   ├── LSPTest.h
+│   ├── autocorrect-test.cc
+│   ├── backtrace-test-error.cc
+│   ├── backtrace-test-raise.cc
+│   ├── error-check-test.cc
+│   ├── fuzz
+│   │   ├── empty.cc
+│   │   ├── fuzz_dash_e.cc
+│   │   ├── fuzz_doc_symbols.cc
+│   │   └── fuzz_hover.cc
+│   ├── hello-test.cc
+│   ├── helpers
+│   │   ├── MockFileSystem.cc
+│   │   ├── MockFileSystem.h
+│   │   ├── expectations.h
+│   │   ├── lsp.cc
+│   │   ├── lsp.h
+│   │   ├── position_assertions.cc
+│   │   └── position_assertions.h
+│   ├── lsp
+│   │   ├── ProtocolTest.cc
+│   │   ├── ProtocolTest.h
+│   │   ├── cache_protocol_test_corpus.cc
+│   │   ├── multithreaded_protocol_test_corpus.cc
+│   │   ├── protocol_test_corpus.cc
+│   │   └── watchman_test_corpus.cc
+│   ├── print_document_symbols.cc
+│   └── test_corpus.cc
+└── third_party
+    ├── licenses
+    │   ├── licenses.h
+    │   └── tools
+    │       └── generate_licenses.cc
+    ├── parser
+    │   ├── cc
+    │   │   ├── capi.cc
+    │   │   ├── context.cc
+    │   │   ├── driver.cc
+    │   │   ├── literal.cc
+    │   │   ├── state_stack.cc
+    │   │   └── token.cc
+    │   ├── codegen
+    │   │   └── generate_diagnostics.cc
+    │   └── include
+    │       └── ruby_parser
+    │           ├── builder.hh
+    │           ├── capi.hh
+    │           ├── context.hh
+    │           ├── diagnostic.hh
+    │           ├── driver.hh
+    │           ├── lexer.hh
+    │           ├── literal.hh
+    │           ├── node.hh
+    │           ├── pool.hh
+    │           ├── state_stack.hh
+    │           └── token.hh
+    └── progressbar
+        ├── progressbar
+        │   ├── progressbar.h
+        │   └── statusbar.h
+        └── src
+            ├── progressbar.c
+            └── statusbar.c

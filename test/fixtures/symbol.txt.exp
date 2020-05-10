@@ -1,0 +1,45 @@
+.
+├── Brewfile
+├── DECISIONS.md
+├── Makefile
+├── README.md
+├── demo.sh
+├── run-tests.sh
+├── scaffold
+│   ├── README.md
+│   ├── TARGET.cm
+│   ├── TARGET.mlb
+│   ├── src
+│   │   ├── call-main.sml
+│   │   ├── main.sig
+│   │   └── main.sml
+│   └── symbol
+├── symbol-new
+└── tests
+    ├── logging.sh
+    ├── symbol
+    │   ├── errors.sh
+    │   ├── errors.sh.exp
+    │   ├── help.sh
+    │   ├── help.sh.exp
+    │   ├── infer-with.sh
+    │   ├── overwrite-existing.sh
+    │   ├── with-mlton.sh
+    │   ├── with-mlton.sh.exp
+    │   ├── with-smlnj.sh
+    │   └── with-smlnj.sh.exp
+    ├── symbol-new
+    │   ├── existing-empty-dot.sh
+    │   ├── existing-empty-dot.sh.exp
+    │   ├── existing-empty.sh
+    │   ├── help.sh
+    │   ├── help.sh.exp
+    │   ├── infer-with.sh
+    │   ├── install-with-smlnj.sh
+    │   ├── new-empty.sh
+    │   ├── new-empty.sh.exp
+    │   ├── no-target.sh
+    │   ├── no-target.sh.exp
+    │   ├── version.sh
+    │   └── version.sh.exp
+    └── travis-install.sh

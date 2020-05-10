@@ -1,0 +1,27 @@
+.
+├── LICENSE.md
+├── README.md
+├── WORKSPACE
+├── bazel
+├── main
+│   ├── BUILD
+│   └── main.cc
+├── test
+│   ├── BUILD
+│   ├── diff_one.sh
+│   ├── diff_tests.bzl
+│   ├── fixtures
+│   │   ├── as-tree.txt
+│   │   ├── symbol.txt
+│   │   └── symbol.txt.exp
+│   └── update_one.sh
+├── third_party
+│   ├── BUILD
+│   ├── externals.bzl
+│   └── spdlog.BUILD
+└── tools
+    ├── BUILD
+    ├── clang.bzl
+    └── scripts
+        ├── build_compilation_db.sh
+        └── generate_compdb_targets.sh

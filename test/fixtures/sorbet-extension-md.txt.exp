@@ -1,0 +1,81 @@
+.
+├── ACKNOWLEDGEMENTS.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── README.md
+├── docs
+│   ├── JRuby.md
+│   ├── README.md
+│   ├── compressors.md
+│   ├── internals.md
+│   ├── logo
+│   │   └── README.md
+│   ├── pipeline.md
+│   ├── suggest-sig.md
+│   └── tracing.md
+├── gems
+│   ├── sorbet
+│   │   └── README.md
+│   └── sorbet-runtime
+│       └── README.md
+├── third_party
+│   ├── README.md
+│   └── parser
+│       └── README.md
+└── website
+    ├── README.md
+    ├── blog
+    │   ├── 2019-05-16-state-of-sorbet-spring-2019.md
+    │   ├── 2019-06-20-open-sourcing-sorbet.md
+    │   └── 2019-12-20-announcing-sorbet-0.5.md
+    ├── docs
+    │   ├── abstract.md
+    │   ├── adopting.md
+    │   ├── attached-class.md
+    │   ├── class-of.md
+    │   ├── class-types.md
+    │   ├── cli.md
+    │   ├── error-reference.md
+    │   ├── exhaustiveness.md
+    │   ├── faq.md
+    │   ├── final.md
+    │   ├── flow-sensitive.md
+    │   ├── gradual.md
+    │   ├── intersection-types.md
+    │   ├── legal
+    │   │   └── trademark-policy.md
+    │   ├── metaprogramming-plugins.md
+    │   ├── metrics.md
+    │   ├── nilable-types.md
+    │   ├── non-forcing-constants.md
+    │   ├── noreturn.md
+    │   ├── override-checking.md
+    │   ├── overview.md
+    │   ├── procs.md
+    │   ├── quickref.md
+    │   ├── rbi.md
+    │   ├── runtime.md
+    │   ├── sealed.md
+    │   ├── self-type.md
+    │   ├── shapes.md
+    │   ├── sigs.md
+    │   ├── static.md
+    │   ├── stdlib-generics.md
+    │   ├── talks
+    │   │   ├── curry-on-2019.md
+    │   │   ├── jvm-ls-2019.md
+    │   │   ├── ruby-conf-2019.md
+    │   │   ├── ruby-kaigi-2018.md
+    │   │   ├── ruby-kaigi-2019.md
+    │   │   └── strange-loop-2018.md
+    │   ├── tconfiguration.md
+    │   ├── tenum.md
+    │   ├── troubleshooting.md
+    │   ├── tstruct.md
+    │   ├── tuples.md
+    │   ├── type-aliases.md
+    │   ├── type-annotations.md
+    │   ├── type-assertions.md
+    │   ├── union-types.md
+    │   └── untyped.md
+    └── style-guide.md
