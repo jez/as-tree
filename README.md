@@ -7,7 +7,7 @@ For example, given:
 ```
 dir1/foo.txt
 dir1/bar.txt
-dir3/qux.txt
+dir2/qux.txt
 ```
 
 it will print:
@@ -18,6 +18,7 @@ it will print:
 │   ├── foo.txt
 │   └── bar.txt
 └── dir2
+    └── qux.txt
 ```
 
 This tools is particularly useful when used with `find` or `fd` to produce such
