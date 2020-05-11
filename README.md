@@ -28,15 +28,24 @@ Inspired by [this feature request](https://github.com/sharkdp/fd/issues/283).
 
 ## Install
 
-This project is written in Rust and built using Bazel. The Makefile will
-download all the tools you need to build it, including Bazel and Rust.
+There are pre-built binary releases in the Releases tab.
+
+This project is written in Rust and builds under both Bazel and Cargo.
+
+To install from source using Cargo:
+
+```
+git clone https://github.com/jez/as-tree
+cd as-tree
+cargo install
+```
+
+To install from source using Bazel:
 
 ```shell
-# Build from source, installs to ~/.local/bin/as-tree
+git clone https://github.com/jez/as-tree
+cd as-tree
 make install
-
-# Build from source, installs to /usr/local/bin/as-tree
-make install prefix=/usr/local
 ```
 
 ## Usage
@@ -82,10 +91,12 @@ of files to print better than `tree` can alone.
 
 ## Developing
 
-```shell
-# Fast build (some debug info, but fast compile times):
-./bazel build //src:as-tree
+Running the tests requires Bazel. The `./bazel` shell script in this repo will
+download and cache a specific version of Bazel for you. From there, Bazel knows
+how to install all the dependencies it needs to build this project (including a
+Rust toolchain).
 
+```shell
 # Run the tests:
 ./bazel test --test_output=errors //test
 
@@ -103,7 +114,6 @@ of files to print better than `tree` can alone.
 
 ## TODO(jez)
 
-- Set up CI (should build under both Bazel and Cargo)
 - rustfmt / buildifier / shellcheck in CI
 - tests for CLI options
 - [ ] Color output according to LS_COLORS environment variable. Prior art:

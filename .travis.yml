@@ -16,4 +16,13 @@ script:
 
 before_deploy:
   - cargo install --path .
-  - cd "$HOME/.cargo/bin" && zip "barchart-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.zip" ./barchart
+  - cd "$HOME/.cargo/bin" && zip "as-tree-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.zip" ./as-tree
+
+deploy:
+  provider: releases
+  api_key:
+    secure: BnKdnETj/m+MgWkeMWcw5geKD0+gadJPCYBVj8eSW6WCjwHTqfAhasjSRNGdR4KbvNwAYfl2b12AMsdWci5lR97TmVZB7SyNnSwpilQM3kEiGUGv3BaTnZ6MNe2rcmcTNSKcQ1/ou8vBXwVeeH2aSlhLASW5kpjnBu9cz7vbuuuWsV5faXD1WPlxI+zGjwBtasBk+hcW9CnMvXYoklosRPk1dTg6Y571d6xcIPJ4C8hjLWCLY984YPluZNkqmOUhGmQThkElQfzbtl2ABcpGkINDyjFM30D1N47Ccu7FIsmgtmspHn3RisEFyCw/68qUGO39i9v0MELCx/Zxccj4F4a37FAOXjjRXFQC8HsVITg3cr5utPddpiGl3e9dNa7lKzJqYEn6OOwfUOHWpL1ZrDmjYwHSNj6ii/O66DdqJ8UE/PvxraA2GUKztro4PmDnj/dq05NdK/CIFSCEdJwZEOBdgHAdhSVLC1Y6wrPyyHGD/4doK5HqdfXGCVDI4NYLFySJ9Z+mopPXKsFlFd79OPFtvaHsjXvxvYUAABtxM62CqfRhJs1XjHs9yPuW6h9DDq7bY+jxj9EwkX9vmhntpkzmbDWAHDHnb7Rzhk9iS9XEKG3rlJGx8F/O1FwQKUoOhUz1mJBiiChENNfIJXLLLkPvC/wgEfD7vCF9KAKK+Is=
+  file: "$HOME/.local/bin/as-tree-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.zip"
+  on:
+    tags: true
+    repo: jez/as-tree
