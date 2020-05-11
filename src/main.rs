@@ -24,7 +24,6 @@ impl PathTrie {
     }
 
     fn _fmt(&self, out: &mut fmt::Formatter, outer_prefix: &str) -> fmt::Result {
-        // TODO(jez) Handle non-UTF-8 locales
         let normal_prefix = format!("{}│   ", outer_prefix);
         let last_prefix = format!("{}    ", outer_prefix);
 
