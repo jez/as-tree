@@ -21,7 +21,7 @@ it will print:
     └── qux.txt
 ```
 
-This tools is particularly useful when used with `find` or `fd` to produce such
+This tool is particularly useful when used with `find` or `fd` to produce such
 a list of files. It's similar in spirit to `tree`, but `find` and `fd` tend to
 be more powerful when it comes to controling which files to list.
 
