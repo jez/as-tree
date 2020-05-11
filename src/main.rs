@@ -1,7 +1,8 @@
 use std::collections::BTreeMap;
 use std::env;
 use std::fmt;
-use std::io::{self, BufRead};
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
 use std::path::{Path, PathBuf};
 use std::process::exit;
 
@@ -47,7 +48,20 @@ impl fmt::Display for PathTrie {
     }
 }
 
-const usage: &'static str = "\
+fn drain_input_to_path_trie<'a, T>(lines: &'a mut T) -> PathTrie
+where
+    T: Iterator<Item = String>,
+{
+    let mut trie = PathTrie::default();
+
+    for path_buf in lines.map(PathBuf::from) {
+        trie.insert(&path_buf)
+    }
+
+    return trie;
+}
+
+const USAGE: &'static str = "\
 Print a list of paths as a tree of paths.
 
 Usage:
@@ -62,33 +76,33 @@ struct Options {
     pub filename: Option<String>,
 }
 
-fn parse_options_or_die() {
-    let argv = env::args();
+fn parse_options_or_die() -> Options {
+    let mut argv = env::args();
 
     if argv.next().is_none() {
-        eprint!("{}", usage);
+        eprint!("{}", USAGE);
         exit(1);
     }
 
-    let mut options = Options::default;
+    let mut options = Options::default();
     for arg in argv {
         if arg.is_empty() {
-            eprint!("Unrecognized argument: {}\n\n{}", arg, usage);
+            eprint!("Unrecognized argument: {}\n\n{}", arg, USAGE);
             exit(1);
         }
 
         if arg == "-h" || arg == "--help" {
-            print!("{}", usage);
+            print!("{}", USAGE);
             exit(0);
         }
 
-        if arg[..1] = "-" {
-            eprint!("Unrecognized option: {}\n\n{}", arg, usage);
+        if &arg[..1] == "-" {
+            eprint!("Unrecognized option: {}\n\n{}", arg, USAGE);
             exit(1);
         }
 
         if options.filename.is_some() {
-            eprint!("Extra argument: {}\n\n{}", arg, usage);
+            eprint!("Extra argument: {}\n\n{}", arg, USAGE);
             exit(1);
         }
 
@@ -98,16 +112,22 @@ fn parse_options_or_die() {
     return options;
 }
 
-fn main() {
-    let mut trie = PathTrie::default();
-    for path_buf in io::stdin()
-        .lock()
-        .lines()
-        .filter_map(Result::ok)
-        .map(PathBuf::from)
-    {
-        trie.insert(&path_buf)
-    }
+fn main() -> io::Result<()> {
+    let options = parse_options_or_die();
+
+    let trie = match options.filename {
+        None => {
+            // TODO(jez) isatty
+            drain_input_to_path_trie(&mut io::stdin().lock().lines().filter_map(Result::ok))
+        }
+        Some(filename) => {
+            let file = File::open(filename)?;
+            let reader = BufReader::new(file);
+            drain_input_to_path_trie(&mut reader.lines().filter_map(Result::ok))
+        }
+    };
 
     print!(".\n{}", trie);
+
+    io::Result::Ok(())
 }
