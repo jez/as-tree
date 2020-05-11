@@ -48,13 +48,10 @@ impl fmt::Display for PathTrie {
     }
 }
 
-fn drain_input_to_path_trie<'a, T>(lines: &'a mut T) -> PathTrie
-where
-    T: Iterator<Item = String>,
-{
+fn drain_input_to_path_trie<T: BufRead>(input: &mut T) -> PathTrie {
     let mut trie = PathTrie::default();
 
-    for path_buf in lines.map(PathBuf::from) {
+    for path_buf in input.lines().filter_map(Result::ok).map(PathBuf::from) {
         trie.insert(&path_buf)
     }
 
@@ -117,13 +114,12 @@ fn main() -> io::Result<()> {
 
     let trie = match options.filename {
         None => {
-            // TODO(jez) isatty
-            drain_input_to_path_trie(&mut io::stdin().lock().lines().filter_map(Result::ok))
+            drain_input_to_path_trie(&mut io::stdin().lock())
         }
         Some(filename) => {
             let file = File::open(filename)?;
-            let reader = BufReader::new(file);
-            drain_input_to_path_trie(&mut reader.lines().filter_map(Result::ok))
+            let mut reader = BufReader::new(file);
+            drain_input_to_path_trie(&mut reader)
         }
     };
 
