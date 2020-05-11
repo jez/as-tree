@@ -1,2 +1,3 @@
 /target
 /bazel-*
+.bazelrc.local

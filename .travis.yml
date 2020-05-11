@@ -1,0 +1,19 @@
+language: rust
+
+# It's slower to cache (fetch cache, unzip, zip, upload cache) than to fetch
+# deps directly right now.
+
+os:
+  - linux
+  - osx
+
+install:
+  - ./tools/scripts/ci-setup.sh
+  - ./bazel --help
+
+script:
+  - ./bazel test --test_output=errors //test
+
+before_deploy:
+  - cargo install --path .
+  - cd "$HOME/.cargo/bin" && zip "barchart-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.zip" ./barchart
