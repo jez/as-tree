@@ -1,7 +1,9 @@
 use std::collections::BTreeMap;
+use std::env;
 use std::fmt;
 use std::io::{self, BufRead};
 use std::path::{Path, PathBuf};
+use std::process::exit;
 
 #[derive(Debug, Default)]
 pub struct PathTrie {
@@ -45,8 +47,58 @@ impl fmt::Display for PathTrie {
     }
 }
 
+const usage: &'static str = "\
+Print a list of paths as a tree of paths.
+
+Usage:
+  as-tree [<file>]
+
+Arguments:
+  <file>      The file to read from [default: stdin]
+";
+
+#[derive(Debug, Default)]
+struct Options {
+    pub filename: Option<String>,
+}
+
+fn parse_options_or_die() {
+    let argv = env::args();
+
+    if argv.next().is_none() {
+        eprint!("{}", usage);
+        exit(1);
+    }
+
+    let mut options = Options::default;
+    for arg in argv {
+        if arg.is_empty() {
+            eprint!("Unrecognized argument: {}\n\n{}", arg, usage);
+            exit(1);
+        }
+
+        if arg == "-h" || arg == "--help" {
+            print!("{}", usage);
+            exit(0);
+        }
+
+        if arg[..1] = "-" {
+            eprint!("Unrecognized option: {}\n\n{}", arg, usage);
+            exit(1);
+        }
+
+        if options.filename.is_some() {
+            eprint!("Extra argument: {}\n\n{}", arg, usage);
+            exit(1);
+        }
+
+        options.filename = Some(arg.to_string());
+    }
+
+    return options;
+}
+
 fn main() {
-    // TODO(jez) stdin or file, -h/--help
     let mut trie = PathTrie::default();
     for path_buf in io::stdin()
         .lock()
