@@ -64,7 +64,7 @@ Arguments:
 
 ## Example
 
-This tools is particularly useful with tools like `fd` which can prune the list
+This tool is particularly useful with tools like `fd` which can prune the list
 of files to print better than `tree` can alone.
 
 ```
