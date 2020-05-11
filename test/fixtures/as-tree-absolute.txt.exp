@@ -1,0 +1,42 @@
+/
+└── Users
+    └── jez
+        └── prog
+            └── cli
+                └── as-tree
+                    ├── LICENSE.md
+                    ├── Makefile
+                    ├── README.md
+                    ├── WORKSPACE
+                    ├── bazel
+                    ├── main
+                    │   ├── BUILD
+                    │   └── main.cc
+                    ├── test
+                    │   ├── BUILD
+                    │   ├── diff_one.sh
+                    │   ├── diff_tests.bzl
+                    │   ├── fixtures
+                    │   │   ├── as-tree-absolute.txt
+                    │   │   ├── as-tree.txt
+                    │   │   ├── as-tree.txt.exp
+                    │   │   ├── empty.txt
+                    │   │   ├── empty.txt.exp
+                    │   │   ├── sorbet-extension-c-h-cc-hh.txt
+                    │   │   ├── sorbet-extension-c-h-cc-hh.txt.exp
+                    │   │   ├── sorbet-extension-md.txt
+                    │   │   ├── sorbet-extension-md.txt.exp
+                    │   │   ├── sorbet.txt
+                    │   │   ├── sorbet.txt.exp
+                    │   │   ├── symbol.txt
+                    │   │   └── symbol.txt.exp
+                    │   └── update_one.sh
+                    ├── third_party
+                    │   ├── BUILD
+                    │   └── externals.bzl
+                    └── tools
+                        ├── BUILD
+                        ├── clang.bzl
+                        └── scripts
+                            ├── build_compilation_db.sh
+                            └── generate_compdb_targets.sh

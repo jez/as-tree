@@ -1,0 +1,4475 @@
+.
+├── ACKNOWLEDGEMENTS.md
+├── BUILD
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── NOTICE
+├── README.md
+├── Rakefile
+├── WORKSPACE
+├── ast
+│   ├── ArgParsing.cc
+│   ├── ArgParsing.h
+│   ├── BUILD
+│   ├── Helpers.cc
+│   ├── Helpers.h
+│   ├── TreeCopying.cc
+│   ├── TreeSanityChecks.cc
+│   ├── Trees.cc
+│   ├── Trees.h
+│   ├── ast.h
+│   ├── desugar
+│   │   ├── BUILD
+│   │   ├── Desugar.cc
+│   │   ├── Desugar.h
+│   │   └── test
+│   │       └── desugar_test.cc
+│   ├── substitute
+│   │   ├── BUILD
+│   │   ├── Substitute.cc
+│   │   └── substitute.h
+│   ├── treemap
+│   │   ├── BUILD
+│   │   └── treemap.h
+│   └── verifier
+│       ├── BUILD
+│       ├── Verifier.cc
+│       └── verifier.h
+├── bazel
+├── cfg
+│   ├── BUILD
+│   ├── CFG.cc
+│   ├── CFG.h
+│   ├── Instructions.cc
+│   ├── Instructions.h
+│   └── builder
+│       ├── BUILD
+│       ├── builder.h
+│       ├── builder_entry.cc
+│       ├── builder_finalize.cc
+│       └── builder_walk.cc
+├── class_flatten
+│   ├── BUILD
+│   ├── class_flatten.cc
+│   └── class_flatten.h
+├── common
+│   ├── BUILD
+│   ├── ConstExprStr.h
+│   ├── Counters.cc
+│   ├── Counters.h
+│   ├── Counters_impl.h
+│   ├── Exception.h
+│   ├── FileOps.h
+│   ├── FileSystem.cc
+│   ├── FileSystem.h
+│   ├── JSON.cc
+│   ├── JSON.h
+│   ├── Levenstein.cc
+│   ├── Levenstein.h
+│   ├── Random.cc
+│   ├── Random.h
+│   ├── Subprocess.cc
+│   ├── Subprocess.h
+│   ├── Timer.cc
+│   ├── Timer.h
+│   ├── backtrace.cc
+│   ├── common.cc
+│   ├── common.h
+│   ├── concurrency
+│   │   ├── BUILD
+│   │   ├── ConcurrentQueue.h
+│   │   ├── WorkerPool.h
+│   │   ├── WorkerPoolImpl.cc
+│   │   └── WorkerPoolImpl.h
+│   ├── crypto_hashing
+│   │   ├── BUILD
+│   │   └── crypto_hashing.h
+│   ├── formatting.h
+│   ├── kvstore
+│   │   ├── BUILD
+│   │   ├── KeyValueStore-emscripten.cc
+│   │   ├── KeyValueStore.cc
+│   │   ├── KeyValueStore.h
+│   │   └── test
+│   │       └── kvstore_test.cc
+│   ├── os
+│   │   ├── emscripten.cc
+│   │   ├── linux.cc
+│   │   ├── mac.cc
+│   │   ├── os.cc
+│   │   └── os.h
+│   ├── sort.h
+│   ├── statsd
+│   │   ├── BUILD
+│   │   ├── statsd-emscripten.cc
+│   │   ├── statsd.cc
+│   │   └── statsd.h
+│   ├── test
+│   │   └── common_test.cc
+│   ├── typecase.h
+│   └── web_tracer_framework
+│       ├── BUILD
+│       ├── tracing.cc
+│       └── tracing.h
+├── core
+│   ├── AutocorrectSuggestion.cc
+│   ├── AutocorrectSuggestion.h
+│   ├── BUILD
+│   ├── Context.cc
+│   ├── Context.h
+│   ├── DebugOnlyCheck.h
+│   ├── Error.cc
+│   ├── Error.h
+│   ├── ErrorFlusher.cc
+│   ├── ErrorFlusher.h
+│   ├── ErrorQueue.cc
+│   ├── ErrorQueue.h
+│   ├── ErrorQueueMessage.h
+│   ├── Files.cc
+│   ├── Files.h
+│   ├── GlobalState.cc
+│   ├── GlobalState.h
+│   ├── GlobalSubstitution.h
+│   ├── Hashing.h
+│   ├── Loc.cc
+│   ├── Loc.h
+│   ├── LocalVariable.cc
+│   ├── LocalVariable.h
+│   ├── NameHash.cc
+│   ├── NameHash.h
+│   ├── NameRef.h
+│   ├── Names.cc
+│   ├── Names.h
+│   ├── StrictLevel.h
+│   ├── SymbolRef.h
+│   ├── Symbols.cc
+│   ├── Symbols.h
+│   ├── TypeConstraint.cc
+│   ├── TypeConstraint.h
+│   ├── TypePtr.h
+│   ├── Types.h
+│   ├── TypesAndOrigins.cc
+│   ├── Unfreeze.cc
+│   ├── Unfreeze.h
+│   ├── core.h
+│   ├── errors
+│   │   ├── cfg.h
+│   │   ├── desugar.h
+│   │   ├── errors.h
+│   │   ├── infer.h
+│   │   ├── internal.h
+│   │   ├── namer.h
+│   │   ├── parser.h
+│   │   ├── plugin.h
+│   │   ├── resolver.h
+│   │   └── rewriter.h
+│   ├── lsp
+│   │   ├── PreemptionTaskManager.cc
+│   │   ├── PreemptionTaskManager.h
+│   │   ├── Query.cc
+│   │   ├── Query.h
+│   │   ├── QueryResponse.cc
+│   │   ├── QueryResponse.h
+│   │   ├── Task.h
+│   │   ├── TypecheckEpochManager.cc
+│   │   └── TypecheckEpochManager.h
+│   ├── proto
+│   │   ├── BUILD
+│   │   ├── proto.cc
+│   │   └── proto.h
+│   ├── serialize
+│   │   ├── BUILD
+│   │   ├── pickler.h
+│   │   ├── serialize.cc
+│   │   ├── serialize.h
+│   │   └── test
+│   │       └── serialize_test.cc
+│   ├── test
+│   │   └── core_test.cc
+│   ├── tools
+│   │   └── generate_names.cc
+│   └── types
+│       ├── calls.cc
+│       ├── printing.cc
+│       ├── subtyping.cc
+│       ├── typemaps.cc
+│       └── types.cc
+├── definition_validator
+│   ├── BUILD
+│   ├── validator.cc
+│   ├── validator.h
+│   ├── variance.cc
+│   └── variance.h
+├── docs
+│   ├── JRuby.md
+│   ├── README.md
+│   ├── compressors.md
+│   ├── img
+│   │   ├── cfg-example.svg
+│   │   ├── chrome-tracing-load-button.png
+│   │   ├── chrome-tracing-loaded.png
+│   │   ├── chrome-tracing-pipeline.png
+│   │   ├── chrome-tracing-scrolled.png
+│   │   ├── chrome-tracing-typecheck-one.png
+│   │   └── sorbet-pipeline.monopic
+│   ├── internals.md
+│   ├── logo
+│   │   ├── README.md
+│   │   ├── sorbet-logo-45-deg@1x.png
+│   │   ├── sorbet-logo-45-deg@2x.png
+│   │   ├── sorbet-logo-monochrome.svg
+│   │   ├── sorbet-logo-purple-sparkles.svg
+│   │   ├── sorbet-logo-white-sparkles-on-purple.svg
+│   │   ├── sorbet-logo-white-sparkles.svg
+│   │   ├── sorbet-logo.sketch
+│   │   ├── sorbet-logo.svg
+│   │   └── sorbet-logo@2x.png
+│   ├── pipeline.md
+│   ├── suggest-sig.md
+│   └── tracing.md
+├── emscripten
+│   ├── BUILD
+│   └── main.cc
+├── gems
+│   ├── sorbet
+│   │   ├── BUILD
+│   │   ├── Gemfile
+│   │   ├── README.md
+│   │   ├── Rakefile
+│   │   ├── bin
+│   │   │   ├── srb
+│   │   │   └── srb-rbi
+│   │   ├── lib
+│   │   │   ├── constant_cache.rb
+│   │   │   ├── create-config.rb
+│   │   │   ├── fetch-rbis.rb
+│   │   │   ├── find-gem-rbis.rb
+│   │   │   ├── gem-generator-tracepoint
+│   │   │   │   ├── tracepoint_serializer.rb
+│   │   │   │   └── tracer.rb
+│   │   │   ├── gem-generator-tracepoint.rb
+│   │   │   ├── gem_loader.rb
+│   │   │   ├── gem_loader.rbi
+│   │   │   ├── hidden-definition-finder.rb
+│   │   │   ├── real_stdlib.rb
+│   │   │   ├── require_everything.rb
+│   │   │   ├── serialize.rb
+│   │   │   ├── status.rb
+│   │   │   ├── step_interface.rb
+│   │   │   ├── suggest-typed.rb
+│   │   │   ├── t.rb
+│   │   │   └── todo-rbi.rb
+│   │   ├── sorbet.gemspec
+│   │   └── test
+│   │       ├── hidden-method-finder
+│   │       │   ├── BUILD
+│   │       │   ├── check_one_bazel.sh
+│   │       │   ├── hidden-method-tests.rb
+│   │       │   ├── hidden_methods.bzl
+│   │       │   ├── hidden_methods_bazel.sh
+│   │       │   ├── logging.sh
+│   │       │   ├── shims.rb.source
+│   │       │   ├── simple
+│   │       │   │   ├── expectations.json
+│   │       │   │   ├── ruby_2_4_hidden.rbi.exp
+│   │       │   │   ├── ruby_2_6_hidden.rbi.exp
+│   │       │   │   └── src
+│   │       │   │       ├── Gemfile
+│   │       │   │       ├── simple.rb
+│   │       │   │       └── sorbet
+│   │       │   │           └── config
+│   │       │   ├── thorough
+│   │       │   │   ├── expectations.json
+│   │       │   │   ├── ruby_2_4_hidden.rbi.exp
+│   │       │   │   ├── ruby_2_6_hidden.rbi.exp
+│   │       │   │   └── src
+│   │       │   │       ├── Gemfile
+│   │       │   │       ├── sorbet
+│   │       │   │       │   ├── config
+│   │       │   │       │   └── rbi
+│   │       │   │       │       └── hidden-definitions
+│   │       │   │       │           └── errors.txt
+│   │       │   │       └── thorough.rb
+│   │       │   └── update_hidden_methods_exp.sh
+│   │       └── snapshot
+│   │           ├── BUILD
+│   │           ├── check_one.sh
+│   │           ├── hermetic_tar.sh
+│   │           ├── logging.sh
+│   │           ├── partial
+│   │           │   ├── bad-hash
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── config
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── bad-t
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── bad_gem
+│   │           │   │   ├── expected
+│   │           │   │   │   ├── out.log
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── config
+│   │           │   │   ├── sorbet
+│   │           │   │   │   └── config
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       ├── bad-gem.gemspec
+│   │           │   │       ├── lib
+│   │           │   │       │   └── bad-gem.rb
+│   │           │   │       └── src.rb
+│   │           │   ├── codecov
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   ├── create-config
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── config
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   ├── db_schema
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── foo.txt
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       ├── db
+│   │           │   │       │   └── schema.rb
+│   │           │   │       └── sorbet
+│   │           │   │           └── foo.txt
+│   │           │   ├── explosive-object
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── extconf
+│   │           │   │   ├── expected
+│   │           │   │   │   └── out.log
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── lib
+│   │           │   │           └── extconf.rb
+│   │           │   ├── fake-object
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── fake-rails
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── config
+│   │           │   │           └── application.rb
+│   │           │   ├── ignore_file_table
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       ├── config
+│   │           │   │   │       └── important_file.txt
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       ├── bad.rb
+│   │           │   │       └── sorbet
+│   │           │   │           ├── config
+│   │           │   │           └── important_file.txt
+│   │           │   ├── local_gem
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── rbi
+│   │           │   │   │           └── gems
+│   │           │   │   │               └── my_gem.rbi
+│   │           │   │   ├── gems
+│   │           │   │   │   └── 0.0.0
+│   │           │   │   │       └── gems
+│   │           │   │   │           └── my_gem-0.0.0
+│   │           │   │   │               ├── lib
+│   │           │   │   │               │   └── my_gem.rb
+│   │           │   │   │               └── my_gem.gemspec
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   ├── local_rvm_gemset_gem
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── rbi
+│   │           │   │   │           └── gems
+│   │           │   │   │               └── my_gem.rbi
+│   │           │   │   ├── gems
+│   │           │   │   │   └── ruby-0.0.0@gemset
+│   │           │   │   │       └── gems
+│   │           │   │   │           └── my_gem-0.0.0
+│   │           │   │   │               ├── lib
+│   │           │   │   │               │   └── my_gem.rb
+│   │           │   │   │               └── my_gem.gemspec
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   ├── missing-instance-methods
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── non-utf-8-file
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── config
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── rails-double-require
+│   │           │   │   ├── expected
+│   │           │   │   │   └── err.log
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       ├── app
+│   │           │   │       │   └── models
+│   │           │   │       │       └── article.rb
+│   │           │   │       └── config
+│   │           │   │           ├── application.rb
+│   │           │   │           └── database.yml
+│   │           │   ├── rails6
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   ├── real_singleton_class
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── rspec-lots
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── stack_master
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── stupidedi
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── type_member
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── my_enumerable.rb
+│   │           │   ├── typed-ignore
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       └── src.rb
+│   │           │   ├── use-existing-config
+│   │           │   │   ├── expected
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       └── config
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       ├── Gemfile.lock
+│   │           │   │       ├── foo.rb
+│   │           │   │       └── sorbet
+│   │           │   │           └── config
+│   │           │   └── webmock
+│   │           │       └── src
+│   │           │           ├── Gemfile
+│   │           │           ├── Gemfile.lock
+│   │           │           └── webmock.rb
+│   │           ├── run_one.sh
+│   │           ├── snapshot.bzl
+│   │           ├── sorbet-typed.rev
+│   │           ├── total
+│   │           │   ├── empty
+│   │           │   │   ├── expected
+│   │           │   │   │   ├── err.log
+│   │           │   │   │   ├── out.log
+│   │           │   │   │   └── sorbet
+│   │           │   │   │       ├── config
+│   │           │   │   │       └── rbi
+│   │           │   │   │           └── sorbet-typed
+│   │           │   │   │               └── lib
+│   │           │   │   │                   ├── bundler
+│   │           │   │   │                   │   └── all
+│   │           │   │   │                   │       └── bundler.rbi
+│   │           │   │   │                   └── ruby
+│   │           │   │   │                       └── all
+│   │           │   │   │                           ├── gem.rbi
+│   │           │   │   │                           ├── open3.rbi
+│   │           │   │   │                           └── resolv.rbi
+│   │           │   │   └── src
+│   │           │   │       ├── Gemfile
+│   │           │   │       └── Gemfile.lock
+│   │           │   └── sorbet-runtime
+│   │           │       ├── expected
+│   │           │       │   ├── err.log
+│   │           │       │   ├── out.log
+│   │           │       │   └── sorbet
+│   │           │       │       ├── config
+│   │           │       │       └── rbi
+│   │           │       │           └── sorbet-typed
+│   │           │       │               └── lib
+│   │           │       │                   ├── bundler
+│   │           │       │                   │   └── all
+│   │           │       │                   │       └── bundler.rbi
+│   │           │       │                   └── ruby
+│   │           │       │                       └── all
+│   │           │       │                           ├── gem.rbi
+│   │           │       │                           ├── open3.rbi
+│   │           │       │                           └── resolv.rbi
+│   │           │       └── src
+│   │           │           ├── Gemfile
+│   │           │           └── Gemfile.lock
+│   │           ├── update_one.sh
+│   │           └── validate_utils.sh
+│   ├── sorbet-runtime
+│   │   ├── BUILD
+│   │   ├── Gemfile
+│   │   ├── README.md
+│   │   ├── Rakefile
+│   │   ├── bench
+│   │   │   ├── constructor.rb
+│   │   │   ├── deserialize.rb
+│   │   │   ├── getters.rb
+│   │   │   ├── prop_definition.rb
+│   │   │   ├── setters.rb
+│   │   │   └── tasks.rb
+│   │   ├── lib
+│   │   │   ├── sorbet-runtime.rb
+│   │   │   └── types
+│   │   │       ├── _types.rb
+│   │   │       ├── abstract_utils.rb
+│   │   │       ├── boolean.rb
+│   │   │       ├── compatibility_patches.rb
+│   │   │       ├── configuration.rb
+│   │   │       ├── enum.rb
+│   │   │       ├── generic.rb
+│   │   │       ├── helpers.rb
+│   │   │       ├── interface_wrapper.rb
+│   │   │       ├── non_forcing_constants.rb
+│   │   │       ├── private
+│   │   │       │   ├── abstract
+│   │   │       │   │   ├── data.rb
+│   │   │       │   │   ├── declare.rb
+│   │   │       │   │   ├── hooks.rb
+│   │   │       │   │   └── validate.rb
+│   │   │       │   ├── casts.rb
+│   │   │       │   ├── class_utils.rb
+│   │   │       │   ├── decl_state.rb
+│   │   │       │   ├── final.rb
+│   │   │       │   ├── methods
+│   │   │       │   │   ├── _methods.rb
+│   │   │       │   │   ├── call_validation.rb
+│   │   │       │   │   ├── decl_builder.rb
+│   │   │       │   │   ├── modes.rb
+│   │   │       │   │   ├── signature.rb
+│   │   │       │   │   └── signature_validation.rb
+│   │   │       │   ├── mixins
+│   │   │       │   │   └── mixins.rb
+│   │   │       │   ├── runtime_levels.rb
+│   │   │       │   ├── sealed.rb
+│   │   │       │   └── types
+│   │   │       │       ├── not_typed.rb
+│   │   │       │       ├── string_holder.rb
+│   │   │       │       ├── type_alias.rb
+│   │   │       │       └── void.rb
+│   │   │       ├── profile.rb
+│   │   │       ├── props
+│   │   │       │   ├── _props.rb
+│   │   │       │   ├── constructor.rb
+│   │   │       │   ├── custom_type.rb
+│   │   │       │   ├── decorator.rb
+│   │   │       │   ├── errors.rb
+│   │   │       │   ├── generated_code_validation.rb
+│   │   │       │   ├── has_lazily_specialized_methods.rb
+│   │   │       │   ├── optional.rb
+│   │   │       │   ├── plugin.rb
+│   │   │       │   ├── pretty_printable.rb
+│   │   │       │   ├── private
+│   │   │       │   │   ├── apply_default.rb
+│   │   │       │   │   ├── deserializer_generator.rb
+│   │   │       │   │   ├── parser.rb
+│   │   │       │   │   ├── serde_transform.rb
+│   │   │       │   │   ├── serializer_generator.rb
+│   │   │       │   │   └── setter_factory.rb
+│   │   │       │   ├── serializable.rb
+│   │   │       │   ├── type_validation.rb
+│   │   │       │   ├── utils.rb
+│   │   │       │   └── weak_constructor.rb
+│   │   │       ├── runtime_profiled.rb
+│   │   │       ├── sig.rb
+│   │   │       ├── struct.rb
+│   │   │       ├── types
+│   │   │       │   ├── attached_class.rb
+│   │   │       │   ├── base.rb
+│   │   │       │   ├── class_of.rb
+│   │   │       │   ├── enum.rb
+│   │   │       │   ├── fixed_array.rb
+│   │   │       │   ├── fixed_hash.rb
+│   │   │       │   ├── intersection.rb
+│   │   │       │   ├── noreturn.rb
+│   │   │       │   ├── proc.rb
+│   │   │       │   ├── self_type.rb
+│   │   │       │   ├── simple.rb
+│   │   │       │   ├── t_enum.rb
+│   │   │       │   ├── type_member.rb
+│   │   │       │   ├── type_parameter.rb
+│   │   │       │   ├── type_template.rb
+│   │   │       │   ├── type_variable.rb
+│   │   │       │   ├── typed_array.rb
+│   │   │       │   ├── typed_enumerable.rb
+│   │   │       │   ├── typed_enumerator.rb
+│   │   │       │   ├── typed_hash.rb
+│   │   │       │   ├── typed_range.rb
+│   │   │       │   ├── typed_set.rb
+│   │   │       │   ├── union.rb
+│   │   │       │   └── untyped.rb
+│   │   │       └── utils.rb
+│   │   ├── sorbet-runtime.gemspec
+│   │   └── test
+│   │       ├── pay-server-shims.rbi
+│   │       ├── test_helper.rb
+│   │       ├── typecheck-runtime.sh
+│   │       └── types
+│   │           ├── abstract_validation.rb
+│   │           ├── absurd.rb
+│   │           ├── attached_class.rb
+│   │           ├── builder_syntax.rb
+│   │           ├── casts.rb
+│   │           ├── configuration.rb
+│   │           ├── edge_cases.rb
+│   │           ├── enum.rb
+│   │           ├── final_method.rb
+│   │           ├── final_module.rb
+│   │           ├── fixtures
+│   │           │   ├── always_raise.rb
+│   │           │   └── sealed_module
+│   │           │       ├── forbid_sealed_class__1.rb
+│   │           │       ├── forbid_sealed_class__2.rb
+│   │           │       ├── forbid_sealed_class__3.rb
+│   │           │       ├── forbid_sealed_module_extend__1.rb
+│   │           │       ├── forbid_sealed_module_extend__2.rb
+│   │           │       ├── forbid_sealed_module_extend__3.rb
+│   │           │       ├── forbid_sealed_module_include__1.rb
+│   │           │       ├── forbid_sealed_module_include__2.rb
+│   │           │       ├── forbid_sealed_module_include__3.rb
+│   │           │       ├── sealed_abstract__1.rb
+│   │           │       ├── sealed_abstract__2.rb
+│   │           │       ├── sealed_abstract__3.rb
+│   │           │       ├── whitelist_violation__1.rb
+│   │           │       └── whitelist_violation__2.rb
+│   │           ├── interface_validation.rb
+│   │           ├── interface_wrapper.rb
+│   │           ├── method_modes.rb
+│   │           ├── method_patches.rb
+│   │           ├── method_validation.rb
+│   │           ├── mixins.rb
+│   │           ├── must.rb
+│   │           ├── non_forcing_constants.rb
+│   │           ├── props
+│   │           │   ├── _props.rb
+│   │           │   ├── constructor.rb
+│   │           │   ├── decorator.rb
+│   │           │   ├── optional.rb
+│   │           │   ├── private
+│   │           │   │   └── setter_factory.rb
+│   │           │   ├── serializable.rb
+│   │           │   └── struct.rb
+│   │           ├── returns.rb
+│   │           ├── sealed_module.rb
+│   │           ├── sig.rb
+│   │           ├── struct.rb
+│   │           ├── types.rb
+│   │           ├── types_to_ruby.rb
+│   │           ├── validate_override_shape.rb
+│   │           └── validate_override_types.rb
+│   └── sorbet-static
+│       └── sorbet-static.gemspec
+├── infer
+│   ├── BUILD
+│   ├── SigSuggestion.cc
+│   ├── SigSuggestion.h
+│   ├── environment.cc
+│   ├── environment.h
+│   ├── infer.h
+│   ├── inference.cc
+│   ├── inference.h
+│   └── test
+│       └── infer_test.cc
+├── local_vars
+│   ├── BUILD
+│   ├── local_vars.cc
+│   └── local_vars.h
+├── main
+│   ├── BUILD
+│   ├── autogen
+│   │   ├── BUILD
+│   │   ├── autogen.cc
+│   │   ├── autogen.h
+│   │   ├── autoloader.cc
+│   │   ├── autoloader.h
+│   │   ├── subclasses.cc
+│   │   └── subclasses.h
+│   ├── cache
+│   │   ├── BUILD
+│   │   ├── cache-orig.cc
+│   │   ├── cache.cc
+│   │   └── cache.h
+│   ├── lsp
+│   │   ├── BUILD
+│   │   ├── DefLocSaver.cc
+│   │   ├── DefLocSaver.h
+│   │   ├── ErrorReporter.cc
+│   │   ├── ErrorReporter.h
+│   │   ├── LSPConfiguration.cc
+│   │   ├── LSPConfiguration.h
+│   │   ├── LSPFileUpdates.cc
+│   │   ├── LSPFileUpdates.h
+│   │   ├── LSPIndexer.cc
+│   │   ├── LSPIndexer.h
+│   │   ├── LSPInput.cc
+│   │   ├── LSPInput.h
+│   │   ├── LSPMessage.cc
+│   │   ├── LSPMessage.h
+│   │   ├── LSPOutput.cc
+│   │   ├── LSPOutput.h
+│   │   ├── LSPPreprocessor.cc
+│   │   ├── LSPPreprocessor.h
+│   │   ├── LSPTask.cc
+│   │   ├── LSPTask.h
+│   │   ├── LSPTypechecker.cc
+│   │   ├── LSPTypechecker.h
+│   │   ├── LSPTypecheckerCoordinator.cc
+│   │   ├── LSPTypecheckerCoordinator.h
+│   │   ├── LocalVarFinder.cc
+│   │   ├── LocalVarFinder.h
+│   │   ├── LocalVarSaver.cc
+│   │   ├── LocalVarSaver.h
+│   │   ├── NextMethodFinder.cc
+│   │   ├── NextMethodFinder.h
+│   │   ├── ShowOperation.cc
+│   │   ├── ShowOperation.h
+│   │   ├── UndoState.cc
+│   │   ├── UndoState.h
+│   │   ├── json_enums.h
+│   │   ├── json_types.cc
+│   │   ├── json_types.h
+│   │   ├── lsp.cc
+│   │   ├── lsp.h
+│   │   ├── lsp_helpers.cc
+│   │   ├── lsp_messages_gen_helpers.cc
+│   │   ├── lsp_messages_gen_helpers.h
+│   │   ├── notifications
+│   │   │   ├── cancel_request.cc
+│   │   │   ├── cancel_request.h
+│   │   │   ├── exit.cc
+│   │   │   ├── exit.h
+│   │   │   ├── initialized.cc
+│   │   │   ├── initialized.h
+│   │   │   ├── notifications.h
+│   │   │   ├── sorbet_fence.cc
+│   │   │   ├── sorbet_fence.h
+│   │   │   ├── sorbet_pause.cc
+│   │   │   ├── sorbet_pause.h
+│   │   │   ├── sorbet_resume.cc
+│   │   │   ├── sorbet_resume.h
+│   │   │   ├── sorbet_workspace_edit.cc
+│   │   │   └── sorbet_workspace_edit.h
+│   │   ├── protocol.cc
+│   │   ├── request_dispatch.cc
+│   │   ├── requests
+│   │   │   ├── code_action.cc
+│   │   │   ├── code_action.h
+│   │   │   ├── completion.cc
+│   │   │   ├── completion.h
+│   │   │   ├── definition.cc
+│   │   │   ├── definition.h
+│   │   │   ├── document_highlight.cc
+│   │   │   ├── document_highlight.h
+│   │   │   ├── document_symbol.cc
+│   │   │   ├── document_symbol.h
+│   │   │   ├── get_counters.cc
+│   │   │   ├── get_counters.h
+│   │   │   ├── hover.cc
+│   │   │   ├── hover.h
+│   │   │   ├── initialize.cc
+│   │   │   ├── initialize.h
+│   │   │   ├── references.cc
+│   │   │   ├── references.h
+│   │   │   ├── requests.h
+│   │   │   ├── shutdown.cc
+│   │   │   ├── shutdown.h
+│   │   │   ├── signature_help.cc
+│   │   │   ├── signature_help.h
+│   │   │   ├── sorbet_error.cc
+│   │   │   ├── sorbet_error.h
+│   │   │   ├── sorbet_read_file.cc
+│   │   │   ├── sorbet_read_file.h
+│   │   │   ├── type_definition.cc
+│   │   │   ├── type_definition.h
+│   │   │   ├── workspace_symbols.cc
+│   │   │   └── workspace_symbols.h
+│   │   ├── test
+│   │   │   ├── error_reporter_test.cc
+│   │   │   ├── generate_lsp_messages_test.cc
+│   │   │   ├── lsp_file_updates_test.cc
+│   │   │   ├── lsp_preprocessor_test.cc
+│   │   │   └── lsp_test.cc
+│   │   ├── tools
+│   │   │   ├── generate_lsp_messages.cc
+│   │   │   ├── generate_lsp_messages.h
+│   │   │   ├── make_lsp_types.cc
+│   │   │   └── make_lsp_types.h
+│   │   ├── watchman
+│   │   │   ├── WatchmanProcess.cc
+│   │   │   └── WatchmanProcess.h
+│   │   ├── wrapper.cc
+│   │   └── wrapper.h
+│   ├── main.cc
+│   ├── options
+│   │   ├── BUILD
+│   │   ├── ConfigParser.cc
+│   │   ├── ConfigParser.h
+│   │   ├── options.cc
+│   │   ├── options.h
+│   │   └── test
+│   │       └── options_test.cc
+│   ├── pipeline
+│   │   ├── BUILD
+│   │   ├── ProgressIndicator.cc
+│   │   ├── ProgressIndicator.h
+│   │   ├── pipeline.cc
+│   │   ├── pipeline.h
+│   │   └── semantic_extension
+│   │       ├── BUILD
+│   │       ├── DefaultImplementation.cc
+│   │       └── SemanticExtension.h
+│   ├── realmain.cc
+│   └── realmain.h
+├── namer
+│   ├── BUILD
+│   ├── configatron
+│   │   ├── BUILD
+│   │   ├── configatron.cc
+│   │   └── configatron.h
+│   ├── namer.cc
+│   ├── namer.h
+│   └── test
+│       └── namer_test.cc
+├── parser
+│   ├── BUILD
+│   ├── Builder.cc
+│   ├── Builder.h
+│   ├── Dedenter.h
+│   ├── Node.cc
+│   ├── Node.h
+│   ├── Parser.cc
+│   ├── parser.h
+│   ├── test
+│   │   └── parser_test.cc
+│   └── tools
+│       └── generate_ast.cc
+├── payload
+│   ├── BUILD
+│   ├── binary
+│   │   ├── BUILD
+│   │   ├── binary.h
+│   │   ├── empty.cc
+│   │   └── tools
+│   │       └── gen_state_payload.cc
+│   ├── otherwise_compdb_bugs_out.cc
+│   ├── payload.cc
+│   ├── payload.h
+│   └── text
+│       ├── BUILD
+│       ├── nopopulate.cc
+│       ├── populate.cc
+│       ├── text.h
+│       └── tools
+│           └── generate_payload.cc
+├── plugin
+│   ├── BUILD
+│   ├── Plugins.cc
+│   ├── Plugins.h
+│   ├── SubprocessTextPlugin.cc
+│   └── SubprocessTextPlugin.h
+├── proto
+│   ├── BUILD
+│   ├── File.proto
+│   ├── Loc.proto
+│   ├── Name.proto
+│   ├── Symbol.proto
+│   ├── Type.proto
+│   └── pay-server
+│       ├── BUILD
+│       ├── README
+│       └── SourceMetrics.proto
+├── rbi
+│   ├── BUILD
+│   ├── core
+│   │   ├── argf.rbi
+│   │   ├── array.rbi
+│   │   ├── basic_object.rbi
+│   │   ├── binding.rbi
+│   │   ├── class.rbi
+│   │   ├── comparable.rbi
+│   │   ├── complex.rbi
+│   │   ├── constants.rbi
+│   │   ├── data.rbi
+│   │   ├── dir.rbi
+│   │   ├── encoding.rbi
+│   │   ├── enum.rbi
+│   │   ├── enumerable.rbi
+│   │   ├── enumerator.rbi
+│   │   ├── errno.rbi
+│   │   ├── errors.rbi
+│   │   ├── exception.rbi
+│   │   ├── false_class.rbi
+│   │   ├── fiber.rbi
+│   │   ├── fiber_error.rbi
+│   │   ├── file.rbi
+│   │   ├── file_test.rbi
+│   │   ├── fixnum.rbi
+│   │   ├── float.rbi
+│   │   ├── gc.rbi
+│   │   ├── hash.rbi
+│   │   ├── integer.rbi
+│   │   ├── io.rbi
+│   │   ├── kernel.rbi
+│   │   ├── marshal.rbi
+│   │   ├── match_data.rbi
+│   │   ├── math.rbi
+│   │   ├── method.rbi
+│   │   ├── module.rbi
+│   │   ├── nil_class.rbi
+│   │   ├── numeric.rbi
+│   │   ├── object.rbi
+│   │   ├── proc.rbi
+│   │   ├── process.rbi
+│   │   ├── random.rbi
+│   │   ├── range.rbi
+│   │   ├── rational.rbi
+│   │   ├── rb_config.rbi
+│   │   ├── regexp.rbi
+│   │   ├── ruby_vm.rbi
+│   │   ├── signal.rbi
+│   │   ├── string.rbi
+│   │   ├── struct.rbi
+│   │   ├── symbol.rbi
+│   │   ├── thread.rbi
+│   │   ├── thread_group.rbi
+│   │   ├── time.rbi
+│   │   ├── trace_point.rbi
+│   │   ├── true_class.rbi
+│   │   ├── unbound_method.rbi
+│   │   └── warning.rbi
+│   ├── gems
+│   │   ├── bundler.rbi
+│   │   ├── chalk.rbi
+│   │   ├── configatron.rbi
+│   │   ├── didyoumean.rbi
+│   │   ├── msgpack.rbi
+│   │   └── stringscanner.rbi
+│   ├── sorbet
+│   │   ├── builder.rbi
+│   │   ├── compatibility_patches.rbi
+│   │   ├── sorbet.rbi
+│   │   ├── t.rbi
+│   │   ├── tprivate.rbi
+│   │   ├── tprops.rbi
+│   │   └── ttypes.rbi
+│   ├── stdlib
+│   │   ├── abbrev.rbi
+│   │   ├── base64.rbi
+│   │   ├── benchmark.rbi
+│   │   ├── big_math.rbi
+│   │   ├── bigdecimal.rbi
+│   │   ├── cgi.rbi
+│   │   ├── coverage.rbi
+│   │   ├── csv.rbi
+│   │   ├── date.rbi
+│   │   ├── date_time.rbi
+│   │   ├── delegator.rbi
+│   │   ├── digest.rbi
+│   │   ├── dir.rbi
+│   │   ├── e2mmap.rbi
+│   │   ├── erb.rbi
+│   │   ├── etc.rbi
+│   │   ├── fileutils.rbi
+│   │   ├── forwardable.rbi
+│   │   ├── gem.rbi
+│   │   ├── json.rbi
+│   │   ├── logger.rbi
+│   │   ├── monitor.rbi
+│   │   ├── mutex_m.rbi
+│   │   ├── net.rbi
+│   │   ├── objspace.rbi
+│   │   ├── open3.rbi
+│   │   ├── open_struct.rbi
+│   │   ├── openssl.rbi
+│   │   ├── optparse.rbi
+│   │   ├── pathname.rbi
+│   │   ├── pp.rbi
+│   │   ├── racc.rbi
+│   │   ├── ripper.rbi
+│   │   ├── set.rbi
+│   │   ├── singleton.rbi
+│   │   ├── socket.rbi
+│   │   ├── stringio.rbi
+│   │   ├── tempfile.rbi
+│   │   ├── time.rbi
+│   │   ├── timeout.rbi
+│   │   ├── tsort.rbi
+│   │   ├── uri.rbi
+│   │   └── webrick.rbi
+│   └── tools
+│       ├── generate_procs.cc
+│       └── sync-rdoc.rb
+├── resolver
+│   ├── BUILD
+│   ├── CorrectTypeAlias.cc
+│   ├── CorrectTypeAlias.h
+│   ├── GlobalPass.cc
+│   ├── resolver.cc
+│   ├── resolver.h
+│   ├── type_syntax.cc
+│   └── type_syntax.h
+├── rewriter
+│   ├── AttrReader.cc
+│   ├── AttrReader.h
+│   ├── BUILD
+│   ├── ClassNew.cc
+│   ├── ClassNew.h
+│   ├── Cleanup.cc
+│   ├── Cleanup.h
+│   ├── Command.cc
+│   ├── Command.h
+│   ├── DSLBuilder.cc
+│   ├── DSLBuilder.h
+│   ├── DefaultArgs.cc
+│   ├── DefaultArgs.h
+│   ├── Delegate.cc
+│   ├── Delegate.h
+│   ├── Flatfiles.cc
+│   ├── Flatfiles.h
+│   ├── Flatten.cc
+│   ├── Flatten.h
+│   ├── Initializer.cc
+│   ├── Initializer.h
+│   ├── InterfaceWrapper.cc
+│   ├── InterfaceWrapper.h
+│   ├── Mattr.cc
+│   ├── Mattr.h
+│   ├── Minitest.cc
+│   ├── Minitest.h
+│   ├── MixinEncryptedProp.cc
+│   ├── MixinEncryptedProp.h
+│   ├── ModuleFunction.cc
+│   ├── ModuleFunction.h
+│   ├── Private.cc
+│   ├── Private.h
+│   ├── Prop.cc
+│   ├── Prop.h
+│   ├── ProtobufDescriptorPool.cc
+│   ├── ProtobufDescriptorPool.h
+│   ├── Rails.cc
+│   ├── Rails.h
+│   ├── Regexp.cc
+│   ├── Regexp.h
+│   ├── SelfNew.cc
+│   ├── SelfNew.h
+│   ├── SigRewriter.cc
+│   ├── SigRewriter.h
+│   ├── Struct.cc
+│   ├── Struct.h
+│   ├── TEnum.cc
+│   ├── TEnum.h
+│   ├── TypeMembers.cc
+│   ├── TypeMembers.h
+│   ├── Util.cc
+│   ├── Util.h
+│   ├── rewriter.cc
+│   └── rewriter.h
+├── sorbet_version
+│   ├── BUILD
+│   ├── sorbet_version.c
+│   └── sorbet_version.h
+├── test
+│   ├── BUILD
+│   ├── LSPTest.cc
+│   ├── LSPTest.h
+│   ├── autocorrect-test.cc
+│   ├── backtrace-test-error.cc
+│   ├── backtrace-test-raise.cc
+│   ├── backtrace-test.sh
+│   ├── cli
+│   │   ├── BUILD
+│   │   ├── allowed-extension
+│   │   │   ├── allowed-extension.out
+│   │   │   ├── allowed-extension.sh
+│   │   │   └── lib
+│   │   │       ├── a.rb
+│   │   │       ├── b.rbi
+│   │   │       ├── c.ru
+│   │   │       └── d.rake
+│   │   ├── arity-messages
+│   │   │   ├── arity-messages.out
+│   │   │   ├── arity-messages.rb
+│   │   │   └── arity-messages.sh
+│   │   ├── at
+│   │   │   ├── at.input
+│   │   │   ├── at.out
+│   │   │   ├── at.rb
+│   │   │   └── at.sh
+│   │   ├── autocorrect
+│   │   │   ├── autocorrect.out
+│   │   │   ├── autocorrect.rb
+│   │   │   └── autocorrect.sh
+│   │   ├── autocorrect-abstract
+│   │   │   ├── autocorrect-abstract.out
+│   │   │   ├── autocorrect-abstract.sh
+│   │   │   ├── post.rb
+│   │   │   └── pre.rb
+│   │   ├── autocorrect-attached-class
+│   │   │   ├── autocorrect-attached-class.out
+│   │   │   ├── autocorrect-attached-class.rb
+│   │   │   └── autocorrect-attached-class.sh
+│   │   ├── autocorrect-bare-stdlib-generics
+│   │   │   ├── autocorrect-bare-stdlib-generics.out
+│   │   │   ├── autocorrect-bare-stdlib-generics.rb
+│   │   │   └── autocorrect-bare-stdlib-generics.sh
+│   │   ├── autocorrect-extend
+│   │   │   ├── autocorrect-extend.out
+│   │   │   ├── autocorrect-extend.rb
+│   │   │   └── autocorrect-extend.sh
+│   │   ├── autocorrect-lazy-type-alias
+│   │   │   ├── autocorrect-lazy-type-alias.out
+│   │   │   ├── autocorrect-lazy-type-alias.sh
+│   │   │   ├── post.rb
+│   │   │   └── pre.rb
+│   │   ├── autocorrect-private
+│   │   │   ├── autocorrect-private.out
+│   │   │   ├── autocorrect-private.rb
+│   │   │   └── autocorrect-private.sh
+│   │   ├── autocorrect-remove-body
+│   │   │   ├── autocorrect-remove-body.out
+│   │   │   ├── autocorrect-remove-body.sh
+│   │   │   ├── post.rb
+│   │   │   ├── post.rbi
+│   │   │   ├── pre.rb
+│   │   │   └── pre.rbi
+│   │   ├── autocorrect-same-loc
+│   │   │   ├── autocorrect-same-loc-1.rb
+│   │   │   ├── autocorrect-same-loc-2.rb
+│   │   │   ├── autocorrect-same-loc.out
+│   │   │   └── autocorrect-same-loc.sh
+│   │   ├── autocorrect-strict
+│   │   │   ├── autocorrect-strict.out
+│   │   │   ├── autocorrect-strict.sh
+│   │   │   ├── post.rb
+│   │   │   └── pre.rb
+│   │   ├── autogen-autoloader
+│   │   │   ├── autogen-autoloader.out
+│   │   │   ├── autogen-autoloader.sh
+│   │   │   ├── bar.rb
+│   │   │   ├── bar2.rb
+│   │   │   ├── errors.rb
+│   │   │   ├── foo.rb
+│   │   │   ├── inplace.rb
+│   │   │   └── scripts
+│   │   │       └── baz.rb
+│   │   ├── autogen-classlist
+│   │   │   ├── a.rb
+│   │   │   ├── autogen-classlist.out
+│   │   │   ├── autogen-classlist.sh
+│   │   │   └── b.rb
+│   │   ├── autogen-errors
+│   │   │   ├── autogen-errors.out
+│   │   │   ├── autogen-errors.rb
+│   │   │   └── autogen-errors.sh
+│   │   ├── autogen-subclasses
+│   │   │   ├── a.rb
+│   │   │   ├── autogen-subclasses.out
+│   │   │   └── autogen-subclasses.sh
+│   │   ├── autogen-subclasses-ignore
+│   │   │   ├── autogen-subclasses-ignore.out
+│   │   │   ├── autogen-subclasses-ignore.sh
+│   │   │   ├── ignored
+│   │   │   │   └── ignored.rb
+│   │   │   └── not-ignored
+│   │   │       └── not-ignored.rb
+│   │   ├── backtrace
+│   │   │   ├── backtrace.out
+│   │   │   └── backtrace.sh
+│   │   ├── bad-perm
+│   │   │   ├── bad-perm.out
+│   │   │   └── bad-perm.sh
+│   │   ├── bad-plugin-spec
+│   │   │   ├── bad-plugin-spec.out
+│   │   │   ├── bad-plugin-spec.sh
+│   │   │   ├── duplicate-triggers.yaml
+│   │   │   ├── missing-triggers.yaml
+│   │   │   ├── non-string-in-ruby-extra-args.yaml
+│   │   │   ├── not-map.yaml
+│   │   │   ├── ruby-extra-args-not-array.yaml
+│   │   │   ├── triggers-not-map.yaml
+│   │   │   └── values-not-scalar.yaml
+│   │   ├── cache-add-typed
+│   │   │   ├── cache-add-typed.out
+│   │   │   └── cache-add-typed.sh
+│   │   ├── cache-doesnt-parse
+│   │   │   ├── cache-doesnt-parse.out
+│   │   │   └── cache-doesnt-parse.sh
+│   │   ├── cache-dsl
+│   │   │   ├── attr_accessor.rb
+│   │   │   ├── cache-dsl.out
+│   │   │   └── cache-dsl.sh
+│   │   ├── cache-keeps-print-options
+│   │   │   ├── cache-keeps-print-options.out
+│   │   │   ├── cache-keeps-print-options.rb
+│   │   │   └── cache-keeps-print-options.sh
+│   │   ├── cache-reserve-mem
+│   │   │   ├── cache-reserve-mem.out
+│   │   │   ├── cache-reserve-mem.sh
+│   │   │   └── input.rb
+│   │   ├── cli_test.bzl
+│   │   ├── config-file
+│   │   │   ├── config-file.out
+│   │   │   ├── config-file.rb
+│   │   │   ├── config-file.sh
+│   │   │   └── sorbet
+│   │   │       ├── bad_no_config
+│   │   │       ├── config
+│   │   │       └── other_config
+│   │   ├── config-file-recursive
+│   │   │   ├── config-file-recursive.out
+│   │   │   ├── config-file-recursive.rb
+│   │   │   ├── config-file-recursive.sh
+│   │   │   └── sorbet
+│   │   │       ├── config
+│   │   │       └── other-config
+│   │   ├── configatron
+│   │   │   ├── configatron.out
+│   │   │   ├── configatron.rb
+│   │   │   ├── configatron.sh
+│   │   │   └── configatron.yaml
+│   │   ├── configatron-yaml-error
+│   │   │   ├── configatron-yaml-error.out
+│   │   │   ├── configatron-yaml-error.rb
+│   │   │   ├── configatron-yaml-error.sh
+│   │   │   └── configatron-yaml-error.yaml
+│   │   ├── conflicting-definition
+│   │   │   ├── a.rb
+│   │   │   ├── b.rb
+│   │   │   ├── conflicting-definition.out
+│   │   │   └── conflicting-definition.sh
+│   │   ├── constant-fuzzy
+│   │   │   ├── constant-fuzzy.out
+│   │   │   ├── constant-fuzzy.rb
+│   │   │   └── constant-fuzzy.sh
+│   │   ├── correct-bare-stdlib-generics
+│   │   │   ├── correct-bare-stdlib-generics.out
+│   │   │   ├── correct-bare-stdlib-generics.rb
+│   │   │   └── correct-bare-stdlib-generics.sh
+│   │   ├── counters
+│   │   │   ├── counters.out
+│   │   │   └── counters.sh
+│   │   ├── dash-e
+│   │   │   ├── dash-e.out
+│   │   │   └── dash-e.sh
+│   │   ├── dedup-input-files
+│   │   │   ├── dedup-input-files.out
+│   │   │   └── dedup-input-files.sh
+│   │   ├── dedup_loc
+│   │   │   ├── dedup_loc.out
+│   │   │   ├── dedup_loc.rb
+│   │   │   └── dedup_loc.sh
+│   │   ├── empty-file
+│   │   │   ├── empty-file.out
+│   │   │   ├── empty-file.sh
+│   │   │   └── empty.rb
+│   │   ├── error-blacklist
+│   │   │   ├── error-blacklist.out
+│   │   │   ├── error-blacklist.rb
+│   │   │   └── error-blacklist.sh
+│   │   ├── error-url
+│   │   │   ├── error-url.out
+│   │   │   ├── error-url.rb
+│   │   │   └── error-url.sh
+│   │   ├── error-whitelist
+│   │   │   ├── error-whitelist.out
+│   │   │   ├── error-whitelist.rb
+│   │   │   └── error-whitelist.sh
+│   │   ├── errors
+│   │   │   ├── errors.out
+│   │   │   ├── errors.rb
+│   │   │   └── errors.sh
+│   │   ├── escaping
+│   │   │   ├── escaping.out
+│   │   │   ├── escaping.rb
+│   │   │   └── escaping.sh
+│   │   ├── file-table-json
+│   │   │   ├── file-table-json.out
+│   │   │   ├── file-table-json.rb
+│   │   │   └── file-table-json.sh
+│   │   ├── folder-input
+│   │   │   ├── folder-input.out
+│   │   │   ├── folder-input.sh
+│   │   │   ├── foo.rb
+│   │   │   └── input
+│   │   │       ├── bar.rb
+│   │   │       ├── file_with_no_dot
+│   │   │       └── subfolder
+│   │   │           └── baz.rb
+│   │   ├── folder-input-dir-and-file
+│   │   │   ├── folder-input-dir-and-file.out
+│   │   │   ├── folder-input-dir-and-file.sh
+│   │   │   ├── foo.rb
+│   │   │   └── input
+│   │   │       ├── bar.rb
+│   │   │       ├── file_with_no_dot
+│   │   │       └── subfolder
+│   │   │           └── baz.rb
+│   │   ├── folder-input-not-dir
+│   │   │   ├── folder-input-not-dir.out
+│   │   │   ├── folder-input-not-dir.sh
+│   │   │   └── foo.rb
+│   │   ├── folder-input-not-found
+│   │   │   ├── folder-input-not-found.out
+│   │   │   └── folder-input-not-found.sh
+│   │   ├── forbid-autocorrect-with-e
+│   │   │   ├── forbid-autocorrect-with-e.out
+│   │   │   └── forbid-autocorrect-with-e.sh
+│   │   ├── forbid-autocorrect-with-quiet
+│   │   │   ├── forbid-autocorrect-with-quiet.out
+│   │   │   ├── forbid-autocorrect-with-quiet.sh
+│   │   │   └── input.rb
+│   │   ├── forgot-typed
+│   │   │   ├── forgot-typed.out
+│   │   │   ├── forgot-typed.rb
+│   │   │   ├── forgot-typed.sh
+│   │   │   └── permit-dsl-sig.rb
+│   │   ├── help
+│   │   │   ├── help.out
+│   │   │   └── help.sh
+│   │   ├── hup-hack
+│   │   │   ├── hup-hack.out
+│   │   │   └── hup-hack.sh
+│   │   ├── ignore
+│   │   │   ├── bar.rb
+│   │   │   ├── foo.rb
+│   │   │   ├── ignore.out
+│   │   │   ├── ignore.sh
+│   │   │   ├── subfolder
+│   │   │   │   └── baz.rb
+│   │   │   └── subfolder2
+│   │   │       ├── foo.rb
+│   │   │       └── subfolder
+│   │   │           └── bar.rb
+│   │   ├── ignore-slash
+│   │   │   ├── bar.rb
+│   │   │   ├── foo
+│   │   │   │   └── foo.rb
+│   │   │   ├── ignore-slash.out
+│   │   │   └── ignore-slash.sh
+│   │   ├── incremental-resolver
+│   │   │   ├── expect-failures
+│   │   │   │   ├── abstract_impl.rb
+│   │   │   │   ├── constant_override.rb
+│   │   │   │   ├── constant_redefinition.rb
+│   │   │   │   └── multiple_sigs.rb
+│   │   │   ├── incremental-resolver.out
+│   │   │   ├── incremental-resolver.sh
+│   │   │   ├── type-member.rb
+│   │   │   └── type-template.rb
+│   │   ├── index-cache-invalidation
+│   │   │   ├── index-cache-invalidation.out
+│   │   │   └── index-cache-invalidation.sh
+│   │   ├── kwarg-loc
+│   │   │   ├── kwarg-loc.out
+│   │   │   ├── kwarg-loc.rb
+│   │   │   └── kwarg-loc.sh
+│   │   ├── license
+│   │   │   ├── license.out
+│   │   │   └── license.sh
+│   │   ├── line-splitting
+│   │   │   ├── line-splitting.out
+│   │   │   └── line-splitting.sh
+│   │   ├── logging
+│   │   │   ├── logging.out
+│   │   │   └── logging.sh
+│   │   ├── lsp-common-case-exit
+│   │   │   ├── lsp-common-case-exit.out
+│   │   │   └── lsp-common-case-exit.sh
+│   │   ├── lsp-invalid-json-and-exit
+│   │   │   ├── lsp-invalid-json-and-exit.out
+│   │   │   └── lsp-invalid-json-and-exit.sh
+│   │   ├── lsp-large-message
+│   │   │   ├── lsp-large-message.out
+│   │   │   └── lsp-large-message.sh
+│   │   ├── lsp-requires-input-dir
+│   │   │   ├── lsp-requires-input-dir.out
+│   │   │   └── lsp-requires-input-dir.sh
+│   │   ├── make_accessible
+│   │   │   ├── make_accessible.out
+│   │   │   ├── make_accessible.sh
+│   │   │   └── suit.rb
+│   │   ├── metrics-file
+│   │   │   ├── metrics-file.out
+│   │   │   ├── metrics-file.sh
+│   │   │   ├── sorbet
+│   │   │   │   ├── plugin.rb
+│   │   │   │   └── triggers.yml
+│   │   │   ├── test.rb
+│   │   │   └── with-error-branching.rb
+│   │   ├── missing-constants
+│   │   │   ├── missing-constants.out
+│   │   │   ├── missing-constants.rb
+│   │   │   └── missing-constants.sh
+│   │   ├── model_mutator_behavior
+│   │   │   ├── model_mutator_behavior.out
+│   │   │   ├── model_mutator_behavior.sh
+│   │   │   ├── model_mutator_behavior__1.rb
+│   │   │   └── model_mutator_behavior__2.rb
+│   │   ├── module-redefinition
+│   │   │   ├── module-redefinition-1.rb
+│   │   │   ├── module-redefinition-2.rb
+│   │   │   ├── module-redefinition-3.rb
+│   │   │   ├── module-redefinition.out
+│   │   │   └── module-redefinition.sh
+│   │   ├── no-did-you-mean
+│   │   │   ├── no-did-you-mean.out
+│   │   │   ├── no-did-you-mean.rb
+│   │   │   └── no-did-you-mean.sh
+│   │   ├── no-error-count
+│   │   │   ├── no-error-count.out
+│   │   │   └── no-error-count.sh
+│   │   ├── no-stdlib
+│   │   │   ├── no-stdlib.out
+│   │   │   └── no-stdlib.sh
+│   │   ├── non-existing-option
+│   │   │   ├── non-existing-option.out
+│   │   │   └── non-existing-option.sh
+│   │   ├── override-typed
+│   │   │   ├── override-typed.out
+│   │   │   ├── override-typed.rb
+│   │   │   ├── override-typed.sh
+│   │   │   └── override-typed.yaml
+│   │   ├── override-typed-bad
+│   │   │   ├── bad-filename.yaml
+│   │   │   ├── bad-list.yaml
+│   │   │   ├── bad-strictness.yaml
+│   │   │   ├── bad-top-level.yaml
+│   │   │   ├── override-typed-bad.out
+│   │   │   ├── override-typed-bad.rb
+│   │   │   ├── override-typed-bad.sh
+│   │   │   └── override-typed-bad.yaml
+│   │   ├── parallel-ordering
+│   │   │   ├── 1.rb
+│   │   │   ├── 2.rb
+│   │   │   ├── 3.rb
+│   │   │   ├── parallel-ordering.out
+│   │   │   └── parallel-ordering.sh
+│   │   ├── parse-tree-whitequark
+│   │   │   ├── parse-tree-whitequark.out
+│   │   │   ├── parse-tree-whitequark.rb
+│   │   │   └── parse-tree-whitequark.sh
+│   │   ├── parser-error
+│   │   │   ├── parser-error-1.rb
+│   │   │   ├── parser-error-2.rb
+│   │   │   ├── parser-error-3.rb
+│   │   │   ├── parser-error-4.rb
+│   │   │   ├── parser-error.out
+│   │   │   └── parser-error.sh
+│   │   ├── phases
+│   │   │   ├── phases.out
+│   │   │   └── phases.sh
+│   │   ├── print-procs
+│   │   │   ├── print-procs.out
+│   │   │   ├── print-procs.rb
+│   │   │   └── print-procs.sh
+│   │   ├── print_generics
+│   │   │   ├── print_generics.out
+│   │   │   ├── print_generics.rb
+│   │   │   └── print_generics.sh
+│   │   ├── print_to_file
+│   │   │   ├── a.rb
+│   │   │   ├── b.rb
+│   │   │   ├── c.rb
+│   │   │   ├── d.rb
+│   │   │   ├── print_to_file.out
+│   │   │   └── print_to_file.sh
+│   │   ├── progressbar
+│   │   │   ├── progressbar.out
+│   │   │   └── progressbar.sh
+│   │   ├── rbi-overrides
+│   │   │   ├── rbi-overrides.out
+│   │   │   ├── rbi-overrides.sh
+│   │   │   ├── t1.rb
+│   │   │   ├── t1.rbi
+│   │   │   ├── t2.rb
+│   │   │   ├── t2.rbi
+│   │   │   ├── t3.rb
+│   │   │   ├── t3.rbi
+│   │   │   ├── t4.rb
+│   │   │   └── t4.rbi
+│   │   ├── rbi-with-code
+│   │   │   ├── rbi-with-code.out
+│   │   │   ├── rbi-with-code.rbi
+│   │   │   └── rbi-with-code.sh
+│   │   ├── remove-path-prefix
+│   │   │   ├── remove-path-prefix.out
+│   │   │   ├── remove-path-prefix.rb
+│   │   │   └── remove-path-prefix.sh
+│   │   ├── remove-path-prefix-https
+│   │   │   ├── remove-path-prefix-https.out
+│   │   │   ├── remove-path-prefix-https.rb
+│   │   │   └── remove-path-prefix-https.sh
+│   │   ├── remove-path-prefix-no-match
+│   │   │   ├── remove-path-prefix-no-match.out
+│   │   │   ├── remove-path-prefix-no-match.rb
+│   │   │   └── remove-path-prefix-no-match.sh
+│   │   ├── sigil-rbi
+│   │   │   ├── abstract.rbi
+│   │   │   ├── multiple_definition.rbi
+│   │   │   ├── no_type.rbi
+│   │   │   ├── overrides.rbi
+│   │   │   ├── sigil-rbi.out
+│   │   │   ├── sigil-rbi.sh
+│   │   │   ├── strict.rbi
+│   │   │   └── typed.rbi
+│   │   ├── silence-dev-message
+│   │   │   ├── silence-dev-message.out
+│   │   │   └── silence-dev-message.sh
+│   │   ├── statsd
+│   │   │   ├── statsd.out
+│   │   │   └── statsd.sh
+│   │   ├── stop-after
+│   │   │   ├── stop-after.out
+│   │   │   └── stop-after.sh
+│   │   ├── stop-after-namer
+│   │   │   ├── stop-after-namer.out
+│   │   │   ├── stop-after-namer.rb
+│   │   │   └── stop-after-namer.sh
+│   │   ├── store-state
+│   │   │   ├── store-state.out
+│   │   │   └── store-state.sh
+│   │   ├── subprocess-plugin
+│   │   │   ├── bad_plugin.rb
+│   │   │   ├── bad_plugin.yaml
+│   │   │   ├── bar_gen.rb
+│   │   │   ├── baz_gen.rb
+│   │   │   ├── echo_argv.rb
+│   │   │   ├── echo_argv.yaml
+│   │   │   ├── foo_gen.rb
+│   │   │   ├── gen.rb
+│   │   │   ├── multi.yaml
+│   │   │   ├── multi1.rb
+│   │   │   ├── multi2.rb
+│   │   │   ├── multi3.rb
+│   │   │   ├── multi4.rb
+│   │   │   ├── multi5.rb
+│   │   │   ├── multi6.rb
+│   │   │   ├── multi_empty.yaml
+│   │   │   ├── no_output.rb
+│   │   │   ├── permute.rb
+│   │   │   ├── ruby_extra_args.yaml
+│   │   │   ├── subprocess-plugin.out
+│   │   │   ├── subprocess-plugin.sh
+│   │   │   ├── trigger_bad_plugin.rb
+│   │   │   └── verify_ruby_options.rb
+│   │   ├── suggest-constant-type
+│   │   │   ├── suggest-constant-type.out
+│   │   │   ├── suggest-constant-type.rb
+│   │   │   └── suggest-constant-type.sh
+│   │   ├── suggest-foreign-lambda
+│   │   │   ├── suggest-foreign-lambda.out
+│   │   │   ├── suggest-foreign-lambda.rb
+│   │   │   └── suggest-foreign-lambda.sh
+│   │   ├── suggest-kernel
+│   │   │   ├── suggest-kernel.out
+│   │   │   ├── suggest-kernel.rb
+│   │   │   └── suggest-kernel.sh
+│   │   ├── suggest-new
+│   │   │   ├── suggest-new.out
+│   │   │   ├── suggest-new.rb
+│   │   │   └── suggest-new.sh
+│   │   ├── suggest-not-stub
+│   │   │   ├── suggest-not-stub.out
+│   │   │   ├── suggest-not-stub.rb
+│   │   │   └── suggest-not-stub.sh
+│   │   ├── suggest-object
+│   │   │   ├── suggest-object.out
+│   │   │   ├── suggest-object.rb
+│   │   │   └── suggest-object.sh
+│   │   ├── suggest-sig
+│   │   │   ├── suggest-sig.out
+│   │   │   ├── suggest-sig.rb
+│   │   │   └── suggest-sig.sh
+│   │   ├── suggest-sig-garbage
+│   │   │   ├── suggest-sig-garbage.out
+│   │   │   ├── suggest-sig-garbage.rb
+│   │   │   └── suggest-sig-garbage.sh
+│   │   ├── suggest-sig-literal
+│   │   │   ├── suggest-sig-literal.out
+│   │   │   ├── suggest-sig-literal.rb
+│   │   │   └── suggest-sig-literal.sh
+│   │   ├── suggest-sig-override
+│   │   │   ├── suggest-sig-override.out
+│   │   │   ├── suggest-sig-override.rb
+│   │   │   └── suggest-sig-override.sh
+│   │   ├── suggest-sig-override-edge
+│   │   │   ├── suggest-sig-override-edge.out
+│   │   │   ├── suggest-sig-override-edge.rb
+│   │   │   └── suggest-sig-override-edge.sh
+│   │   ├── suggest-singleton
+│   │   │   ├── suggest-singleton.out
+│   │   │   ├── suggest-singleton.rb
+│   │   │   └── suggest-singleton.sh
+│   │   ├── suggest-t-let
+│   │   │   ├── suggest-t-let.out
+│   │   │   ├── suggest-t-let.rb
+│   │   │   └── suggest-t-let.sh
+│   │   ├── suggest-type-alias
+│   │   │   ├── suggest-type-alias.out
+│   │   │   ├── suggest-type-alias.rb
+│   │   │   └── suggest-type-alias.sh
+│   │   ├── suggest-typed-true
+│   │   │   ├── empty.rb
+│   │   │   ├── suggest-typed-already-autogenerated.rb
+│   │   │   ├── suggest-typed-already-ignore.rb
+│   │   │   ├── suggest-typed-and-type.rb
+│   │   │   ├── suggest-typed-behaviour-over-multiple-1.rb
+│   │   │   ├── suggest-typed-behaviour-over-multiple-2.rb
+│   │   │   ├── suggest-typed-false.rb
+│   │   │   ├── suggest-typed-ignore.rb
+│   │   │   ├── suggest-typed-shabang.rb
+│   │   │   ├── suggest-typed-strict.rb
+│   │   │   ├── suggest-typed-strong.rb
+│   │   │   ├── suggest-typed-true.out
+│   │   │   ├── suggest-typed-true.rb
+│   │   │   ├── suggest-typed-true.sh
+│   │   │   └── suggest-typed-with-too-low.rb
+│   │   ├── suggest-typos
+│   │   │   ├── suggest-typos.out
+│   │   │   └── suggest-typos.sh
+│   │   ├── suggest_autogen
+│   │   │   ├── suggest_autogen.out
+│   │   │   ├── suggest_autogen.rb
+│   │   │   └── suggest_autogen.sh
+│   │   ├── suggest_static
+│   │   │   ├── suggest_static.out
+│   │   │   ├── suggest_static.rb
+│   │   │   └── suggest_static.sh
+│   │   ├── suggest_t_must
+│   │   │   ├── suggest_t_must.out
+│   │   │   ├── suggest_t_must.rb
+│   │   │   └── suggest_t_must.sh
+│   │   ├── suppress-non-critical
+│   │   │   ├── suppress-non-critical.out
+│   │   │   └── suppress-non-critical.sh
+│   │   ├── symbol-table-json
+│   │   │   ├── symbol-table-json.out
+│   │   │   ├── symbol-table-json.rb
+│   │   │   └── symbol-table-json.sh
+│   │   ├── symbol-table-json-alias
+│   │   │   ├── symbol-table-json-alias.out
+│   │   │   ├── symbol-table-json-alias.rb
+│   │   │   └── symbol-table-json-alias.sh
+│   │   ├── test_one.sh
+│   │   ├── typed-src
+│   │   │   └── typed-src.out
+│   │   ├── update_one.sh
+│   │   ├── version-returns-0
+│   │   │   ├── version-returns-0.out
+│   │   │   └── version-returns-0.sh
+│   │   ├── web-trace-file
+│   │   │   ├── web-trace-file.out
+│   │   │   └── web-trace-file.sh
+│   │   └── web-trace-file-non-ascii
+│   │       ├── web-trace-file-non-ascii.out
+│   │       ├── web-trace-file-non-ascii.rb
+│   │       └── web-trace-file-non-ascii.sh
+│   ├── error-check-test.cc
+│   ├── fuzz
+│   │   ├── BUILD
+│   │   ├── TextDocumentPositionParamsWithoutTextDocumentIdentifier.proto
+│   │   ├── empty.cc
+│   │   ├── fuzz_dash_e.cc
+│   │   ├── fuzz_doc_symbols.cc
+│   │   ├── fuzz_hover.cc
+│   │   └── ruby.dict
+│   ├── hello-test.cc
+│   ├── helpers
+│   │   ├── BUILD
+│   │   ├── MockFileSystem.cc
+│   │   ├── MockFileSystem.h
+│   │   ├── expectations.h
+│   │   ├── lsp.cc
+│   │   ├── lsp.h
+│   │   ├── position_assertions.cc
+│   │   └── position_assertions.h
+│   ├── lint
+│   │   └── buildifier
+│   │       └── BUILD
+│   ├── lsp
+│   │   ├── BUILD
+│   │   ├── ProtocolTest.cc
+│   │   ├── ProtocolTest.h
+│   │   ├── alias-incremental
+│   │   │   └── alias-incremental.rec
+│   │   ├── cache_protocol_test_corpus.cc
+│   │   ├── incremental-lsp-changes
+│   │   │   └── incremental-lsp-changes.rec
+│   │   ├── lsp_test.bzl
+│   │   ├── lsp_test_runner.sh
+│   │   ├── multithreaded_protocol_test_corpus.cc
+│   │   ├── no-trailing-newline
+│   │   │   └── no-trailing-newline.rec
+│   │   ├── protocol_test_corpus.cc
+│   │   ├── update_one.sh
+│   │   ├── watchman_test_corpus.cc
+│   │   └── workspaceSymbol
+│   │       └── workspaceSymbol.rec
+│   ├── pipeline_test.bzl
+│   ├── print_document_symbols.cc
+│   ├── test_corpus.cc
+│   ├── test_corpus_forwarder.sh
+│   ├── testdata
+│   │   ├── autogen
+│   │   │   ├── aliased_ancestors.rb
+│   │   │   ├── aliased_ancestors.rb.autogen.exp
+│   │   │   ├── ancestors.rb
+│   │   │   ├── ancestors.rb.autogen.exp
+│   │   │   ├── ancestors_ref.rb
+│   │   │   ├── ancestors_ref.rb.autogen.exp
+│   │   │   ├── bad_prop.rb
+│   │   │   ├── bad_prop.rb.autogen.exp
+│   │   │   ├── bare_alias.rb
+│   │   │   ├── bare_alias.rb.autogen.exp
+│   │   │   ├── bare_casgn.rb
+│   │   │   ├── bare_casgn.rb.autogen.exp
+│   │   │   ├── bare_class.rb
+│   │   │   ├── bare_class.rb.autogen.exp
+│   │   │   ├── bare_module.rb
+│   │   │   ├── bare_module.rb.autogen.exp
+│   │   │   ├── cbase_const.rb
+│   │   │   ├── cbase_const.rb.autogen.exp
+│   │   │   ├── defines_behavior.rb
+│   │   │   ├── defines_behavior.rb.autogen.exp
+│   │   │   ├── dynamic_superclass.rb
+│   │   │   ├── dynamic_superclass.rb.autogen.exp
+│   │   │   ├── foo.fixturerb
+│   │   │   ├── foo.fixturerb.autogen.exp
+│   │   │   ├── generator.rb
+│   │   │   ├── generator.rb.autogen.exp
+│   │   │   ├── hidden_include.rb
+│   │   │   ├── hidden_include.rb.autogen.exp
+│   │   │   ├── multiple_alias.rb
+│   │   │   ├── multiple_alias.rb.autogen.exp
+│   │   │   ├── nested_defs.rb
+│   │   │   ├── nested_defs.rb.autogen.exp
+│   │   │   ├── no_dsls.rb
+│   │   │   ├── no_dsls.rb.autogen.exp
+│   │   │   ├── resolving_refs.rb
+│   │   │   ├── resolving_refs.rb.autogen.exp
+│   │   │   ├── simple_refs.rb
+│   │   │   ├── simple_refs.rb.autogen.exp
+│   │   │   ├── strong_sigil.rb
+│   │   │   └── strong_sigil.rb.autogen.exp
+│   │   ├── call_with_block.rb
+│   │   ├── call_with_block_strict.rb
+│   │   ├── call_with_splat_and_block.rb
+│   │   ├── call_with_splat_and_block_strict.rb
+│   │   ├── cfg
+│   │   │   ├── array.rb
+│   │   │   ├── array.rb.cfg.exp
+│   │   │   ├── block_in_deadcode.rb
+│   │   │   ├── block_in_deadcode.rb.cfg.exp
+│   │   │   ├── block_return_bug.rb
+│   │   │   ├── blocks.rb
+│   │   │   ├── blocks.rb.cfg.exp
+│   │   │   ├── blocks.rb.desugar-tree.exp
+│   │   │   ├── blocks.rb.parse-tree.exp
+│   │   │   ├── blocks.rb.symbol-table-raw.exp
+│   │   │   ├── break.rb
+│   │   │   ├── break.rb.cfg.exp
+│   │   │   ├── break_in_junk.rb
+│   │   │   ├── break_in_junk.rb.cfg.exp
+│   │   │   ├── break_in_while.rb
+│   │   │   ├── break_in_while.rb.cfg.exp
+│   │   │   ├── class_static_field.rb
+│   │   │   ├── class_static_field_children.rb
+│   │   │   ├── dealias_with_return.rb
+│   │   │   ├── dealias_with_return.rb.cfg.exp
+│   │   │   ├── do_while.rb
+│   │   │   ├── do_while.rb.cfg.exp
+│   │   │   ├── ensure_after_raise.rb
+│   │   │   ├── examples.rb
+│   │   │   ├── examples.rb.cfg.exp
+│   │   │   ├── examples.rb.desugar-tree.exp
+│   │   │   ├── examples.rb.flatten-tree.exp
+│   │   │   ├── examples.rb.parse-tree.exp
+│   │   │   ├── examples.rb.symbol-table-raw.exp
+│   │   │   ├── extra_bb_args.rb
+│   │   │   ├── extra_bb_args.rb.cfg.exp
+│   │   │   ├── floats.rb
+│   │   │   ├── floats.rb.cfg.exp
+│   │   │   ├── floats.rb.desugar-tree.exp
+│   │   │   ├── fuzz_dedup_exit_edges.rb
+│   │   │   ├── fuzz_recursive_alias.rb
+│   │   │   ├── hash.rb
+│   │   │   ├── hash.rb.cfg.exp
+│   │   │   ├── ivar_assign.rb
+│   │   │   ├── ivar_assign.rb.cfg.exp
+│   │   │   ├── next.rb
+│   │   │   ├── next.rb.cfg.exp
+│   │   │   ├── next_in_junk.rb
+│   │   │   ├── next_in_junk.rb.cfg.exp
+│   │   │   ├── next_in_while.rb
+│   │   │   ├── next_in_while.rb.cfg.exp
+│   │   │   ├── override_bang.rb
+│   │   │   ├── raw_test.rb
+│   │   │   ├── raw_test.rb.cfg-raw.exp
+│   │   │   ├── reassign_dead_block_bug.rb
+│   │   │   ├── reassign_dead_block_bug.rb.cfg.exp
+│   │   │   ├── rescue.rb
+│   │   │   ├── rescue.rb.cfg.exp
+│   │   │   ├── rescue.rb.desugar-tree-raw.exp
+│   │   │   ├── rescue.rb.desugar-tree.exp
+│   │   │   ├── rescue_bad_class.rb
+│   │   │   ├── rescue_bad_class.rb.flatten-tree.exp
+│   │   │   ├── rescue_complex.rb
+│   │   │   ├── rescue_complex.rb.cfg.exp
+│   │   │   ├── rescue_complex.rb.desugar-tree.exp
+│   │   │   ├── rescue_else_block.rb
+│   │   │   ├── rescue_else_block.rb.cfg.exp
+│   │   │   ├── rescue_expression.rb
+│   │   │   ├── rescue_expression.rb.cfg.exp
+│   │   │   ├── rescue_two_return.rb
+│   │   │   ├── rescue_two_return.rb.cfg.exp
+│   │   │   ├── rescue_var_expression.rb
+│   │   │   ├── rescue_var_expression.rb.cfg.exp
+│   │   │   ├── rescue_with_return.rb
+│   │   │   ├── rescue_with_return.rb.cfg.exp
+│   │   │   ├── retry.rb
+│   │   │   ├── retry.rb.cfg.exp
+│   │   │   ├── retry.rb.desugar-tree-raw.exp
+│   │   │   ├── retry.rb.desugar-tree.exp
+│   │   │   ├── retry_invalid.rb
+│   │   │   ├── retry_multiple.rb
+│   │   │   ├── retry_multiple.rb.cfg.exp
+│   │   │   ├── retry_nested.rb
+│   │   │   ├── retry_nested.rb.cfg.exp
+│   │   │   ├── return_type_of_nilable_blk_param.rb
+│   │   │   ├── side_effects.rb
+│   │   │   ├── side_effects.rb.cfg.exp
+│   │   │   ├── side_effects2.rb
+│   │   │   ├── side_effects2.rb.cfg.exp
+│   │   │   ├── singleton_lazy.rb
+│   │   │   ├── singleton_lazy.rb.symbol-table-raw.exp
+│   │   │   ├── triple_eq.rb
+│   │   │   ├── uaf1.rb
+│   │   │   ├── uaf1.rb.cfg.exp
+│   │   │   ├── undeclared_variable.rb
+│   │   │   ├── unreachable.rb
+│   │   │   └── wtf_ensure.rb
+│   │   ├── class_not_class_of.rb
+│   │   ├── core
+│   │   │   ├── autogenerated.rb
+│   │   │   ├── fuzz_bad_subtyping.rb
+│   │   │   └── fuzz_unparseable.rb
+│   │   ├── desugar
+│   │   │   ├── accidentally_quadratic.rb
+│   │   │   ├── accidentally_quadratic.rb.desugar-tree.exp
+│   │   │   ├── and_self.rb
+│   │   │   ├── assign_empty_parens.rb
+│   │   │   ├── assign_empty_stmts.rb
+│   │   │   ├── assign_keyword.rb
+│   │   │   ├── backtick.rb
+│   │   │   ├── backtick.rb.desugar-tree.exp
+│   │   │   ├── blockpass.rb
+│   │   │   ├── blockpass.rb.desugar-tree.exp
+│   │   │   ├── case.rb
+│   │   │   ├── class_def_kind.rb
+│   │   │   ├── class_def_kind.rb.desugar-tree-raw.exp
+│   │   │   ├── complex.rb
+│   │   │   ├── complex.rb.desugar-tree.exp
+│   │   │   ├── constant_error.rb
+│   │   │   ├── constant_error.rb.symbol-table-raw.exp
+│   │   │   ├── constant_reassignment.rb
+│   │   │   ├── csend.rb
+│   │   │   ├── csend.rb.desugar-tree.exp
+│   │   │   ├── defined.rb
+│   │   │   ├── defined.rb.desugar-tree.exp
+│   │   │   ├── defs_not_self.rb
+│   │   │   ├── defs_not_self.rb.desugar-tree.exp
+│   │   │   ├── destructure.rb
+│   │   │   ├── destructure.rb.flatten-tree.exp
+│   │   │   ├── destructure.rb.symbol-table-raw.exp
+│   │   │   ├── destructure_rest.rb
+│   │   │   ├── dsymbol.rb
+│   │   │   ├── dsymbol.rb.desugar-tree.exp
+│   │   │   ├── empty_string_concatenation.rb
+│   │   │   ├── ensure_without_rescue.rb
+│   │   │   ├── ensure_without_rescue.rb.cfg.exp
+│   │   │   ├── ensure_without_rescue.rb.desugar-tree.exp
+│   │   │   ├── file.rb
+│   │   │   ├── file.rb.desugar-tree.exp
+│   │   │   ├── file.rb.parse-tree.exp
+│   │   │   ├── for.rb
+│   │   │   ├── for.rb.cfg.exp
+│   │   │   ├── for.rb.desugar-tree.exp
+│   │   │   ├── fuzz_bad_loc_dstring.rb
+│   │   │   ├── fuzz_block_pass.rb
+│   │   │   ├── fuzz_break_do_end.rb
+│   │   │   ├── fuzz_include_self.rb
+│   │   │   ├── hash.rb
+│   │   │   ├── hash.rb.desugar-tree.exp
+│   │   │   ├── hash_two_args.rb
+│   │   │   ├── integers.rb
+│   │   │   ├── integers.rb.desugar-tree.exp
+│   │   │   ├── lambda.rb
+│   │   │   ├── lambda.rb.desugar-tree.exp
+│   │   │   ├── line_literal.rb
+│   │   │   ├── line_literal.rb.desugar-tree.exp
+│   │   │   ├── multi_assign.rb
+│   │   │   ├── multi_assign.rb.desugar-tree.exp
+│   │   │   ├── multi_assign.rb.symbol-table-raw.exp
+│   │   │   ├── nthref.rb
+│   │   │   ├── nthref.rb.desugar-tree-raw.exp
+│   │   │   ├── nthref.rb.parse-tree.exp
+│   │   │   ├── op_eq.rb
+│   │   │   ├── op_eq.rb.desugar-tree.exp
+│   │   │   ├── op_eq.rb.flatten-tree.exp
+│   │   │   ├── opasgn.rb
+│   │   │   ├── opasgn.rb.desugar-tree.exp
+│   │   │   ├── ops.rb
+│   │   │   ├── ops.rb.desugar-tree.exp
+│   │   │   ├── range.rb
+│   │   │   ├── range.rb.desugar-tree-raw.exp
+│   │   │   ├── regexp.rb
+│   │   │   ├── regexp.rb.desugar-tree.exp
+│   │   │   ├── regexp_strict.rb
+│   │   │   ├── sclass.rb
+│   │   │   ├── sclass.rb.desugar-tree.exp
+│   │   │   ├── sclass.rb.flatten-tree.exp
+│   │   │   ├── sclass.rb.symbol-table-raw.exp
+│   │   │   ├── sclass_inheritance.rb
+│   │   │   ├── sclass_inheritance.rb.desugar-tree.exp
+│   │   │   ├── sclass_inheritance.rb.flatten-tree.exp
+│   │   │   ├── sclass_inheritance.rb.symbol-table-raw.exp
+│   │   │   ├── splat.rb
+│   │   │   ├── splat.rb.desugar-tree.exp
+│   │   │   ├── star_in_block_arg.rb
+│   │   │   ├── star_in_block_arg.rb.desugar-tree.exp
+│   │   │   ├── strings.rb
+│   │   │   ├── strings.rb.desugar-tree.exp
+│   │   │   ├── top_level_const.rb
+│   │   │   ├── top_level_const.rb.desugar-tree-raw.exp
+│   │   │   ├── top_level_const.rb.desugar-tree.exp
+│   │   │   ├── top_level_const.rb.symbol-table-raw.exp
+│   │   │   ├── undef.rb
+│   │   │   └── undef_strict.rb
+│   │   ├── deviations
+│   │   │   ├── keyword_method_names.rb
+│   │   │   ├── keyword_method_names.rb.parse-tree.exp
+│   │   │   ├── non_ruby_names.rb
+│   │   │   ├── non_ruby_names.rb.desugar-tree.exp
+│   │   │   ├── non_ruby_names.rb.flatten-tree.exp
+│   │   │   ├── non_ruby_names.rb.parse-tree.exp
+│   │   │   ├── non_ruby_names.rb.symbol-table-raw.exp
+│   │   │   ├── superclass_implicit.rb
+│   │   │   └── superclass_implicit.rb.symbol-table-raw.exp
+│   │   ├── disabled
+│   │   │   └── whitequark
+│   │   │       ├── parse_dedenting_heredoc_13.rb
+│   │   │       └── parse_encoding_.rb
+│   │   ├── error_recovery_send_after_end.rb
+│   │   ├── error_recovery_send_after_end.rb.parse-tree.exp
+│   │   ├── infer
+│   │   │   ├── absurd_false.rb
+│   │   │   ├── aliases__1.rb
+│   │   │   ├── aliases__2.rb
+│   │   │   ├── align_child_as_parent.rb
+│   │   │   ├── all_bug.rb
+│   │   │   ├── arg_matching.rb
+│   │   │   ├── arity.rb
+│   │   │   ├── assign_self.rb
+│   │   │   ├── assignment_call.rb
+│   │   │   ├── attached_class.rb
+│   │   │   ├── attached_class_factory_example.rb
+│   │   │   ├── attached_class_params.rb
+│   │   │   ├── attached_class_printing.rb
+│   │   │   ├── attached_class_reopen.rb
+│   │   │   ├── attached_class_self_new.rb
+│   │   │   ├── bad_child_class.rb
+│   │   │   ├── bad_suggest.rb
+│   │   │   ├── block_arg.rb
+│   │   │   ├── block_given.rb
+│   │   │   ├── block_parameter.rb
+│   │   │   ├── blocks2.rb
+│   │   │   ├── blocks2.rb.cfg.exp
+│   │   │   ├── body_not_always_run.rb
+│   │   │   ├── boolean.rb
+│   │   │   ├── case.rb
+│   │   │   ├── case_all.rb
+│   │   │   ├── case_exhaustive_union_type.rb
+│   │   │   ├── case_subclass.rb
+│   │   │   ├── case_untyped.rb
+│   │   │   ├── case_when_any.rb
+│   │   │   ├── casts.rb
+│   │   │   ├── casts.rb.cfg.exp
+│   │   │   ├── casts.rb.flatten-tree.exp
+│   │   │   ├── class.rb
+│   │   │   ├── class_new.rb
+│   │   │   ├── compact.rb
+│   │   │   ├── constructor_return.rb
+│   │   │   ├── constructors.rb
+│   │   │   ├── control_flow
+│   │   │   │   ├── blank_p.rb
+│   │   │   │   ├── bug_852.rb
+│   │   │   │   ├── class_less_than.rb
+│   │   │   │   ├── complex_implication_1.rb
+│   │   │   │   ├── complex_implication_1.rb.cfg.exp
+│   │   │   │   ├── complex_implications_2.rb
+│   │   │   │   ├── complex_implications_2.rb.cfg.exp
+│   │   │   │   ├── csend_and.rb
+│   │   │   │   ├── dead_condition.rb
+│   │   │   │   ├── dynamic.rb
+│   │   │   │   ├── isa_module.rb
+│   │   │   │   ├── nil_p.rb
+│   │   │   │   ├── normalize_params.rb
+│   │   │   │   ├── normalize_params.rb.cfg.exp
+│   │   │   │   ├── present_p.rb
+│   │   │   │   ├── simple.rb
+│   │   │   │   ├── simple.rb.cfg.exp
+│   │   │   │   ├── singletons.rb
+│   │   │   │   ├── truthiness.rb
+│   │   │   │   └── truthiness_bug.rb
+│   │   │   ├── control_flow_in_ensure.rb
+│   │   │   ├── control_flow_in_rescue.rb
+│   │   │   ├── crash_after_parse_errors.rb
+│   │   │   ├── dead_after_return.rb
+│   │   │   ├── dispatch_call_and.rb
+│   │   │   ├── dropsubtypesof.rb
+│   │   │   ├── exhaustiveness.rb
+│   │   │   ├── false_dead_code.rb
+│   │   │   ├── fields.rb
+│   │   │   ├── fields.rb.cfg.exp
+│   │   │   ├── flat_map.rb
+│   │   │   ├── flatten.rb
+│   │   │   ├── flatten_methods.rb
+│   │   │   ├── flatten_methods.rb.flatten-tree.exp
+│   │   │   ├── flatten_private.rb
+│   │   │   ├── flatten_private.rb.flatten-tree.exp
+│   │   │   ├── forward_proc.rb
+│   │   │   ├── fuzz_dangling_type_parameter.rb
+│   │   │   ├── fuzz_disallow_overloading.rb
+│   │   │   ├── fuzz_nonexistant_method.rb
+│   │   │   ├── fuzz_oneline_conditional.rb
+│   │   │   ├── fuzz_static_init_loc.rb
+│   │   │   ├── fuzz_toplevel_type_member.rb
+│   │   │   ├── fuzz_tripleeq_sig_suggestion.rb
+│   │   │   ├── fuzz_uninitialized_vars.rb
+│   │   │   ├── generic_methods
+│   │   │   │   ├── countraints_crosstalk.rb
+│   │   │   │   ├── genericMethods1.rb
+│   │   │   │   ├── genericMethods2.rb
+│   │   │   │   ├── genericMethodsErrors.rb
+│   │   │   │   ├── infer_bottom.rb
+│   │   │   │   ├── two_bounds.rb
+│   │   │   │   └── untyped_in_container.rb
+│   │   │   ├── generic_type_template_arg.rb
+│   │   │   ├── generics
+│   │   │   │   ├── Boxes.rb
+│   │   │   │   ├── TypeSyntax.rb
+│   │   │   │   ├── adapt_child_to_parent.rb
+│   │   │   │   ├── all_bottom.rb
+│   │   │   │   ├── arity_mismatch.rb
+│   │   │   │   ├── bad_bound_typed_false.rb
+│   │   │   │   ├── bounds.rb
+│   │   │   │   ├── bounds_super.rb
+│   │   │   │   ├── class_less_than.rb
+│   │   │   │   ├── duplicate_members.rb
+│   │   │   │   ├── enumerable.rb
+│   │   │   │   ├── fixed_ordering.rb
+│   │   │   │   ├── generic_self_method.rb
+│   │   │   │   ├── generics_class_of.rb
+│   │   │   │   ├── glb.rb
+│   │   │   │   ├── glb2.rb
+│   │   │   │   ├── isa_with_type_member.rb
+│   │   │   │   ├── lub.rb
+│   │   │   │   ├── lub_lambda_param.rb
+│   │   │   │   ├── lub_with_raw.rb
+│   │   │   │   ├── others_type_members.rb
+│   │   │   │   ├── self_params.rb
+│   │   │   │   ├── specified.rb
+│   │   │   │   ├── t_magic.rb
+│   │   │   │   ├── tuple_decay.rb
+│   │   │   │   ├── two_params.rb
+│   │   │   │   ├── type_param_is_a.rb
+│   │   │   │   ├── use_member_in_body.rb
+│   │   │   │   ├── variance_methods.rb
+│   │   │   │   ├── variance_neutral.rb
+│   │   │   │   ├── variance_params.rb
+│   │   │   │   ├── variance_user.rb
+│   │   │   │   └── wrong_type_member.rb
+│   │   │   ├── glb_corner_case.rb
+│   │   │   ├── glb_generic_with_class.rb
+│   │   │   ├── hashes.rb
+│   │   │   ├── hashes.rb.cfg.exp
+│   │   │   ├── huge_unions.rb
+│   │   │   ├── huge_unions.rb.cfg.exp
+│   │   │   ├── i1438.rb
+│   │   │   ├── infer1.rb
+│   │   │   ├── infer1.rb.cfg.exp
+│   │   │   ├── infer1.rb.desugar-tree.exp
+│   │   │   ├── infer1.rb.flatten-tree.exp
+│   │   │   ├── infer1.rb.symbol-table-raw.exp
+│   │   │   ├── infer_types.rb
+│   │   │   ├── intrinsics_generics.rb
+│   │   │   ├── isa_bug.rb
+│   │   │   ├── isa_generic.rb
+│   │   │   ├── isa_generic.rb.cfg.exp
+│   │   │   ├── kwargs.rb
+│   │   │   ├── kwargs_generics.rb
+│   │   │   ├── leaking_exceptions.rb
+│   │   │   ├── let.rb
+│   │   │   ├── literal_is_array.rb
+│   │   │   ├── loop_in_self_reassignments.rb
+│   │   │   ├── loop_with_rescue_next.rb
+│   │   │   ├── loops.rb
+│   │   │   ├── loops.rb.cfg.exp
+│   │   │   ├── lub_and_glb_corner_cases.rb
+│   │   │   ├── lub_between_self_params.rb
+│   │   │   ├── lub_generics.rb
+│   │   │   ├── lub_tuples.rb
+│   │   │   ├── lub_tuples.rb.symbol-table-raw.exp
+│   │   │   ├── magic_dead.rb
+│   │   │   ├── massign_return_rhs.rb
+│   │   │   ├── massign_return_rhs.rb.desugar-tree.exp
+│   │   │   ├── match_operator.rb
+│   │   │   ├── meta_types.rb
+│   │   │   ├── meta_types.rb.cfg.exp
+│   │   │   ├── metatype_in_lub.rb
+│   │   │   ├── metatype_instantiation.rb
+│   │   │   ├── module_function_two.rb
+│   │   │   ├── more_after_return.rb
+│   │   │   ├── multi_assign.rb
+│   │   │   ├── must.rb
+│   │   │   ├── next_in_while.rb
+│   │   │   ├── nil_noreturn.rb
+│   │   │   ├── nilable_and.rb
+│   │   │   ├── non_existent_method.rb
+│   │   │   ├── non_forcing_is_a.rb
+│   │   │   ├── non_forcing_is_a_dead.rb
+│   │   │   ├── non_forcing_is_a_false.rb
+│   │   │   ├── or_and_and_or.rb
+│   │   │   ├── overload_block.rb
+│   │   │   ├── overloads_test.rb
+│   │   │   ├── pinned_control_flow.rb
+│   │   │   ├── pinned_control_flow1.rb
+│   │   │   ├── proc.rb
+│   │   │   ├── proc_args.rb
+│   │   │   ├── product.rb
+│   │   │   ├── rebind.rb
+│   │   │   ├── rebind.rb.cfg.exp
+│   │   │   ├── ref_eq.rb
+│   │   │   ├── restargs.rb
+│   │   │   ├── restargsbox.rb
+│   │   │   ├── return_in_if.rb
+│   │   │   ├── reveal_type.rb
+│   │   │   ├── sealed_singleton_class.rb
+│   │   │   ├── segfault_generic.rb
+│   │   │   ├── self_type.rb
+│   │   │   ├── self_type.rb.cfg.exp
+│   │   │   ├── self_type_param.rb
+│   │   │   ├── self_type_param_bounded.rb
+│   │   │   ├── setters.rb
+│   │   │   ├── shape_merge.rb
+│   │   │   ├── show.rb
+│   │   │   ├── sigil.rb
+│   │   │   ├── sigil.rb.cfg.exp
+│   │   │   ├── singleton_case_exhaustiveness.rb
+│   │   │   ├── singleton_classes.rb
+│   │   │   ├── singleton_enum_case.rb
+│   │   │   ├── singleton_enum_eqeq.rb
+│   │   │   ├── singleton_if_exhaustiveness.rb
+│   │   │   ├── singleton_methods.rb
+│   │   │   ├── singleton_methods.rb.cfg.exp
+│   │   │   ├── singleton_non_final_enum.rb
+│   │   │   ├── singleton_of_singleton.rb
+│   │   │   ├── singleton_of_singleton.rb.cfg.exp
+│   │   │   ├── splat.rb
+│   │   │   ├── star_star_args.rb
+│   │   │   ├── strict_dead.rb
+│   │   │   ├── stubs_are_dynamic.rb
+│   │   │   ├── subtype_symbol.rb
+│   │   │   ├── t_all_type_member_bug.rb
+│   │   │   ├── toplevel.rb
+│   │   │   ├── toplevel.rb.flatten-tree.exp
+│   │   │   ├── toplevel_var.rb
+│   │   │   ├── transitive.rb
+│   │   │   ├── transitive.rb.cfg.exp
+│   │   │   ├── tuples.rb
+│   │   │   ├── type_substraction.rb
+│   │   │   ├── unwrap_locs.rb
+│   │   │   ├── void_final.rb
+│   │   │   ├── void_proc.rb
+│   │   │   ├── yield_inside_block.rb
+│   │   │   ├── yield_multiple.rb
+│   │   │   ├── yield_multiple.rb.desugar-tree-raw.exp
+│   │   │   ├── zsuper.rb
+│   │   │   └── zsuper.rb.cfg.exp
+│   │   ├── intrinsics
+│   │   │   ├── shapes.rb
+│   │   │   └── to_h.rb
+│   │   ├── local_vars
+│   │   │   ├── z_super_args.rb
+│   │   │   └── z_super_args.rb.index-tree.exp
+│   │   ├── lsp
+│   │   │   ├── bad_field_edits.1.rbupdate
+│   │   │   ├── bad_field_edits.1.rbupdate.document-symbols.exp
+│   │   │   ├── bad_field_edits.rb
+│   │   │   ├── bad_field_edits.rb.document-symbols.exp
+│   │   │   ├── code_actions
+│   │   │   │   ├── loop_type_change.A.rbedited
+│   │   │   │   ├── loop_type_change.rb
+│   │   │   │   ├── private.A.rbedited
+│   │   │   │   ├── private.B.rbedited
+│   │   │   │   ├── private.rb
+│   │   │   │   ├── sig_missing__child.A.rbedited
+│   │   │   │   ├── sig_missing__child.rb
+│   │   │   │   ├── sig_missing__parent.A.rbedited
+│   │   │   │   ├── sig_missing__parent.rb
+│   │   │   │   ├── typo.A.rbedited
+│   │   │   │   ├── typo.B.rbedited
+│   │   │   │   ├── typo.C.rbedited
+│   │   │   │   ├── typo.D.rbedited
+│   │   │   │   └── typo.rb
+│   │   │   ├── completion
+│   │   │   │   ├── alias_method.rb
+│   │   │   │   ├── angle_bracket_names.rb
+│   │   │   │   ├── class_and_module.rb
+│   │   │   │   ├── constants.A.rbedited
+│   │   │   │   ├── constants.B.rbedited
+│   │   │   │   ├── constants.C.rbedited
+│   │   │   │   ├── constants.rb
+│   │   │   │   ├── constants_aliases.rb
+│   │   │   │   ├── constants_all_kinds.rb
+│   │   │   │   ├── constants_existing.rb
+│   │   │   │   ├── constants_magic.rb
+│   │   │   │   ├── constants_root.rb
+│   │   │   │   ├── constants_t.rb
+│   │   │   │   ├── constants_type_members.rb
+│   │   │   │   ├── constants_via_inherit.rb
+│   │   │   │   ├── constants_via_mixins.rb
+│   │   │   │   ├── constants_via_nesting.rb
+│   │   │   │   ├── depth.rb
+│   │   │   │   ├── duplicate_locals.rb
+│   │   │   │   ├── grandchild.rb
+│   │   │   │   ├── implicit_self.rb
+│   │   │   │   ├── intersection.rb
+│   │   │   │   ├── keywords.rb
+│   │   │   │   ├── locals.rb
+│   │   │   │   ├── locals_and_methods.rb
+│   │   │   │   ├── no_parens.A.rbedited
+│   │   │   │   ├── no_parens.rb
+│   │   │   │   ├── non_prefix.rb
+│   │   │   │   ├── overloads_test.A.rbedited
+│   │   │   │   ├── overloads_test.B.rbedited
+│   │   │   │   ├── overloads_test.rb
+│   │   │   │   ├── private.rb
+│   │   │   │   ├── redefinition.rb
+│   │   │   │   ├── sig.A.rbedited
+│   │   │   │   ├── sig.B.rbedited
+│   │   │   │   ├── sig.rb
+│   │   │   │   ├── sig_all_untyped.A.rbedited
+│   │   │   │   ├── sig_all_untyped.rb
+│   │   │   │   ├── sig_many_defs.A.rbedited
+│   │   │   │   ├── sig_many_defs.rb
+│   │   │   │   ├── sig_no_defs.A.rbedited
+│   │   │   │   ├── sig_no_defs.rb
+│   │   │   │   ├── sig_no_method.A.rbedited
+│   │   │   │   ├── sig_no_method.B.rbedited
+│   │   │   │   ├── sig_no_method.rb
+│   │   │   │   ├── sig_redefinition__1.A.rbedited
+│   │   │   │   ├── sig_redefinition__1.B.rbedited
+│   │   │   │   ├── sig_redefinition__1.rb
+│   │   │   │   ├── sig_redefinition__2.A.rbedited
+│   │   │   │   ├── sig_redefinition__2.B.rbedited
+│   │   │   │   ├── sig_redefinition__2.rb
+│   │   │   │   ├── sig_root.A.rbedited
+│   │   │   │   ├── sig_root.rb
+│   │   │   │   ├── sig_singleton.A.rbedited
+│   │   │   │   ├── sig_singleton.B.rbedited
+│   │   │   │   ├── sig_singleton.rb
+│   │   │   │   ├── sig_snippet.A.rbedited
+│   │   │   │   ├── sig_snippet.B.rbedited
+│   │   │   │   ├── sig_snippet.C.rbedited
+│   │   │   │   ├── sig_snippet.D.rbedited
+│   │   │   │   ├── sig_snippet.rb
+│   │   │   │   ├── simple.rb
+│   │   │   │   ├── snippet_arity.A.rbedited
+│   │   │   │   ├── snippet_arity.B.rbedited
+│   │   │   │   ├── snippet_arity.C.rbedited
+│   │   │   │   ├── snippet_arity.D.rbedited
+│   │   │   │   ├── snippet_arity.rb
+│   │   │   │   ├── snippet_block.A.rbedited
+│   │   │   │   ├── snippet_block.B.rbedited
+│   │   │   │   ├── snippet_block.C.rbedited
+│   │   │   │   ├── snippet_block.D.rbedited
+│   │   │   │   ├── snippet_block.rb
+│   │   │   │   ├── snippet_block_arity.A.rbedited
+│   │   │   │   ├── snippet_block_arity.B.rbedited
+│   │   │   │   ├── snippet_block_arity.C.rbedited
+│   │   │   │   ├── snippet_block_arity.rb
+│   │   │   │   ├── snippet_default.A.rbedited
+│   │   │   │   ├── snippet_default.rb
+│   │   │   │   ├── snippet_keywords.A.rbedited
+│   │   │   │   ├── snippet_keywords.B.rbedited
+│   │   │   │   ├── snippet_keywords.C.rbedited
+│   │   │   │   ├── snippet_keywords.D.rbedited
+│   │   │   │   ├── snippet_keywords.E.rbedited
+│   │   │   │   ├── snippet_keywords.rb
+│   │   │   │   ├── snippet_repeated.A.rbedited
+│   │   │   │   ├── snippet_repeated.B.rbedited
+│   │   │   │   ├── snippet_repeated.C.rbedited
+│   │   │   │   ├── snippet_repeated.D.rbedited
+│   │   │   │   ├── snippet_repeated.rb
+│   │   │   │   ├── snippet_types.A.rbedited
+│   │   │   │   ├── snippet_types.B.rbedited
+│   │   │   │   ├── snippet_types.rb
+│   │   │   │   └── union.rb
+│   │   │   ├── cvar__definition.rb
+│   │   │   ├── cvar__usage.rb
+│   │   │   ├── definition_untyped.rb
+│   │   │   ├── definitions_and_usages.rb
+│   │   │   ├── definitions_and_usages_2.rb
+│   │   │   ├── definitions_and_usages_untyped__typed.rb
+│   │   │   ├── definitions_and_usages_untyped__untyped.rb
+│   │   │   ├── document_symbols.rb
+│   │   │   ├── document_symbols.rb.document-symbols.exp
+│   │   │   ├── document_symbols_crash.1.rbupdate
+│   │   │   ├── document_symbols_crash.1.rbupdate.document-symbols.exp
+│   │   │   ├── document_symbols_crash.rb
+│   │   │   ├── document_symbols_crash.rb.document-symbols.exp
+│   │   │   ├── errors_clear_after_fixing.1.rbupdate
+│   │   │   ├── errors_clear_after_fixing.rb
+│   │   │   ├── fast_path
+│   │   │   │   ├── class_add_member.1.rbupdate
+│   │   │   │   ├── class_add_member.rb
+│   │   │   │   ├── class_change_include_multifile__included.rb
+│   │   │   │   ├── class_change_include_multifile__using.1.rbupdate
+│   │   │   │   ├── class_change_include_multifile__using.rb
+│   │   │   │   ├── class_change_superclass.1.rbupdate
+│   │   │   │   ├── class_change_superclass.rb
+│   │   │   │   ├── class_change_superclass_multifile__child.1.rbupdate
+│   │   │   │   ├── class_change_superclass_multifile__child.rb
+│   │   │   │   ├── class_change_superclass_multifile__super.rb
+│   │   │   │   ├── class_remove_member.1.rbupdate
+│   │   │   │   ├── class_remove_member.rb
+│   │   │   │   ├── method_add_argument.1.rbupdate
+│   │   │   │   ├── method_add_argument.rb
+│   │   │   │   ├── method_add_keyword_arg.1.rbupdate
+│   │   │   │   ├── method_add_keyword_arg.rb
+│   │   │   │   ├── method_add_sig.1.rbupdate
+│   │   │   │   ├── method_add_sig.rb
+│   │   │   │   ├── method_change_argument_kind.1.rbupdate
+│   │   │   │   ├── method_change_argument_kind.rb
+│   │   │   │   ├── method_change_argument_type__def.1.rbupdate
+│   │   │   │   ├── method_change_argument_type__def.rb
+│   │   │   │   ├── method_change_argument_type__usage.1.rbupdate
+│   │   │   │   ├── method_change_argument_type__usage.rb
+│   │   │   │   ├── method_change_kw_arg_name.1.rbupdate
+│   │   │   │   ├── method_change_kw_arg_name.rb
+│   │   │   │   ├── method_change_kw_arg_type.1.rbupdate
+│   │   │   │   ├── method_change_kw_arg_type.rb
+│   │   │   │   ├── method_change_return_type__def.1.rbupdate
+│   │   │   │   ├── method_change_return_type__def.rb
+│   │   │   │   ├── method_change_return_type__usage.1.rbupdate
+│   │   │   │   ├── method_change_return_type__usage.rb
+│   │   │   │   ├── method_rename_argument.1.rbupdate
+│   │   │   │   ├── method_rename_argument.rb
+│   │   │   │   ├── method_signature_update.1.rbupdate
+│   │   │   │   ├── method_signature_update.rb
+│   │   │   │   ├── method_signature_update_generics__def.1.rbupdate
+│   │   │   │   ├── method_signature_update_generics__def.rb
+│   │   │   │   ├── method_signature_update_generics__usage.rb
+│   │   │   │   ├── method_signature_update_static__def.1.rbupdate
+│   │   │   │   ├── method_signature_update_static__def.rb
+│   │   │   │   ├── method_signature_update_static__usage.rb
+│   │   │   │   ├── parse_errors.1.rbupdate
+│   │   │   │   ├── parse_errors.2.rbupdate
+│   │   │   │   ├── parse_errors.3.rbupdate
+│   │   │   │   ├── parse_errors.rb
+│   │   │   │   ├── string_literal_change.1.rbupdate
+│   │   │   │   ├── string_literal_change.rb
+│   │   │   │   ├── undefined_constant.1.rbupdate
+│   │   │   │   └── undefined_constant.rb
+│   │   │   ├── field_edits.1.rbupdate
+│   │   │   ├── field_edits.1.rbupdate.document-symbols.exp
+│   │   │   ├── field_edits.2.rbupdate
+│   │   │   ├── field_edits.2.rbupdate.document-symbols.exp
+│   │   │   ├── field_edits.rb
+│   │   │   ├── field_edits.rb.document-symbols.exp
+│   │   │   ├── genericMethods.rb
+│   │   │   ├── go_to_type_definition.rb
+│   │   │   ├── go_to_type_definition_applied.rb
+│   │   │   ├── go_to_type_definition_false.rb
+│   │   │   ├── good_field_edits.1.rbupdate
+│   │   │   ├── good_field_edits.1.rbupdate.document-symbols.exp
+│   │   │   ├── good_field_edits.rb
+│   │   │   ├── good_field_edits.rb.document-symbols.exp
+│   │   │   ├── highlight.rb
+│   │   │   ├── highlight_simple.rb
+│   │   │   ├── hover.rb
+│   │   │   ├── hover_abstract.rb
+│   │   │   ├── hover_ampersand_operations.rb
+│   │   │   ├── hover_ancestors.rb
+│   │   │   ├── hover_conditional_type_narrowing.rb
+│   │   │   ├── hover_constants.rb
+│   │   │   ├── hover_generics.rb
+│   │   │   ├── hover_method.rb
+│   │   │   ├── hover_method_for_building_arrays_and_hashes.rb
+│   │   │   ├── hover_method_includes_defs.rb
+│   │   │   ├── hover_method_not_found.rb
+│   │   │   ├── hover_operator_overload.rb
+│   │   │   ├── hover_override.rb
+│   │   │   ├── hover_proc_void.rb
+│   │   │   ├── hover_untyped.rb
+│   │   │   ├── hover_untyped_keyword_arg.rb
+│   │   │   ├── hover_untyped_proc_arg.rb
+│   │   │   ├── include_and_extend.rb
+│   │   │   ├── ivars.rb
+│   │   │   ├── missing_typed_sigil.A.rbedited
+│   │   │   ├── missing_typed_sigil.rb
+│   │   │   ├── no_stdlib.rb
+│   │   │   ├── sig_deletion.1.rbupdate
+│   │   │   ├── sig_deletion.rb
+│   │   │   ├── struct_fuzz.rb
+│   │   │   ├── symbol_query_filter__helper.rb
+│   │   │   ├── symbol_query_filter__main.rb
+│   │   │   ├── type_aliases.rb
+│   │   │   ├── untyped_field_reference__1.rb
+│   │   │   ├── untyped_field_reference__2.rb
+│   │   │   ├── workspace_symbols_boundaries.rb
+│   │   │   ├── workspace_symbols_fullname.rb
+│   │   │   ├── workspace_symbols_minitest.rb
+│   │   │   ├── workspace_symbols_minitest_scope.rb
+│   │   │   ├── workspace_symbols_multiply_defined.rb
+│   │   │   ├── workspace_symbols_multiply_defined_2.rb
+│   │   │   ├── workspace_symbols_namespaces.rb
+│   │   │   ├── workspace_symbols_shortname.rb
+│   │   │   ├── workspace_symbols_sparse.rb
+│   │   │   └── workspace_symbols_stdlib.rb
+│   │   ├── namer
+│   │   │   ├── alias_cross_file.flatten-tree.exp
+│   │   │   ├── alias_cross_file.symbol-table-raw.exp
+│   │   │   ├── alias_cross_file__01.rb
+│   │   │   ├── alias_cross_file__02.rb
+│   │   │   ├── alias_method.rb
+│   │   │   ├── alias_method.rb.symbol-table-raw.exp
+│   │   │   ├── alias_method_redefinition.rb
+│   │   │   ├── ancestors.rb
+│   │   │   ├── ancestors.rb.flatten-tree.exp
+│   │   │   ├── ancestors.rb.symbol-table-raw.exp
+│   │   │   ├── arguments.rb
+│   │   │   ├── arguments.rb.desugar-tree-raw.exp
+│   │   │   ├── arguments.rb.desugar-tree.exp
+│   │   │   ├── arguments.rb.flatten-tree-raw.exp
+│   │   │   ├── arguments.rb.flatten-tree.exp
+│   │   │   ├── arguments.rb.symbol-table-raw.exp
+│   │   │   ├── array_sum.rb
+│   │   │   ├── block_in_class.rb
+│   │   │   ├── blocks_in_reopened_class.rb
+│   │   │   ├── bug_1425.rb
+│   │   │   ├── circular_mixin.rb
+│   │   │   ├── circular_mixin.rb.symbol-table-raw.exp
+│   │   │   ├── class_and_alias.rb
+│   │   │   ├── class_and_alias.rb.flatten-tree.exp
+│   │   │   ├── class_and_alias.rb.symbol-table-raw.exp
+│   │   │   ├── class_module.rb
+│   │   │   ├── conflicting_names.rb
+│   │   │   ├── conflicting_names.rb.flatten-tree.exp
+│   │   │   ├── conflicting_names.rb.symbol-table-raw.exp
+│   │   │   ├── constant_in_block.rb
+│   │   │   ├── constant_in_block.rb.symbol-table-raw.exp
+│   │   │   ├── constant_redefinition
+│   │   │   │   ├── class_then_constant.rb
+│   │   │   │   ├── class_then_constant_then_reopen.rb
+│   │   │   │   ├── constant_then_class.rb
+│   │   │   │   ├── constant_then_module.rb
+│   │   │   │   ├── module_then_constant.rb
+│   │   │   │   └── module_then_constant_then_reopen.rb
+│   │   │   ├── constant_types.rb
+│   │   │   ├── constant_types.rb.symbol-table-raw.exp
+│   │   │   ├── constants.rb
+│   │   │   ├── constants.rb.flatten-tree.exp
+│   │   │   ├── constants.rb.symbol-table-raw.exp
+│   │   │   ├── defs_in_blocks.rb
+│   │   │   ├── defs_in_blocks.rb.flatten-tree.exp
+│   │   │   ├── defs_in_blocks.rb.symbol-table-raw.exp
+│   │   │   ├── docs_example_1.rb
+│   │   │   ├── docs_example_2.rb
+│   │   │   ├── duplicate_scope.rb
+│   │   │   ├── dynamic_constant.rb
+│   │   │   ├── dynamic_method_with_class.rb
+│   │   │   ├── dynamic_method_with_class.rb.symbol-table-raw.exp
+│   │   │   ├── extend.rb
+│   │   │   ├── extend.rb.symbol-table-raw.exp
+│   │   │   ├── fuzz_class_in_field.rb
+│   │   │   ├── fuzz_dynamic_constant.rb
+│   │   │   ├── fuzz_ivar_constant_scope.rb
+│   │   │   ├── fuzz_repeated_kwarg.rb
+│   │   │   ├── fuzz_shared_singletons.rb
+│   │   │   ├── fuzz_type_member.rb
+│   │   │   ├── fuzz_type_template_overwrite.rb
+│   │   │   ├── fuzz_type_template_overwrite.rb.symbol-table-raw.exp
+│   │   │   ├── gvar.rb
+│   │   │   ├── gvar.rb.flatten-tree.exp
+│   │   │   ├── gvar.rb.symbol-table-raw.exp
+│   │   │   ├── include_noarg.rb
+│   │   │   ├── locals.rb
+│   │   │   ├── locals.rb.flatten-tree.exp
+│   │   │   ├── locals.rb.symbol-table-raw.exp
+│   │   │   ├── method_redef.rb
+│   │   │   ├── module_function.rb
+│   │   │   ├── module_function.rb.cfg.exp
+│   │   │   ├── module_function.rb.symbol-table-raw.exp
+│   │   │   ├── multiple_stubs.rb
+│   │   │   ├── multiple_stubs.rb.flatten-tree.exp
+│   │   │   ├── multiple_stubs.rb.symbol-table-raw.exp
+│   │   │   ├── nested_class.rb
+│   │   │   ├── nested_class.rb.flatten-tree.exp
+│   │   │   ├── nested_static_field.rb
+│   │   │   ├── net_imap.rb
+│   │   │   ├── next_break.rb
+│   │   │   ├── next_break.rb.flatten-tree.exp
+│   │   │   ├── payload_name.rb
+│   │   │   ├── redefine.rb
+│   │   │   ├── redefines_object.rb
+│   │   │   ├── redefines_object.rb.cfg.exp
+│   │   │   ├── redefinition_method.rb
+│   │   │   ├── redefinition_method.rb.flatten-tree.exp
+│   │   │   ├── root_private.rb
+│   │   │   ├── root_private.rb.symbol-table-raw.exp
+│   │   │   ├── self_constant.rb
+│   │   │   ├── self_disallowed.rb
+│   │   │   ├── simple.rb
+│   │   │   ├── simple.rb.desugar-tree.exp
+│   │   │   ├── simple.rb.flatten-tree.exp
+│   │   │   ├── simple.rb.parse-tree.exp
+│   │   │   ├── simple.rb.symbol-table-raw.exp
+│   │   │   ├── singleton_class.rb
+│   │   │   ├── singleton_class.rb.symbol-table-raw.exp
+│   │   │   ├── super.rb
+│   │   │   ├── superclass_redefinition.rb
+│   │   │   ├── superclass_redefinition.rb.symbol-table-raw.exp
+│   │   │   ├── type_alias.rb
+│   │   │   ├── type_alias.rb.symbol-table-raw.exp
+│   │   │   ├── type_member_redefs__1.rb
+│   │   │   ├── type_member_redefs__2.rb
+│   │   │   ├── visibility.rb
+│   │   │   ├── visibility.rb.symbol-table-raw.exp
+│   │   │   ├── yield.rb
+│   │   │   ├── yield.rb.cfg.exp
+│   │   │   ├── yield.rb.flatten-tree.exp
+│   │   │   └── yield.rb.symbol-table-raw.exp
+│   │   ├── parser
+│   │   │   ├── and_and_bug.rb
+│   │   │   ├── and_and_bug.rb.parse-tree.exp
+│   │   │   ├── anon_blockarg.rb
+│   │   │   ├── chained_sends_lots.rb
+│   │   │   ├── chained_sends_lots.rb.desugar-tree.exp
+│   │   │   ├── compare_overload_parse_error.rb
+│   │   │   ├── complement_literal.rb
+│   │   │   ├── complement_literal.rb.desugar-tree.exp
+│   │   │   ├── complement_literal.rb.parse-tree.exp
+│   │   │   ├── empty.rb
+│   │   │   ├── empty.rb.parse-tree.exp
+│   │   │   ├── encoding.rb
+│   │   │   ├── error_recovery_assign.rb
+│   │   │   ├── error_recovery_assign.rb.parse-tree.exp
+│   │   │   ├── error_recovery_const_case.rb
+│   │   │   ├── error_recovery_const_case.rb.parse-tree.exp
+│   │   │   ├── error_recovery_constant_only_scope.rb
+│   │   │   ├── error_recovery_constant_only_scope.rb.parse-tree.exp
+│   │   │   ├── error_recovery_if_no_end.rb
+│   │   │   ├── error_recovery_if_no_end.rb.parse-tree.exp
+│   │   │   ├── error_recovery_missing_fun.rb
+│   │   │   ├── error_recovery_missing_fun.rb.parse-tree.exp
+│   │   │   ├── error_recovery_multiple_stmts.rb
+│   │   │   ├── error_recovery_multiple_stmts.rb.parse-tree.exp
+│   │   │   ├── fuzz_def_begin.rb
+│   │   │   ├── fuzz_ivar.rb
+│   │   │   ├── fuzz_rational.rb
+│   │   │   ├── heredoc_chomp.rb
+│   │   │   ├── heredoc_chomp.rb.desugar-tree.exp
+│   │   │   ├── index_assign.rb
+│   │   │   ├── index_assign.rb.parse-tree.exp
+│   │   │   ├── invalid_fatal.rb
+│   │   │   ├── invalid_fatal.rb.parse-tree.exp
+│   │   │   ├── invalid_syntax_error.rb
+│   │   │   ├── invalid_syntax_error.rb.parse-tree.exp
+│   │   │   ├── invalid_trailing_in_number.rb
+│   │   │   ├── invalid_trailing_in_number.rb.parse-tree.exp
+│   │   │   ├── long_string.rb
+│   │   │   ├── long_string.rb.parse-tree.exp
+│   │   │   ├── misc.rb
+│   │   │   ├── misc.rb.desugar-tree.exp
+│   │   │   ├── misc.rb.parse-tree.exp
+│   │   │   ├── offset0.rb
+│   │   │   ├── offset0.rb.parse-tree.exp
+│   │   │   ├── ruby_25.rb
+│   │   │   ├── ruby_25.rb.parse-tree.exp
+│   │   │   ├── trailing_comas.rb
+│   │   │   ├── trailing_comas.rb.parse-tree-json.exp
+│   │   │   ├── typed_ignore.rb
+│   │   │   ├── unary_num.rb
+│   │   │   └── unary_num.rb.parse-tree.exp
+│   │   ├── perf
+│   │   │   ├── enum_canBeTruthy_regression.rb
+│   │   │   └── sealed_registration_perf.rb
+│   │   ├── proc_variance.rb
+│   │   ├── rbi
+│   │   │   ├── argf.rb
+│   │   │   ├── array.rb
+│   │   │   ├── basicobject_instance_eval.rb
+│   │   │   ├── basicobject_instance_exec.rb
+│   │   │   ├── bigdecimal.rb
+│   │   │   ├── class.rb
+│   │   │   ├── date.rb
+│   │   │   ├── each_with_object.rb
+│   │   │   ├── enumerable.rb
+│   │   │   ├── enumerable_flat_map.rb
+│   │   │   ├── etc.rb
+│   │   │   ├── exception.rb
+│   │   │   ├── falseclass.rb
+│   │   │   ├── hash.rb
+│   │   │   ├── int_float.rb
+│   │   │   ├── io.rb
+│   │   │   ├── json.rb
+│   │   │   ├── kernel.rb
+│   │   │   ├── kernel_array.rb
+│   │   │   ├── kernel_class.rb
+│   │   │   ├── lazy_enumerator.rb
+│   │   │   ├── module.rb
+│   │   │   ├── object.rb
+│   │   │   ├── object_constant.rb
+│   │   │   ├── proc.rb
+│   │   │   ├── proc_sig_strong.rb
+│   │   │   ├── process.rb
+│   │   │   ├── random.rb
+│   │   │   ├── range.rb
+│   │   │   ├── regexp.rb
+│   │   │   ├── ruby_typer.rb
+│   │   │   ├── sorbet.rb
+│   │   │   ├── string.rb
+│   │   │   ├── t.rb
+│   │   │   ├── tempfile.rb
+│   │   │   ├── time.rb
+│   │   │   ├── to_sym.rb
+│   │   │   ├── trueclass.rb
+│   │   │   ├── uri.rb
+│   │   │   ├── with_without__1.rbi
+│   │   │   ├── with_without__2.rbi
+│   │   │   └── with_without__3.rb
+│   │   ├── resolver
+│   │   │   ├── abstract.rb
+│   │   │   ├── abstract_out_of_order.rb
+│   │   │   ├── abstract_override.rb
+│   │   │   ├── abstract_types.rb
+│   │   │   ├── abstract_validation.rb
+│   │   │   ├── alias.rb
+│   │   │   ├── alias.rb.symbol-table-raw.exp
+│   │   │   ├── alias_define_method__01.rb
+│   │   │   ├── alias_define_method__02.rb
+│   │   │   ├── alias_without_alias.rb
+│   │   │   ├── ancestor_scope.rb
+│   │   │   ├── ancestor_scope.rb.flatten-tree.exp
+│   │   │   ├── bad_alias.rb
+│   │   │   ├── bad_final_sig.rb
+│   │   │   ├── bad_hash.rb
+│   │   │   ├── bad_param_ordering.rb
+│   │   │   ├── bad_sealed_class__1.rb
+│   │   │   ├── bad_sealed_class__2.rb
+│   │   │   ├── bad_sealed_class_absurd__1.rb
+│   │   │   ├── bad_sealed_class_absurd__2.rb
+│   │   │   ├── bad_sealed_module__1.rb
+│   │   │   ├── bad_sealed_module__2.rb
+│   │   │   ├── bad_synthesize.rb
+│   │   │   ├── bare_generics.rb
+│   │   │   ├── bare_generics_strict.rb
+│   │   │   ├── bare_stdlib_generics.rb
+│   │   │   ├── bind.rb
+│   │   │   ├── bind_class_of.rb
+│   │   │   ├── bind_class_of.rb.symbol-table-raw.exp
+│   │   │   ├── bool_alias.rb
+│   │   │   ├── cbase.rb
+│   │   │   ├── cbase.rb.symbol-table-raw.exp
+│   │   │   ├── choose_sig.rb
+│   │   │   ├── circle_of_itself.rb
+│   │   │   ├── class_instance_vars.rb
+│   │   │   ├── class_instance_vars.rb.flatten-tree.exp
+│   │   │   ├── class_instance_vars.rb.symbol-table-raw.exp
+│   │   │   ├── class_ivar.rb
+│   │   │   ├── constant_in_typealias.rb
+│   │   │   ├── crash.rb
+│   │   │   ├── default_arg_in_block.rb
+│   │   │   ├── defined.rb
+│   │   │   ├── empty_sealed.rb
+│   │   │   ├── enumerable_strict.rb
+│   │   │   ├── field.rb
+│   │   │   ├── field.rb.flatten-tree-raw.exp
+│   │   │   ├── field_across_file__01.rb
+│   │   │   ├── field_across_file__02.rb
+│   │   │   ├── final_method.rb
+│   │   │   ├── final_module.rb
+│   │   │   ├── flatten.rb
+│   │   │   ├── flatten.rb.flatten-tree.exp
+│   │   │   ├── flatten.rb.symbol-table-raw.exp
+│   │   │   ├── fuzz_alias_to_type_alias.rb
+│   │   │   ├── fuzz_ancester.rb
+│   │   │   ├── fuzz_class_of_static_field.rb
+│   │   │   ├── fuzz_empty_type_alias.rb
+│   │   │   ├── fuzz_include_infinite_typealias.rb
+│   │   │   ├── fuzz_include_type_alias.rb
+│   │   │   ├── fuzz_infinite_type.rb
+│   │   │   ├── fuzz_mixes_in_class_methods.rb
+│   │   │   ├── fuzz_multiple_sigs.rb
+│   │   │   ├── fuzz_sig_generic_field.rb
+│   │   │   ├── fuzz_sig_parsing.rb
+│   │   │   ├── fuzz_sig_weird.rb
+│   │   │   ├── fuzz_suggest.rb
+│   │   │   ├── fuzz_top_level_abstract.rb
+│   │   │   ├── fuzz_type_member_forget.rb
+│   │   │   ├── fuzz_type_member_scope.rb
+│   │   │   ├── fuzz_type_member_scope.rb.symbol-table-raw.exp
+│   │   │   ├── fuzz_wrong_fun_print.rb
+│   │   │   ├── generic_class_alias.rb
+│   │   │   ├── implementations.rb
+│   │   │   ├── infinite.rb
+│   │   │   ├── inherit_alias.rb
+│   │   │   ├── inherit_alias.rb.symbol-table-raw.exp
+│   │   │   ├── invalid_alias.rb
+│   │   │   ├── invalid_alias.rb.symbol-table-raw.exp
+│   │   │   ├── lazy_field.rb
+│   │   │   ├── let_errors.rb
+│   │   │   ├── let_errors.rb.symbol-table-raw.exp
+│   │   │   ├── let_errors_false.rb
+│   │   │   ├── let_errors_nilable.rb
+│   │   │   ├── let_var.rb
+│   │   │   ├── let_var.rb.symbol-table-raw.exp
+│   │   │   ├── linearization
+│   │   │   │   ├── constant_resolution_before_linearization.rb
+│   │   │   │   ├── includes_class.rb
+│   │   │   │   ├── includes_class.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization1.rb
+│   │   │   │   ├── linearization1.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization2.rb
+│   │   │   │   ├── linearization2.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization3.rb
+│   │   │   │   ├── linearization3.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization4.rb
+│   │   │   │   ├── linearization4.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization4a.rb
+│   │   │   │   ├── linearization4a.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization5.rb
+│   │   │   │   ├── linearization5.rb.symbol-table-raw.exp
+│   │   │   │   ├── linearization6.rb
+│   │   │   │   └── linearization6.rb.symbol-table-raw.exp
+│   │   │   ├── missing_helpers_abstract.rb
+│   │   │   ├── missing_helpers_interface.rb
+│   │   │   ├── missing_type_combinator_args.rb
+│   │   │   ├── missing_type_combinator_args.rb.flatten-tree.exp
+│   │   │   ├── mixes_in_class_methods.rb
+│   │   │   ├── mixes_in_class_methods.rb.symbol-table-raw.exp
+│   │   │   ├── mixes_in_class_methods_twice.rb
+│   │   │   ├── nested_sealed.rb
+│   │   │   ├── no_runtime_sig.rb
+│   │   │   ├── non_builder_sig.rb
+│   │   │   ├── object_include_stub.rb
+│   │   │   ├── optional_block.rb
+│   │   │   ├── optional_cyclic.rb
+│   │   │   ├── optional_nested.rb
+│   │   │   ├── optional_nil.rb
+│   │   │   ├── optional_nil.rb.flatten-tree.exp
+│   │   │   ├── optional_nil.rb.name-tree.exp
+│   │   │   ├── overloads_test.rb
+│   │   │   ├── override_shapes.rb
+│   │   │   ├── overrides.rb
+│   │   │   ├── proc.rb
+│   │   │   ├── proc.rb.symbol-table-raw.exp
+│   │   │   ├── rbi_final_no_sig__1.rb
+│   │   │   ├── rbi_final_no_sig__2.rb
+│   │   │   ├── rbi_final_re_sig__1.rb
+│   │   │   ├── rbi_final_re_sig__2.rb
+│   │   │   ├── recover_from_bad_superclass.rb
+│   │   │   ├── recover_from_bad_superclass.rb.symbol-table-raw.exp
+│   │   │   ├── redefinition_of_subclass_type_member.rb
+│   │   │   ├── resolution_order.rb
+│   │   │   ├── resolution_order.rb.symbol-table-raw.exp
+│   │   │   ├── resolution_scoping.rb
+│   │   │   ├── resolution_scoping.rb.symbol-table-raw.exp
+│   │   │   ├── resolve_errors.rb
+│   │   │   ├── resolve_through_alias.rb
+│   │   │   ├── resolve_through_alias.rb.symbol-table-raw.exp
+│   │   │   ├── resolve_through_type_alias.rb
+│   │   │   ├── resolve_tree_printing.rb
+│   │   │   ├── resolve_tree_printing.rb.flatten-tree-raw.exp
+│   │   │   ├── resolve_via_ancestors
+│   │   │   │   ├── mixin.rb
+│   │   │   │   ├── simple.rb
+│   │   │   │   ├── superclass_three_pass.rb
+│   │   │   │   └── two_mixins.rb
+│   │   │   ├── reveal_type.rb
+│   │   │   ├── sealed_aliases.rb
+│   │   │   ├── sealed_class.rb
+│   │   │   ├── sealed_concrete_parent_class.rb
+│   │   │   ├── sealed_module.rb
+│   │   │   ├── sealed_stdlib.rb
+│   │   │   ├── sealed_with_rbi__1.rb
+│   │   │   ├── sealed_with_rbi__2.rb
+│   │   │   ├── sealed_with_rbi__3.rbi
+│   │   │   ├── self.rb
+│   │   │   ├── self.rb.symbol-table-raw.exp
+│   │   │   ├── self_ancestor.rb
+│   │   │   ├── sig_bad.rb
+│   │   │   ├── sig_bad.rb.symbol-table-raw.exp
+│   │   │   ├── sig_compat.rb
+│   │   │   ├── sig_compat.rb.symbol-table-raw.exp
+│   │   │   ├── sig_generated.rb
+│   │   │   ├── sig_good.rb
+│   │   │   ├── sig_good.rb.symbol-table-raw.exp
+│   │   │   ├── sig_in_block.rb
+│   │   │   ├── sig_misc.rb
+│   │   │   ├── sig_misc.rb.symbol-table-raw.exp
+│   │   │   ├── sig_on_failure.rb
+│   │   │   ├── sig_returns_nil.rb
+│   │   │   ├── sig_void.rb
+│   │   │   ├── simple.rb
+│   │   │   ├── simple.rb.flatten-tree.exp
+│   │   │   ├── simple.rb.symbol-table-raw.exp
+│   │   │   ├── strict.rb
+│   │   │   ├── stub_assign.rb
+│   │   │   ├── stub_missing_class_alias.rb
+│   │   │   ├── stub_missing_class_alias.rb.symbol-table-raw.exp
+│   │   │   ├── stubs_typed_untyped.flatten-tree.exp
+│   │   │   ├── stubs_typed_untyped__1.rb
+│   │   │   ├── stubs_typed_untyped__2.rb
+│   │   │   ├── t_struct_subclass.rb
+│   │   │   ├── top_level.rb
+│   │   │   ├── top_level_abstract_typed_true.rb
+│   │   │   ├── top_level_include.rb
+│   │   │   ├── top_level_sig.rb
+│   │   │   ├── type_alias.rb
+│   │   │   ├── type_alias_order.rb
+│   │   │   ├── type_arguments.rb
+│   │   │   ├── type_arguments.rb.symbol-table-raw.exp
+│   │   │   ├── type_member_bad_parent.rb
+│   │   │   ├── type_member_constant_assignment.rb
+│   │   │   ├── type_member_constant_assignment.rb.symbol-table-raw.exp
+│   │   │   ├── type_member_cycle.rb
+│   │   │   ├── type_member_fixed_order.rb
+│   │   │   ├── type_member_in_method.rb
+│   │   │   ├── type_member_missing.rb
+│   │   │   ├── type_member_missing.rb.symbol-table-raw.exp
+│   │   │   ├── type_member_missing_then_use.rb
+│   │   │   ├── type_member_out_of_order.rb
+│   │   │   ├── type_member_singleton_members.rb
+│   │   │   ├── type_member_singleton_members.rb.symbol-table-raw.exp
+│   │   │   ├── type_members.rb
+│   │   │   ├── unnamed_proc_arguments.rb
+│   │   │   ├── unsigged_default.rb
+│   │   │   ├── untyped_generics.rb
+│   │   │   └── void.rb
+│   │   ├── rewriter
+│   │   │   ├── attr.rb
+│   │   │   ├── attr.rb.flatten-tree.exp
+│   │   │   ├── attr.rb.symbol-table-raw.exp
+│   │   │   ├── attr_bad_string.rb
+│   │   │   ├── attr_multi.rb
+│   │   │   ├── attr_multi.rb.rewrite-tree.exp
+│   │   │   ├── attr_multi.rb.symbol-table-raw.exp
+│   │   │   ├── attr_parameters.rb
+│   │   │   ├── attr_strict.rb
+│   │   │   ├── chalk_odm_document.rb
+│   │   │   ├── chalk_odm_document.rb.rewrite-tree.exp
+│   │   │   ├── class_new.rb
+│   │   │   ├── class_new.rb.rewrite-tree.exp
+│   │   │   ├── coerce_in_prop.rb
+│   │   │   ├── command.rb
+│   │   │   ├── command.rb.rewrite-tree.exp
+│   │   │   ├── default_args.rb
+│   │   │   ├── default_args.rb.rewrite-tree.exp
+│   │   │   ├── default_args_edge.rb
+│   │   │   ├── default_args_malformed_sig.rb
+│   │   │   ├── dsl_builder.rb
+│   │   │   ├── dsl_builder.rb.rewrite-tree.exp
+│   │   │   ├── empty_until.rb
+│   │   │   ├── flatfile_dsl.rb
+│   │   │   ├── flatfile_dsl.rb.rewrite-tree.exp
+│   │   │   ├── flatten_module_private_class_method.rb
+│   │   │   ├── flatten_module_private_class_method.rb.symbol-table-raw.exp
+│   │   │   ├── flatten_nested.rb
+│   │   │   ├── flatten_nested.rb.flatten-tree.exp
+│   │   │   ├── flatten_nested_sclass.rb
+│   │   │   ├── flatten_nested_sclass.rb.symbol-table-raw.exp
+│   │   │   ├── fuzz_attr_bare.rb
+│   │   │   ├── fuzz_attr_no_args.rb
+│   │   │   ├── fuzz_chalk_bad_type.rb
+│   │   │   ├── fuzz_dup_type_not_constant.rb
+│   │   │   ├── fuzz_encrypted_prop.rb
+│   │   │   ├── fuzz_optinal_crash.rb
+│   │   │   ├── fuzz_prop_weird_member.rb
+│   │   │   ├── fuzz_qualified_lhs.rb
+│   │   │   ├── generic_module_function.rb
+│   │   │   ├── initializer.rb
+│   │   │   ├── interface_wrapper.rb
+│   │   │   ├── interface_wrapper.rb.rewrite-tree.exp
+│   │   │   ├── minitest.rb
+│   │   │   ├── minitest.rb.rewrite-tree.exp
+│   │   │   ├── minitest_tables.rb
+│   │   │   ├── minitest_tables.rb.rewrite-tree.exp
+│   │   │   ├── nesting.rb
+│   │   │   ├── not_prop.rb
+│   │   │   ├── not_prop.rb.rewrite-tree.exp
+│   │   │   ├── not_prop.rb.symbol-table.exp
+│   │   │   ├── prop.rb
+│   │   │   ├── prop.rb.rewrite-tree-raw.exp
+│   │   │   ├── prop.rb.rewrite-tree.exp
+│   │   │   ├── prop.rb.symbol-table-raw.exp
+│   │   │   ├── prop_computed_by.rb
+│   │   │   ├── prop_computed_by.rb.rewrite-tree.exp
+│   │   │   ├── prop_default.rb
+│   │   │   ├── prop_enum.rb
+│   │   │   ├── prop_get_logic.rb
+│   │   │   ├── prop_in_module.rb
+│   │   │   ├── prop_in_module.rb.rewrite-tree.exp
+│   │   │   ├── prop_missing.rb
+│   │   │   ├── prop_missing.rb.rewrite-tree.exp
+│   │   │   ├── prop_mutator.rb
+│   │   │   ├── prop_proc_regression.rb
+│   │   │   ├── prop_prohibit_shapes_and_tuples.rb
+│   │   │   ├── prop_skipped.rb
+│   │   │   ├── protobuf_descriptor_pool.rb
+│   │   │   ├── protobuf_descriptor_pool.rb.rewrite-tree.exp
+│   │   │   ├── rails
+│   │   │   │   ├── cattr_accessor.rb
+│   │   │   │   ├── cattr_accessor.rb.rewrite-tree.exp
+│   │   │   │   ├── cattr_reader.rb
+│   │   │   │   ├── cattr_reader.rb.rewrite-tree.exp
+│   │   │   │   ├── cattr_writer.rb
+│   │   │   │   ├── cattr_writer.rb.rewrite-tree.exp
+│   │   │   │   ├── class_attribute.rb
+│   │   │   │   ├── class_attribute.rb.rewrite-tree.exp
+│   │   │   │   ├── delegate.rb
+│   │   │   │   ├── delegate.rb.rewrite-tree.exp
+│   │   │   │   ├── mattr_accessor.rb
+│   │   │   │   ├── mattr_accessor.rb.rewrite-tree.exp
+│   │   │   │   ├── mattr_reader.rb
+│   │   │   │   ├── mattr_reader.rb.rewrite-tree.exp
+│   │   │   │   ├── mattr_writer.rb
+│   │   │   │   ├── mattr_writer.rb.rewrite-tree.exp
+│   │   │   │   └── migration.rb
+│   │   │   ├── stringy_struct.rb
+│   │   │   ├── struct.rb
+│   │   │   ├── struct.rb.rewrite-tree.exp
+│   │   │   ├── struct.rb.symbol-table-raw.exp
+│   │   │   ├── struct_initialize.rb
+│   │   │   ├── struct_self.rb
+│   │   │   ├── t_enum.rb
+│   │   │   ├── t_enum_alias.rb
+│   │   │   ├── t_enum_all.rb
+│   │   │   ├── t_enum_exhaustiveness.rb
+│   │   │   ├── t_enum_override_initialize.rb
+│   │   │   ├── t_enum_snapshot.rb
+│   │   │   ├── t_enum_snapshot.rb.rewrite-tree.exp
+│   │   │   ├── t_enum_type_syntax.rb
+│   │   │   └── t_struct
+│   │   │       ├── custom_initialize.rb
+│   │   │       ├── default.rb
+│   │   │       ├── default.rb.rewrite-tree.exp
+│   │   │       ├── default_bad.rb
+│   │   │       ├── inexact.rb
+│   │   │       ├── inexact.rb.rewrite-tree.exp
+│   │   │       ├── nilable.rb
+│   │   │       ├── nilable.rb.rewrite-tree.exp
+│   │   │       ├── none.rb
+│   │   │       ├── none.rb.rewrite-tree.exp
+│   │   │       ├── normal.rb
+│   │   │       ├── normal.rb.rewrite-tree.exp
+│   │   │       ├── override.rb
+│   │   │       ├── override.rb.rewrite-tree.exp
+│   │   │       ├── override_bad.rb
+│   │   │       ├── param_order.rb
+│   │   │       ├── param_order.rb.rewrite-tree.exp
+│   │   │       ├── root.rb
+│   │   │       ├── root.rb.rewrite-tree.exp
+│   │   │       ├── some_default.rb
+│   │   │       └── some_default.rb.rewrite-tree.exp
+│   │   ├── substitutions
+│   │   │   └── double_subsitutions.rb
+│   │   ├── testrunner
+│   │   │   └── pos.rb
+│   │   ├── todo
+│   │   │   ├── block_in_class.rb
+│   │   │   ├── block_in_class.rb.flatten-tree.exp
+│   │   │   ├── block_in_class.rb.symbol-table-raw.exp
+│   │   │   ├── class_of.rb
+│   │   │   ├── const_in_block.rb
+│   │   │   ├── const_in_block.rb.symbol-table-raw.exp
+│   │   │   └── generics_should_fail.rb
+│   │   ├── tuple_type_size.rb
+│   │   └── union_method_arity_error.rb
+│   └── whitequark
+│       ├── test_ENCODING_0.parse-tree-whitequark.exp
+│       ├── test_ENCODING_0.rb
+│       ├── test_alias_0.parse-tree-whitequark.exp
+│       ├── test_alias_0.rb
+│       ├── test_alias_gvar_0.parse-tree-whitequark.exp
+│       ├── test_alias_gvar_0.rb
+│       ├── test_alias_gvar_1.parse-tree-whitequark.exp
+│       ├── test_alias_gvar_1.rb
+│       ├── test_alias_nth_ref_0.rb
+│       ├── test_ambiuous_quoted_label_in_ternary_operator_0.parse-tree-whitequark.exp
+│       ├── test_ambiuous_quoted_label_in_ternary_operator_0.rb
+│       ├── test_ambiuous_quoted_label_in_ternary_operator_1.rb
+│       ├── test_ambiuous_quoted_label_in_ternary_operator_2.rb
+│       ├── test_ambiuous_quoted_label_in_ternary_operator_3.rb
+│       ├── test_and_0.parse-tree-whitequark.exp
+│       ├── test_and_0.rb
+│       ├── test_and_1.parse-tree-whitequark.exp
+│       ├── test_and_1.rb
+│       ├── test_and_asgn_0.parse-tree-whitequark.exp
+│       ├── test_and_asgn_0.rb
+│       ├── test_and_asgn_1.parse-tree-whitequark.exp
+│       ├── test_and_asgn_1.rb
+│       ├── test_and_or_masgn_0.parse-tree-whitequark.exp
+│       ├── test_and_or_masgn_0.rb
+│       ├── test_and_or_masgn_1.parse-tree-whitequark.exp
+│       ├── test_and_or_masgn_1.rb
+│       ├── test_arg_0.parse-tree-whitequark.exp
+│       ├── test_arg_0.rb
+│       ├── test_arg_1.parse-tree-whitequark.exp
+│       ├── test_arg_1.rb
+│       ├── test_arg_combinations_0.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_0.rb
+│       ├── test_arg_combinations_1.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_1.rb
+│       ├── test_arg_combinations_10.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_10.rb
+│       ├── test_arg_combinations_11.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_11.rb
+│       ├── test_arg_combinations_12.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_12.rb
+│       ├── test_arg_combinations_13.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_13.rb
+│       ├── test_arg_combinations_14.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_14.rb
+│       ├── test_arg_combinations_2.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_2.rb
+│       ├── test_arg_combinations_3.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_3.rb
+│       ├── test_arg_combinations_4.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_4.rb
+│       ├── test_arg_combinations_5.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_5.rb
+│       ├── test_arg_combinations_6.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_6.rb
+│       ├── test_arg_combinations_7.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_7.rb
+│       ├── test_arg_combinations_8.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_8.rb
+│       ├── test_arg_combinations_9.parse-tree-whitequark.exp
+│       ├── test_arg_combinations_9.rb
+│       ├── test_arg_duplicate_0.rb
+│       ├── test_arg_duplicate_1.rb
+│       ├── test_arg_duplicate_2.rb
+│       ├── test_arg_duplicate_3.rb
+│       ├── test_arg_duplicate_4.rb
+│       ├── test_arg_duplicate_5.rb
+│       ├── test_arg_duplicate_6.rb
+│       ├── test_arg_duplicate_7.rb
+│       ├── test_arg_duplicate_8.rb
+│       ├── test_arg_duplicate_9.rb
+│       ├── test_arg_duplicate_ignored_0.parse-tree-whitequark.exp
+│       ├── test_arg_duplicate_ignored_0.rb
+│       ├── test_arg_duplicate_ignored_1.parse-tree-whitequark.exp
+│       ├── test_arg_duplicate_ignored_1.rb
+│       ├── test_arg_duplicate_proc_0.rb
+│       ├── test_arg_invalid_0.rb
+│       ├── test_arg_invalid_1.rb
+│       ├── test_arg_invalid_2.rb
+│       ├── test_arg_invalid_3.rb
+│       ├── test_arg_label_0.parse-tree-whitequark.exp
+│       ├── test_arg_label_0.rb
+│       ├── test_arg_label_1.parse-tree-whitequark.exp
+│       ├── test_arg_label_1.rb
+│       ├── test_arg_label_2.parse-tree-whitequark.exp
+│       ├── test_arg_label_2.rb
+│       ├── test_arg_scope_0.parse-tree-whitequark.exp
+│       ├── test_arg_scope_0.rb
+│       ├── test_args_args_assocs_0.parse-tree-whitequark.exp
+│       ├── test_args_args_assocs_0.rb
+│       ├── test_args_args_assocs_1.parse-tree-whitequark.exp
+│       ├── test_args_args_assocs_1.rb
+│       ├── test_args_args_assocs_comma_0.parse-tree-whitequark.exp
+│       ├── test_args_args_assocs_comma_0.rb
+│       ├── test_args_args_comma_0.parse-tree-whitequark.exp
+│       ├── test_args_args_comma_0.rb
+│       ├── test_args_args_star_0.parse-tree-whitequark.exp
+│       ├── test_args_args_star_0.rb
+│       ├── test_args_args_star_1.parse-tree-whitequark.exp
+│       ├── test_args_args_star_1.rb
+│       ├── test_args_assocs_0.parse-tree-whitequark.exp
+│       ├── test_args_assocs_0.rb
+│       ├── test_args_assocs_1.parse-tree-whitequark.exp
+│       ├── test_args_assocs_1.rb
+│       ├── test_args_assocs_comma_0.parse-tree-whitequark.exp
+│       ├── test_args_assocs_comma_0.rb
+│       ├── test_args_block_pass_0.parse-tree-whitequark.exp
+│       ├── test_args_block_pass_0.rb
+│       ├── test_args_cmd_0.parse-tree-whitequark.exp
+│       ├── test_args_cmd_0.rb
+│       ├── test_args_star_0.parse-tree-whitequark.exp
+│       ├── test_args_star_0.rb
+│       ├── test_args_star_1.parse-tree-whitequark.exp
+│       ├── test_args_star_1.rb
+│       ├── test_array_assocs_0.parse-tree-whitequark.exp
+│       ├── test_array_assocs_0.rb
+│       ├── test_array_assocs_1.parse-tree-whitequark.exp
+│       ├── test_array_assocs_1.rb
+│       ├── test_array_plain_0.parse-tree-whitequark.exp
+│       ├── test_array_plain_0.rb
+│       ├── test_array_splat_0.parse-tree-whitequark.exp
+│       ├── test_array_splat_0.rb
+│       ├── test_array_splat_1.parse-tree-whitequark.exp
+│       ├── test_array_splat_1.rb
+│       ├── test_array_splat_2.parse-tree-whitequark.exp
+│       ├── test_array_splat_2.rb
+│       ├── test_array_symbols_0.parse-tree-whitequark.exp
+│       ├── test_array_symbols_0.rb
+│       ├── test_array_symbols_empty_0.parse-tree-whitequark.exp
+│       ├── test_array_symbols_empty_0.rb
+│       ├── test_array_symbols_empty_1.parse-tree-whitequark.exp
+│       ├── test_array_symbols_empty_1.rb
+│       ├── test_array_symbols_interp_0.parse-tree-whitequark.exp
+│       ├── test_array_symbols_interp_0.rb
+│       ├── test_array_symbols_interp_1.parse-tree-whitequark.exp
+│       ├── test_array_symbols_interp_1.rb
+│       ├── test_array_words_0.parse-tree-whitequark.exp
+│       ├── test_array_words_0.rb
+│       ├── test_array_words_empty_0.parse-tree-whitequark.exp
+│       ├── test_array_words_empty_0.rb
+│       ├── test_array_words_empty_1.parse-tree-whitequark.exp
+│       ├── test_array_words_empty_1.rb
+│       ├── test_array_words_interp_0.parse-tree-whitequark.exp
+│       ├── test_array_words_interp_0.rb
+│       ├── test_array_words_interp_1.parse-tree-whitequark.exp
+│       ├── test_array_words_interp_1.rb
+│       ├── test_asgn_backref_invalid_0.rb
+│       ├── test_asgn_cmd_0.parse-tree-whitequark.exp
+│       ├── test_asgn_cmd_0.rb
+│       ├── test_asgn_cmd_1.parse-tree-whitequark.exp
+│       ├── test_asgn_cmd_1.rb
+│       ├── test_asgn_keyword_invalid_0.rb
+│       ├── test_asgn_keyword_invalid_1.rb
+│       ├── test_asgn_keyword_invalid_2.rb
+│       ├── test_asgn_keyword_invalid_3.rb
+│       ├── test_asgn_keyword_invalid_4.rb
+│       ├── test_asgn_keyword_invalid_5.rb
+│       ├── test_asgn_mrhs_0.parse-tree-whitequark.exp
+│       ├── test_asgn_mrhs_0.rb
+│       ├── test_asgn_mrhs_1.parse-tree-whitequark.exp
+│       ├── test_asgn_mrhs_1.rb
+│       ├── test_asgn_mrhs_2.parse-tree-whitequark.exp
+│       ├── test_asgn_mrhs_2.rb
+│       ├── test_back_ref_0.parse-tree-whitequark.exp
+│       ├── test_back_ref_0.rb
+│       ├── test_bang_0.parse-tree-whitequark.exp
+│       ├── test_bang_0.rb
+│       ├── test_bang_cmd_0.parse-tree-whitequark.exp
+│       ├── test_bang_cmd_0.rb
+│       ├── test_begin_cmdarg_0.parse-tree-whitequark.exp
+│       ├── test_begin_cmdarg_0.rb
+│       ├── test_beginless_range_before_27_0.rb
+│       ├── test_beginless_range_before_27_1.rb
+│       ├── test_block_arg_combinations_0.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_0.rb
+│       ├── test_block_arg_combinations_1.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_1.rb
+│       ├── test_block_arg_combinations_10.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_10.rb
+│       ├── test_block_arg_combinations_11.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_11.rb
+│       ├── test_block_arg_combinations_12.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_12.rb
+│       ├── test_block_arg_combinations_13.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_13.rb
+│       ├── test_block_arg_combinations_14.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_14.rb
+│       ├── test_block_arg_combinations_15.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_15.rb
+│       ├── test_block_arg_combinations_16.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_16.rb
+│       ├── test_block_arg_combinations_17.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_17.rb
+│       ├── test_block_arg_combinations_18.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_18.rb
+│       ├── test_block_arg_combinations_19.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_19.rb
+│       ├── test_block_arg_combinations_2.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_2.rb
+│       ├── test_block_arg_combinations_20.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_20.rb
+│       ├── test_block_arg_combinations_21.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_21.rb
+│       ├── test_block_arg_combinations_22.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_22.rb
+│       ├── test_block_arg_combinations_23.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_23.rb
+│       ├── test_block_arg_combinations_24.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_24.rb
+│       ├── test_block_arg_combinations_25.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_25.rb
+│       ├── test_block_arg_combinations_26.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_26.rb
+│       ├── test_block_arg_combinations_27.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_27.rb
+│       ├── test_block_arg_combinations_3.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_3.rb
+│       ├── test_block_arg_combinations_4.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_4.rb
+│       ├── test_block_arg_combinations_5.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_5.rb
+│       ├── test_block_arg_combinations_6.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_6.rb
+│       ├── test_block_arg_combinations_7.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_7.rb
+│       ├── test_block_arg_combinations_8.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_8.rb
+│       ├── test_block_arg_combinations_9.parse-tree-whitequark.exp
+│       ├── test_block_arg_combinations_9.rb
+│       ├── test_block_kwarg_0.parse-tree-whitequark.exp
+│       ├── test_block_kwarg_0.rb
+│       ├── test_block_kwarg_combinations_0.parse-tree-whitequark.exp
+│       ├── test_block_kwarg_combinations_0.rb
+│       ├── test_block_kwarg_combinations_1.parse-tree-whitequark.exp
+│       ├── test_block_kwarg_combinations_1.rb
+│       ├── test_block_kwarg_combinations_2.parse-tree-whitequark.exp
+│       ├── test_block_kwarg_combinations_2.rb
+│       ├── test_blockarg_0.parse-tree-whitequark.exp
+│       ├── test_blockarg_0.rb
+│       ├── test_break_0.parse-tree-whitequark.exp
+│       ├── test_break_0.rb
+│       ├── test_break_1.parse-tree-whitequark.exp
+│       ├── test_break_1.rb
+│       ├── test_break_2.parse-tree-whitequark.exp
+│       ├── test_break_2.rb
+│       ├── test_break_3.parse-tree-whitequark.exp
+│       ├── test_break_3.rb
+│       ├── test_break_block_0.parse-tree-whitequark.exp
+│       ├── test_break_block_0.rb
+│       ├── test_bug_435_0.parse-tree-whitequark.exp
+│       ├── test_bug_435_0.rb
+│       ├── test_bug_447_0.parse-tree-whitequark.exp
+│       ├── test_bug_447_0.rb
+│       ├── test_bug_447_1.parse-tree-whitequark.exp
+│       ├── test_bug_447_1.rb
+│       ├── test_bug_452_0.parse-tree-whitequark.exp
+│       ├── test_bug_452_0.rb
+│       ├── test_bug_466_0.parse-tree-whitequark.exp
+│       ├── test_bug_466_0.rb
+│       ├── test_bug_473_0.parse-tree-whitequark.exp
+│       ├── test_bug_473_0.rb
+│       ├── test_bug_480_0.parse-tree-whitequark.exp
+│       ├── test_bug_480_0.rb
+│       ├── test_bug_481_0.parse-tree-whitequark.exp
+│       ├── test_bug_481_0.rb
+│       ├── test_bug_cmd_string_lookahead_0.parse-tree-whitequark.exp
+│       ├── test_bug_cmd_string_lookahead_0.rb
+│       ├── test_bug_cmdarg_0.parse-tree-whitequark.exp
+│       ├── test_bug_cmdarg_0.rb
+│       ├── test_bug_cmdarg_1.parse-tree-whitequark.exp
+│       ├── test_bug_cmdarg_1.rb
+│       ├── test_bug_cmdarg_2.parse-tree-whitequark.exp
+│       ├── test_bug_cmdarg_2.rb
+│       ├── test_bug_def_no_paren_eql_begin_0.parse-tree-whitequark.exp
+│       ├── test_bug_def_no_paren_eql_begin_0.rb
+│       ├── test_bug_do_block_in_call_args_0.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_call_args_0.rb
+│       ├── test_bug_do_block_in_cmdarg_0.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_cmdarg_0.rb
+│       ├── test_bug_do_block_in_hash_brace_0.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_hash_brace_0.rb
+│       ├── test_bug_do_block_in_hash_brace_1.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_hash_brace_1.rb
+│       ├── test_bug_do_block_in_hash_brace_2.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_hash_brace_2.rb
+│       ├── test_bug_do_block_in_hash_brace_3.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_hash_brace_3.rb
+│       ├── test_bug_do_block_in_hash_brace_4.parse-tree-whitequark.exp
+│       ├── test_bug_do_block_in_hash_brace_4.rb
+│       ├── test_bug_heredoc_do_0.parse-tree-whitequark.exp
+│       ├── test_bug_heredoc_do_0.rb
+│       ├── test_bug_heredoc_xstring_0.rb
+│       ├── test_bug_interp_single_0.parse-tree-whitequark.exp
+│       ├── test_bug_interp_single_0.rb
+│       ├── test_bug_interp_single_1.parse-tree-whitequark.exp
+│       ├── test_bug_interp_single_1.rb
+│       ├── test_bug_lambda_leakage_0.parse-tree-whitequark.exp
+│       ├── test_bug_lambda_leakage_0.rb
+│       ├── test_bug_regex_verification_0.parse-tree-whitequark.exp
+│       ├── test_bug_regex_verification_0.rb
+│       ├── test_bug_rescue_empty_else_0.parse-tree-whitequark.exp
+│       ├── test_bug_rescue_empty_else_0.rb
+│       ├── test_bug_while_not_parens_do_0.parse-tree-whitequark.exp
+│       ├── test_bug_while_not_parens_do_0.rb
+│       ├── test_case_cond_0.parse-tree-whitequark.exp
+│       ├── test_case_cond_0.rb
+│       ├── test_case_cond_else_0.parse-tree-whitequark.exp
+│       ├── test_case_cond_else_0.rb
+│       ├── test_case_expr_0.parse-tree-whitequark.exp
+│       ├── test_case_expr_0.rb
+│       ├── test_case_expr_else_0.parse-tree-whitequark.exp
+│       ├── test_case_expr_else_0.rb
+│       ├── test_casgn_invalid_0.rb
+│       ├── test_casgn_invalid_1.rb
+│       ├── test_casgn_invalid_2.rb
+│       ├── test_casgn_invalid_3.rb
+│       ├── test_casgn_invalid_4.rb
+│       ├── test_casgn_invalid_5.rb
+│       ├── test_casgn_scoped_0.parse-tree-whitequark.exp
+│       ├── test_casgn_scoped_0.rb
+│       ├── test_casgn_toplevel_0.parse-tree-whitequark.exp
+│       ├── test_casgn_toplevel_0.rb
+│       ├── test_casgn_unscoped_0.parse-tree-whitequark.exp
+│       ├── test_casgn_unscoped_0.rb
+│       ├── test_character_0.parse-tree-whitequark.exp
+│       ├── test_character_0.rb
+│       ├── test_class_0.parse-tree-whitequark.exp
+│       ├── test_class_0.rb
+│       ├── test_class_1.parse-tree-whitequark.exp
+│       ├── test_class_1.rb
+│       ├── test_class_definition_in_while_cond_0.parse-tree-whitequark.exp
+│       ├── test_class_definition_in_while_cond_0.rb
+│       ├── test_class_definition_in_while_cond_1.parse-tree-whitequark.exp
+│       ├── test_class_definition_in_while_cond_1.rb
+│       ├── test_class_definition_in_while_cond_2.parse-tree-whitequark.exp
+│       ├── test_class_definition_in_while_cond_2.rb
+│       ├── test_class_definition_in_while_cond_3.parse-tree-whitequark.exp
+│       ├── test_class_definition_in_while_cond_3.rb
+│       ├── test_class_invalid_0.rb
+│       ├── test_class_invalid_1.rb
+│       ├── test_class_super_0.parse-tree-whitequark.exp
+│       ├── test_class_super_0.rb
+│       ├── test_class_super_label_0.parse-tree-whitequark.exp
+│       ├── test_class_super_label_0.rb
+│       ├── test_codepoint_too_large_0.rb
+│       ├── test_complex_0.parse-tree-whitequark.exp
+│       ├── test_complex_0.rb
+│       ├── test_complex_1.parse-tree-whitequark.exp
+│       ├── test_complex_1.rb
+│       ├── test_complex_2.parse-tree-whitequark.exp
+│       ├── test_complex_2.rb
+│       ├── test_complex_3.parse-tree-whitequark.exp
+│       ├── test_complex_3.rb
+│       ├── test_cond_begin_0.parse-tree-whitequark.exp
+│       ├── test_cond_begin_0.rb
+│       ├── test_cond_eflipflop_0.parse-tree-whitequark.exp
+│       ├── test_cond_eflipflop_0.rb
+│       ├── test_cond_eflipflop_1.parse-tree-whitequark.exp
+│       ├── test_cond_eflipflop_1.rb
+│       ├── test_cond_iflipflop_0.parse-tree-whitequark.exp
+│       ├── test_cond_iflipflop_0.rb
+│       ├── test_cond_iflipflop_1.parse-tree-whitequark.exp
+│       ├── test_cond_iflipflop_1.rb
+│       ├── test_cond_match_current_line_0.parse-tree-whitequark.exp
+│       ├── test_cond_match_current_line_0.rb
+│       ├── test_cond_match_current_line_1.parse-tree-whitequark.exp
+│       ├── test_cond_match_current_line_1.rb
+│       ├── test_const_op_asgn_0.parse-tree-whitequark.exp
+│       ├── test_const_op_asgn_0.rb
+│       ├── test_const_op_asgn_1.parse-tree-whitequark.exp
+│       ├── test_const_op_asgn_1.rb
+│       ├── test_const_op_asgn_2.parse-tree-whitequark.exp
+│       ├── test_const_op_asgn_2.rb
+│       ├── test_const_op_asgn_3.parse-tree-whitequark.exp
+│       ├── test_const_op_asgn_3.rb
+│       ├── test_const_op_asgn_4.parse-tree-whitequark.exp
+│       ├── test_const_op_asgn_4.rb
+│       ├── test_const_scoped_0.parse-tree-whitequark.exp
+│       ├── test_const_scoped_0.rb
+│       ├── test_const_toplevel_0.parse-tree-whitequark.exp
+│       ├── test_const_toplevel_0.rb
+│       ├── test_const_unscoped_0.parse-tree-whitequark.exp
+│       ├── test_const_unscoped_0.rb
+│       ├── test_cpath_0.parse-tree-whitequark.exp
+│       ├── test_cpath_0.rb
+│       ├── test_cpath_1.parse-tree-whitequark.exp
+│       ├── test_cpath_1.rb
+│       ├── test_cpath_invalid_0.rb
+│       ├── test_cvar_0.parse-tree-whitequark.exp
+│       ├── test_cvar_0.rb
+│       ├── test_cvasgn_0.parse-tree-whitequark.exp
+│       ├── test_cvasgn_0.rb
+│       ├── test_def_0.parse-tree-whitequark.exp
+│       ├── test_def_0.rb
+│       ├── test_def_1.parse-tree-whitequark.exp
+│       ├── test_def_1.rb
+│       ├── test_def_2.parse-tree-whitequark.exp
+│       ├── test_def_2.rb
+│       ├── test_def_3.parse-tree-whitequark.exp
+│       ├── test_def_3.rb
+│       ├── test_def_4.parse-tree-whitequark.exp
+│       ├── test_def_4.rb
+│       ├── test_def_5.parse-tree-whitequark.exp
+│       ├── test_def_5.rb
+│       ├── test_defined_0.parse-tree-whitequark.exp
+│       ├── test_defined_0.rb
+│       ├── test_defined_1.parse-tree-whitequark.exp
+│       ├── test_defined_1.rb
+│       ├── test_defined_2.parse-tree-whitequark.exp
+│       ├── test_defined_2.rb
+│       ├── test_defs_0.parse-tree-whitequark.exp
+│       ├── test_defs_0.rb
+│       ├── test_defs_1.parse-tree-whitequark.exp
+│       ├── test_defs_1.rb
+│       ├── test_defs_2.parse-tree-whitequark.exp
+│       ├── test_defs_2.rb
+│       ├── test_defs_3.parse-tree-whitequark.exp
+│       ├── test_defs_3.rb
+│       ├── test_defs_4.parse-tree-whitequark.exp
+│       ├── test_defs_4.rb
+│       ├── test_defs_invalid_0.rb
+│       ├── test_defs_invalid_1.rb
+│       ├── test_defs_invalid_2.rb
+│       ├── test_defs_invalid_3.rb
+│       ├── test_defs_invalid_4.rb
+│       ├── test_defs_invalid_5.rb
+│       ├── test_defs_invalid_6.rb
+│       ├── test_defs_invalid_7.rb
+│       ├── test_emit_arg_inside_procarg0_legacy_0.parse-tree-whitequark.exp
+│       ├── test_emit_arg_inside_procarg0_legacy_0.rb
+│       ├── test_ensure_0.parse-tree-whitequark.exp
+│       ├── test_ensure_0.rb
+│       ├── test_ensure_empty_0.parse-tree-whitequark.exp
+│       ├── test_ensure_empty_0.rb
+│       ├── test_false_0.parse-tree-whitequark.exp
+│       ├── test_false_0.rb
+│       ├── test_float_0.parse-tree-whitequark.exp
+│       ├── test_float_0.rb
+│       ├── test_float_1.parse-tree-whitequark.exp
+│       ├── test_float_1.rb
+│       ├── test_for_0.parse-tree-whitequark.exp
+│       ├── test_for_0.rb
+│       ├── test_for_1.parse-tree-whitequark.exp
+│       ├── test_for_1.rb
+│       ├── test_for_mlhs_0.parse-tree-whitequark.exp
+│       ├── test_for_mlhs_0.rb
+│       ├── test_gvar_0.parse-tree-whitequark.exp
+│       ├── test_gvar_0.rb
+│       ├── test_gvasgn_0.parse-tree-whitequark.exp
+│       ├── test_gvasgn_0.rb
+│       ├── test_hash_empty_0.parse-tree-whitequark.exp
+│       ├── test_hash_empty_0.rb
+│       ├── test_hash_hashrocket_0.parse-tree-whitequark.exp
+│       ├── test_hash_hashrocket_0.rb
+│       ├── test_hash_hashrocket_1.parse-tree-whitequark.exp
+│       ├── test_hash_hashrocket_1.rb
+│       ├── test_hash_kwsplat_0.parse-tree-whitequark.exp
+│       ├── test_hash_kwsplat_0.rb
+│       ├── test_hash_label_0.parse-tree-whitequark.exp
+│       ├── test_hash_label_0.rb
+│       ├── test_hash_label_end_0.parse-tree-whitequark.exp
+│       ├── test_hash_label_end_0.rb
+│       ├── test_hash_label_end_1.parse-tree-whitequark.exp
+│       ├── test_hash_label_end_1.rb
+│       ├── test_hash_label_end_2.parse-tree-whitequark.exp
+│       ├── test_hash_label_end_2.rb
+│       ├── test_if_0.parse-tree-whitequark.exp
+│       ├── test_if_0.rb
+│       ├── test_if_1.parse-tree-whitequark.exp
+│       ├── test_if_1.rb
+│       ├── test_if_else_0.parse-tree-whitequark.exp
+│       ├── test_if_else_0.rb
+│       ├── test_if_else_1.parse-tree-whitequark.exp
+│       ├── test_if_else_1.rb
+│       ├── test_if_elsif_0.parse-tree-whitequark.exp
+│       ├── test_if_elsif_0.rb
+│       ├── test_if_masgn_24_0.parse-tree-whitequark.exp
+│       ├── test_if_masgn_24_0.rb
+│       ├── test_if_mod_0.parse-tree-whitequark.exp
+│       ├── test_if_mod_0.rb
+│       ├── test_if_nl_then_0.parse-tree-whitequark.exp
+│       ├── test_if_nl_then_0.rb
+│       ├── test_int_0.parse-tree-whitequark.exp
+│       ├── test_int_0.rb
+│       ├── test_int_1.parse-tree-whitequark.exp
+│       ├── test_int_1.rb
+│       ├── test_int_2.parse-tree-whitequark.exp
+│       ├── test_int_2.rb
+│       ├── test_int_LINE_0.parse-tree-whitequark.exp
+│       ├── test_int_LINE_0.rb
+│       ├── test_ivar_0.parse-tree-whitequark.exp
+│       ├── test_ivar_0.rb
+│       ├── test_ivasgn_0.parse-tree-whitequark.exp
+│       ├── test_ivasgn_0.rb
+│       ├── test_kwarg_0.parse-tree-whitequark.exp
+│       ├── test_kwarg_0.rb
+│       ├── test_kwarg_combinations_0.parse-tree-whitequark.exp
+│       ├── test_kwarg_combinations_0.rb
+│       ├── test_kwarg_combinations_1.parse-tree-whitequark.exp
+│       ├── test_kwarg_combinations_1.rb
+│       ├── test_kwarg_combinations_2.parse-tree-whitequark.exp
+│       ├── test_kwarg_combinations_2.rb
+│       ├── test_kwarg_combinations_3.parse-tree-whitequark.exp
+│       ├── test_kwarg_combinations_3.rb
+│       ├── test_kwarg_invalid_0.rb
+│       ├── test_kwarg_invalid_1.rb
+│       ├── test_kwarg_no_paren_0.parse-tree-whitequark.exp
+│       ├── test_kwarg_no_paren_0.rb
+│       ├── test_kwarg_no_paren_1.parse-tree-whitequark.exp
+│       ├── test_kwarg_no_paren_1.rb
+│       ├── test_kwbegin_compstmt_0.parse-tree-whitequark.exp
+│       ├── test_kwbegin_compstmt_0.rb
+│       ├── test_kwoptarg_0.parse-tree-whitequark.exp
+│       ├── test_kwoptarg_0.rb
+│       ├── test_kwrestarg_named_0.parse-tree-whitequark.exp
+│       ├── test_kwrestarg_named_0.rb
+│       ├── test_kwrestarg_unnamed_0.parse-tree-whitequark.exp
+│       ├── test_kwrestarg_unnamed_0.rb
+│       ├── test_lbrace_arg_after_command_args_0.parse-tree-whitequark.exp
+│       ├── test_lbrace_arg_after_command_args_0.rb
+│       ├── test_log_asgn_invalid_0.rb
+│       ├── test_log_asgn_invalid_1.rb
+│       ├── test_lparenarg_after_lvar_since_25_0.parse-tree-whitequark.exp
+│       ├── test_lparenarg_after_lvar_since_25_0.rb
+│       ├── test_lparenarg_after_lvar_since_25_1.parse-tree-whitequark.exp
+│       ├── test_lparenarg_after_lvar_since_25_1.rb
+│       ├── test_lvar_0.parse-tree-whitequark.exp
+│       ├── test_lvar_0.rb
+│       ├── test_lvasgn_0.parse-tree-whitequark.exp
+│       ├── test_lvasgn_0.rb
+│       ├── test_marg_combinations_0.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_0.rb
+│       ├── test_marg_combinations_1.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_1.rb
+│       ├── test_marg_combinations_2.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_2.rb
+│       ├── test_marg_combinations_3.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_3.rb
+│       ├── test_marg_combinations_4.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_4.rb
+│       ├── test_marg_combinations_5.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_5.rb
+│       ├── test_marg_combinations_6.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_6.rb
+│       ├── test_marg_combinations_7.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_7.rb
+│       ├── test_marg_combinations_8.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_8.rb
+│       ├── test_marg_combinations_9.parse-tree-whitequark.exp
+│       ├── test_marg_combinations_9.rb
+│       ├── test_masgn_0.parse-tree-whitequark.exp
+│       ├── test_masgn_0.rb
+│       ├── test_masgn_1.parse-tree-whitequark.exp
+│       ├── test_masgn_1.rb
+│       ├── test_masgn_2.parse-tree-whitequark.exp
+│       ├── test_masgn_2.rb
+│       ├── test_masgn_attr_0.parse-tree-whitequark.exp
+│       ├── test_masgn_attr_0.rb
+│       ├── test_masgn_attr_1.parse-tree-whitequark.exp
+│       ├── test_masgn_attr_1.rb
+│       ├── test_masgn_attr_2.parse-tree-whitequark.exp
+│       ├── test_masgn_attr_2.rb
+│       ├── test_masgn_backref_invalid_0.rb
+│       ├── test_masgn_cmd_0.parse-tree-whitequark.exp
+│       ├── test_masgn_cmd_0.rb
+│       ├── test_masgn_const_0.parse-tree-whitequark.exp
+│       ├── test_masgn_const_0.rb
+│       ├── test_masgn_const_1.parse-tree-whitequark.exp
+│       ├── test_masgn_const_1.rb
+│       ├── test_masgn_const_invalid_0.rb
+│       ├── test_masgn_const_invalid_1.rb
+│       ├── test_masgn_keyword_invalid_0.rb
+│       ├── test_masgn_nested_0.parse-tree-whitequark.exp
+│       ├── test_masgn_nested_0.rb
+│       ├── test_masgn_nested_1.parse-tree-whitequark.exp
+│       ├── test_masgn_nested_1.rb
+│       ├── test_masgn_splat_0.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_0.rb
+│       ├── test_masgn_splat_1.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_1.rb
+│       ├── test_masgn_splat_2.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_2.rb
+│       ├── test_masgn_splat_3.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_3.rb
+│       ├── test_masgn_splat_4.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_4.rb
+│       ├── test_masgn_splat_5.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_5.rb
+│       ├── test_masgn_splat_6.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_6.rb
+│       ├── test_masgn_splat_7.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_7.rb
+│       ├── test_masgn_splat_8.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_8.rb
+│       ├── test_masgn_splat_9.parse-tree-whitequark.exp
+│       ├── test_masgn_splat_9.rb
+│       ├── test_method_definition_in_while_cond_0.parse-tree-whitequark.exp
+│       ├── test_method_definition_in_while_cond_0.rb
+│       ├── test_method_definition_in_while_cond_1.parse-tree-whitequark.exp
+│       ├── test_method_definition_in_while_cond_1.rb
+│       ├── test_method_definition_in_while_cond_2.parse-tree-whitequark.exp
+│       ├── test_method_definition_in_while_cond_2.rb
+│       ├── test_method_definition_in_while_cond_3.parse-tree-whitequark.exp
+│       ├── test_method_definition_in_while_cond_3.rb
+│       ├── test_module_0.parse-tree-whitequark.exp
+│       ├── test_module_0.rb
+│       ├── test_module_invalid_0.rb
+│       ├── test_multiple_args_with_trailing_comma_0.parse-tree-whitequark.exp
+│       ├── test_multiple_args_with_trailing_comma_0.rb
+│       ├── test_next_0.parse-tree-whitequark.exp
+│       ├── test_next_0.rb
+│       ├── test_next_1.parse-tree-whitequark.exp
+│       ├── test_next_1.rb
+│       ├── test_next_2.parse-tree-whitequark.exp
+│       ├── test_next_2.rb
+│       ├── test_next_3.parse-tree-whitequark.exp
+│       ├── test_next_3.rb
+│       ├── test_next_block_0.parse-tree-whitequark.exp
+│       ├── test_next_block_0.rb
+│       ├── test_nil_0.parse-tree-whitequark.exp
+│       ├── test_nil_0.rb
+│       ├── test_nil_expression_0.parse-tree-whitequark.exp
+│       ├── test_nil_expression_0.rb
+│       ├── test_nil_expression_1.parse-tree-whitequark.exp
+│       ├── test_nil_expression_1.rb
+│       ├── test_non_lvar_injecting_match_0.parse-tree-whitequark.exp
+│       ├── test_non_lvar_injecting_match_0.rb
+│       ├── test_not_0.parse-tree-whitequark.exp
+│       ├── test_not_0.rb
+│       ├── test_not_1.parse-tree-whitequark.exp
+│       ├── test_not_1.rb
+│       ├── test_not_2.parse-tree-whitequark.exp
+│       ├── test_not_2.rb
+│       ├── test_not_cmd_0.parse-tree-whitequark.exp
+│       ├── test_not_cmd_0.rb
+│       ├── test_not_masgn_24_0.parse-tree-whitequark.exp
+│       ├── test_not_masgn_24_0.rb
+│       ├── test_nth_ref_0.parse-tree-whitequark.exp
+│       ├── test_nth_ref_0.rb
+│       ├── test_on_error_0.rb
+│       ├── test_op_asgn_0.parse-tree-whitequark.exp
+│       ├── test_op_asgn_0.rb
+│       ├── test_op_asgn_1.parse-tree-whitequark.exp
+│       ├── test_op_asgn_1.rb
+│       ├── test_op_asgn_2.parse-tree-whitequark.exp
+│       ├── test_op_asgn_2.rb
+│       ├── test_op_asgn_cmd_0.parse-tree-whitequark.exp
+│       ├── test_op_asgn_cmd_0.rb
+│       ├── test_op_asgn_cmd_1.parse-tree-whitequark.exp
+│       ├── test_op_asgn_cmd_1.rb
+│       ├── test_op_asgn_cmd_2.parse-tree-whitequark.exp
+│       ├── test_op_asgn_cmd_2.rb
+│       ├── test_op_asgn_cmd_3.parse-tree-whitequark.exp
+│       ├── test_op_asgn_cmd_3.rb
+│       ├── test_op_asgn_index_0.parse-tree-whitequark.exp
+│       ├── test_op_asgn_index_0.rb
+│       ├── test_op_asgn_index_cmd_0.parse-tree-whitequark.exp
+│       ├── test_op_asgn_index_cmd_0.rb
+│       ├── test_op_asgn_invalid_0.rb
+│       ├── test_op_asgn_invalid_1.rb
+│       ├── test_op_asgn_invalid_2.rb
+│       ├── test_optarg_0.parse-tree-whitequark.exp
+│       ├── test_optarg_0.rb
+│       ├── test_optarg_1.parse-tree-whitequark.exp
+│       ├── test_optarg_1.rb
+│       ├── test_or_0.parse-tree-whitequark.exp
+│       ├── test_or_0.rb
+│       ├── test_or_1.parse-tree-whitequark.exp
+│       ├── test_or_1.rb
+│       ├── test_or_asgn_0.parse-tree-whitequark.exp
+│       ├── test_or_asgn_0.rb
+│       ├── test_or_asgn_1.parse-tree-whitequark.exp
+│       ├── test_or_asgn_1.rb
+│       ├── test_parser_bug_272_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_272_0.rb
+│       ├── test_parser_bug_490_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_490_0.rb
+│       ├── test_parser_bug_490_1.parse-tree-whitequark.exp
+│       ├── test_parser_bug_490_1.rb
+│       ├── test_parser_bug_490_2.parse-tree-whitequark.exp
+│       ├── test_parser_bug_490_2.rb
+│       ├── test_parser_bug_507_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_507_0.rb
+│       ├── test_parser_bug_518_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_518_0.rb
+│       ├── test_parser_bug_525_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_525_0.rb
+│       ├── test_parser_bug_604_0.parse-tree-whitequark.exp
+│       ├── test_parser_bug_604_0.rb
+│       ├── test_postexe_0.parse-tree-whitequark.exp
+│       ├── test_postexe_0.rb
+│       ├── test_preexe_0.parse-tree-whitequark.exp
+│       ├── test_preexe_0.rb
+│       ├── test_preexe_invalid_0.rb
+│       ├── test_procarg0_0.parse-tree-whitequark.exp
+│       ├── test_procarg0_0.rb
+│       ├── test_procarg0_1.parse-tree-whitequark.exp
+│       ├── test_procarg0_1.rb
+│       ├── test_procarg0_legacy_0.parse-tree-whitequark.exp
+│       ├── test_procarg0_legacy_0.rb
+│       ├── test_range_endless_0.parse-tree-whitequark.exp
+│       ├── test_range_endless_0.rb
+│       ├── test_range_endless_1.parse-tree-whitequark.exp
+│       ├── test_range_endless_1.rb
+│       ├── test_range_exclusive_0.parse-tree-whitequark.exp
+│       ├── test_range_exclusive_0.rb
+│       ├── test_range_inclusive_0.parse-tree-whitequark.exp
+│       ├── test_range_inclusive_0.rb
+│       ├── test_rational_0.parse-tree-whitequark.exp
+│       ├── test_rational_0.rb
+│       ├── test_rational_1.parse-tree-whitequark.exp
+│       ├── test_rational_1.rb
+│       ├── test_redo_0.parse-tree-whitequark.exp
+│       ├── test_redo_0.rb
+│       ├── test_regex_interp_0.parse-tree-whitequark.exp
+│       ├── test_regex_interp_0.rb
+│       ├── test_regex_plain_0.parse-tree-whitequark.exp
+│       ├── test_regex_plain_0.rb
+│       ├── test_resbody_list_0.parse-tree-whitequark.exp
+│       ├── test_resbody_list_0.rb
+│       ├── test_resbody_list_mrhs_0.parse-tree-whitequark.exp
+│       ├── test_resbody_list_mrhs_0.rb
+│       ├── test_resbody_list_var_0.parse-tree-whitequark.exp
+│       ├── test_resbody_list_var_0.rb
+│       ├── test_resbody_var_0.parse-tree-whitequark.exp
+│       ├── test_resbody_var_0.rb
+│       ├── test_resbody_var_1.parse-tree-whitequark.exp
+│       ├── test_resbody_var_1.rb
+│       ├── test_rescue_0.parse-tree-whitequark.exp
+│       ├── test_rescue_0.rb
+│       ├── test_rescue_else_0.parse-tree-whitequark.exp
+│       ├── test_rescue_else_0.rb
+│       ├── test_rescue_else_ensure_0.parse-tree-whitequark.exp
+│       ├── test_rescue_else_ensure_0.rb
+│       ├── test_rescue_else_useless_0.rb
+│       ├── test_rescue_else_useless_1.rb
+│       ├── test_rescue_ensure_0.parse-tree-whitequark.exp
+│       ├── test_rescue_ensure_0.rb
+│       ├── test_rescue_in_lambda_block_0.parse-tree-whitequark.exp
+│       ├── test_rescue_in_lambda_block_0.rb
+│       ├── test_rescue_in_lambda_block_1.rb
+│       ├── test_rescue_mod_0.parse-tree-whitequark.exp
+│       ├── test_rescue_mod_0.rb
+│       ├── test_rescue_mod_asgn_0.parse-tree-whitequark.exp
+│       ├── test_rescue_mod_asgn_0.rb
+│       ├── test_rescue_mod_op_assign_0.parse-tree-whitequark.exp
+│       ├── test_rescue_mod_op_assign_0.rb
+│       ├── test_rescue_without_begin_end_0.parse-tree-whitequark.exp
+│       ├── test_rescue_without_begin_end_0.rb
+│       ├── test_restarg_named_0.parse-tree-whitequark.exp
+│       ├── test_restarg_named_0.rb
+│       ├── test_restarg_unnamed_0.parse-tree-whitequark.exp
+│       ├── test_restarg_unnamed_0.rb
+│       ├── test_retry_0.parse-tree-whitequark.exp
+│       ├── test_retry_0.rb
+│       ├── test_return_0.parse-tree-whitequark.exp
+│       ├── test_return_0.rb
+│       ├── test_return_1.parse-tree-whitequark.exp
+│       ├── test_return_1.rb
+│       ├── test_return_2.parse-tree-whitequark.exp
+│       ├── test_return_2.rb
+│       ├── test_return_3.parse-tree-whitequark.exp
+│       ├── test_return_3.rb
+│       ├── test_return_block_0.parse-tree-whitequark.exp
+│       ├── test_return_block_0.rb
+│       ├── test_return_in_class_0.rb
+│       ├── test_ruby_bug_10279_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_10279_0.rb
+│       ├── test_ruby_bug_10653_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_10653_0.rb
+│       ├── test_ruby_bug_10653_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_10653_1.rb
+│       ├── test_ruby_bug_10653_2.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_10653_2.rb
+│       ├── test_ruby_bug_11107_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11107_0.rb
+│       ├── test_ruby_bug_11380_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11380_0.rb
+│       ├── test_ruby_bug_11873_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_0.rb
+│       ├── test_ruby_bug_11873_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_1.rb
+│       ├── test_ruby_bug_11873_10.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_10.rb
+│       ├── test_ruby_bug_11873_11.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_11.rb
+│       ├── test_ruby_bug_11873_2.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_2.rb
+│       ├── test_ruby_bug_11873_3.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_3.rb
+│       ├── test_ruby_bug_11873_4.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_4.rb
+│       ├── test_ruby_bug_11873_5.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_5.rb
+│       ├── test_ruby_bug_11873_6.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_6.rb
+│       ├── test_ruby_bug_11873_7.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_7.rb
+│       ├── test_ruby_bug_11873_8.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_8.rb
+│       ├── test_ruby_bug_11873_9.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_9.rb
+│       ├── test_ruby_bug_11873_a_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_0.rb
+│       ├── test_ruby_bug_11873_a_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_1.rb
+│       ├── test_ruby_bug_11873_a_10.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_10.rb
+│       ├── test_ruby_bug_11873_a_11.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_11.rb
+│       ├── test_ruby_bug_11873_a_12.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_12.rb
+│       ├── test_ruby_bug_11873_a_13.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_13.rb
+│       ├── test_ruby_bug_11873_a_14.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_14.rb
+│       ├── test_ruby_bug_11873_a_15.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_15.rb
+│       ├── test_ruby_bug_11873_a_16.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_16.rb
+│       ├── test_ruby_bug_11873_a_17.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_17.rb
+│       ├── test_ruby_bug_11873_a_18.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_18.rb
+│       ├── test_ruby_bug_11873_a_19.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_19.rb
+│       ├── test_ruby_bug_11873_a_2.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_2.rb
+│       ├── test_ruby_bug_11873_a_3.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_3.rb
+│       ├── test_ruby_bug_11873_a_4.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_4.rb
+│       ├── test_ruby_bug_11873_a_5.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_5.rb
+│       ├── test_ruby_bug_11873_a_6.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_6.rb
+│       ├── test_ruby_bug_11873_a_7.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_7.rb
+│       ├── test_ruby_bug_11873_a_8.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_8.rb
+│       ├── test_ruby_bug_11873_a_9.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_a_9.rb
+│       ├── test_ruby_bug_11873_b_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_11873_b_0.rb
+│       ├── test_ruby_bug_12073_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12073_0.rb
+│       ├── test_ruby_bug_12073_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12073_1.rb
+│       ├── test_ruby_bug_12402_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_0.rb
+│       ├── test_ruby_bug_12402_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_1.rb
+│       ├── test_ruby_bug_12402_10.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_10.rb
+│       ├── test_ruby_bug_12402_11.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_11.rb
+│       ├── test_ruby_bug_12402_12.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_12.rb
+│       ├── test_ruby_bug_12402_13.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_13.rb
+│       ├── test_ruby_bug_12402_2.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_2.rb
+│       ├── test_ruby_bug_12402_3.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_3.rb
+│       ├── test_ruby_bug_12402_4.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_4.rb
+│       ├── test_ruby_bug_12402_5.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_5.rb
+│       ├── test_ruby_bug_12402_6.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_6.rb
+│       ├── test_ruby_bug_12402_7.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_7.rb
+│       ├── test_ruby_bug_12402_8.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_8.rb
+│       ├── test_ruby_bug_12402_9.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12402_9.rb
+│       ├── test_ruby_bug_12669_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12669_0.rb
+│       ├── test_ruby_bug_12669_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12669_1.rb
+│       ├── test_ruby_bug_12669_2.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12669_2.rb
+│       ├── test_ruby_bug_12669_3.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12669_3.rb
+│       ├── test_ruby_bug_12686_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_12686_0.rb
+│       ├── test_ruby_bug_12686_1.rb
+│       ├── test_ruby_bug_13547_0.rb
+│       ├── test_ruby_bug_13547_1.rb
+│       ├── test_ruby_bug_13547_10.rb
+│       ├── test_ruby_bug_13547_11.rb
+│       ├── test_ruby_bug_13547_12.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_13547_12.rb
+│       ├── test_ruby_bug_13547_2.rb
+│       ├── test_ruby_bug_13547_3.rb
+│       ├── test_ruby_bug_13547_4.rb
+│       ├── test_ruby_bug_13547_5.rb
+│       ├── test_ruby_bug_13547_6.rb
+│       ├── test_ruby_bug_13547_7.rb
+│       ├── test_ruby_bug_13547_8.rb
+│       ├── test_ruby_bug_13547_9.rb
+│       ├── test_ruby_bug_14690_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_14690_0.rb
+│       ├── test_ruby_bug_9669_0.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_9669_0.rb
+│       ├── test_ruby_bug_9669_1.parse-tree-whitequark.exp
+│       ├── test_ruby_bug_9669_1.rb
+│       ├── test_sclass_0.parse-tree-whitequark.exp
+│       ├── test_sclass_0.rb
+│       ├── test_self_0.parse-tree-whitequark.exp
+│       ├── test_self_0.rb
+│       ├── test_send_attr_asgn_0.parse-tree-whitequark.exp
+│       ├── test_send_attr_asgn_0.rb
+│       ├── test_send_attr_asgn_1.parse-tree-whitequark.exp
+│       ├── test_send_attr_asgn_1.rb
+│       ├── test_send_attr_asgn_2.parse-tree-whitequark.exp
+│       ├── test_send_attr_asgn_2.rb
+│       ├── test_send_attr_asgn_3.parse-tree-whitequark.exp
+│       ├── test_send_attr_asgn_3.rb
+│       ├── test_send_attr_asgn_conditional_0.parse-tree-whitequark.exp
+│       ├── test_send_attr_asgn_conditional_0.rb
+│       ├── test_send_binary_op_0.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_0.rb
+│       ├── test_send_binary_op_1.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_1.rb
+│       ├── test_send_binary_op_10.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_10.rb
+│       ├── test_send_binary_op_11.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_11.rb
+│       ├── test_send_binary_op_12.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_12.rb
+│       ├── test_send_binary_op_13.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_13.rb
+│       ├── test_send_binary_op_14.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_14.rb
+│       ├── test_send_binary_op_15.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_15.rb
+│       ├── test_send_binary_op_16.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_16.rb
+│       ├── test_send_binary_op_17.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_17.rb
+│       ├── test_send_binary_op_18.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_18.rb
+│       ├── test_send_binary_op_19.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_19.rb
+│       ├── test_send_binary_op_2.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_2.rb
+│       ├── test_send_binary_op_20.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_20.rb
+│       ├── test_send_binary_op_3.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_3.rb
+│       ├── test_send_binary_op_4.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_4.rb
+│       ├── test_send_binary_op_5.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_5.rb
+│       ├── test_send_binary_op_6.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_6.rb
+│       ├── test_send_binary_op_7.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_7.rb
+│       ├── test_send_binary_op_8.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_8.rb
+│       ├── test_send_binary_op_9.parse-tree-whitequark.exp
+│       ├── test_send_binary_op_9.rb
+│       ├── test_send_block_blockarg_0.rb
+│       ├── test_send_block_chain_cmd_0.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_0.rb
+│       ├── test_send_block_chain_cmd_1.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_1.rb
+│       ├── test_send_block_chain_cmd_2.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_2.rb
+│       ├── test_send_block_chain_cmd_3.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_3.rb
+│       ├── test_send_block_chain_cmd_4.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_4.rb
+│       ├── test_send_block_chain_cmd_5.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_5.rb
+│       ├── test_send_block_chain_cmd_6.parse-tree-whitequark.exp
+│       ├── test_send_block_chain_cmd_6.rb
+│       ├── test_send_block_conditional_0.parse-tree-whitequark.exp
+│       ├── test_send_block_conditional_0.rb
+│       ├── test_send_call_0.parse-tree-whitequark.exp
+│       ├── test_send_call_0.rb
+│       ├── test_send_call_1.parse-tree-whitequark.exp
+│       ├── test_send_call_1.rb
+│       ├── test_send_conditional_0.parse-tree-whitequark.exp
+│       ├── test_send_conditional_0.rb
+│       ├── test_send_index_0.parse-tree-whitequark.exp
+│       ├── test_send_index_0.rb
+│       ├── test_send_index_asgn_0.parse-tree-whitequark.exp
+│       ├── test_send_index_asgn_0.rb
+│       ├── test_send_index_asgn_legacy_0.parse-tree-whitequark.exp
+│       ├── test_send_index_asgn_legacy_0.rb
+│       ├── test_send_index_cmd_0.parse-tree-whitequark.exp
+│       ├── test_send_index_cmd_0.rb
+│       ├── test_send_index_legacy_0.parse-tree-whitequark.exp
+│       ├── test_send_index_legacy_0.rb
+│       ├── test_send_lambda_0.parse-tree-whitequark.exp
+│       ├── test_send_lambda_0.rb
+│       ├── test_send_lambda_1.parse-tree-whitequark.exp
+│       ├── test_send_lambda_1.rb
+│       ├── test_send_lambda_2.parse-tree-whitequark.exp
+│       ├── test_send_lambda_2.rb
+│       ├── test_send_lambda_args_0.parse-tree-whitequark.exp
+│       ├── test_send_lambda_args_0.rb
+│       ├── test_send_lambda_args_1.parse-tree-whitequark.exp
+│       ├── test_send_lambda_args_1.rb
+│       ├── test_send_lambda_args_noparen_0.parse-tree-whitequark.exp
+│       ├── test_send_lambda_args_noparen_0.rb
+│       ├── test_send_lambda_args_noparen_1.parse-tree-whitequark.exp
+│       ├── test_send_lambda_args_noparen_1.rb
+│       ├── test_send_lambda_args_shadow_0.parse-tree-whitequark.exp
+│       ├── test_send_lambda_args_shadow_0.rb
+│       ├── test_send_lambda_legacy_0.parse-tree-whitequark.exp
+│       ├── test_send_lambda_legacy_0.rb
+│       ├── test_send_op_asgn_conditional_0.parse-tree-whitequark.exp
+│       ├── test_send_op_asgn_conditional_0.rb
+│       ├── test_send_plain_0.parse-tree-whitequark.exp
+│       ├── test_send_plain_0.rb
+│       ├── test_send_plain_1.parse-tree-whitequark.exp
+│       ├── test_send_plain_1.rb
+│       ├── test_send_plain_2.parse-tree-whitequark.exp
+│       ├── test_send_plain_2.rb
+│       ├── test_send_plain_cmd_0.parse-tree-whitequark.exp
+│       ├── test_send_plain_cmd_0.rb
+│       ├── test_send_plain_cmd_1.parse-tree-whitequark.exp
+│       ├── test_send_plain_cmd_1.rb
+│       ├── test_send_plain_cmd_2.parse-tree-whitequark.exp
+│       ├── test_send_plain_cmd_2.rb
+│       ├── test_send_self_0.parse-tree-whitequark.exp
+│       ├── test_send_self_0.rb
+│       ├── test_send_self_1.parse-tree-whitequark.exp
+│       ├── test_send_self_1.rb
+│       ├── test_send_self_2.parse-tree-whitequark.exp
+│       ├── test_send_self_2.rb
+│       ├── test_send_self_block_0.parse-tree-whitequark.exp
+│       ├── test_send_self_block_0.rb
+│       ├── test_send_self_block_1.parse-tree-whitequark.exp
+│       ├── test_send_self_block_1.rb
+│       ├── test_send_self_block_2.parse-tree-whitequark.exp
+│       ├── test_send_self_block_2.rb
+│       ├── test_send_self_block_3.parse-tree-whitequark.exp
+│       ├── test_send_self_block_3.rb
+│       ├── test_send_unary_op_0.parse-tree-whitequark.exp
+│       ├── test_send_unary_op_0.rb
+│       ├── test_send_unary_op_1.parse-tree-whitequark.exp
+│       ├── test_send_unary_op_1.rb
+│       ├── test_send_unary_op_2.parse-tree-whitequark.exp
+│       ├── test_send_unary_op_2.rb
+│       ├── test_space_args_arg_0.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_0.rb
+│       ├── test_space_args_arg_block_0.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_block_0.rb
+│       ├── test_space_args_arg_block_1.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_block_1.rb
+│       ├── test_space_args_arg_block_2.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_block_2.rb
+│       ├── test_space_args_arg_call_0.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_call_0.rb
+│       ├── test_space_args_arg_newline_0.parse-tree-whitequark.exp
+│       ├── test_space_args_arg_newline_0.rb
+│       ├── test_space_args_block_0.parse-tree-whitequark.exp
+│       ├── test_space_args_block_0.rb
+│       ├── test_space_args_cmd_0.parse-tree-whitequark.exp
+│       ├── test_space_args_cmd_0.rb
+│       ├── test_string_FILE_0.parse-tree-whitequark.exp
+│       ├── test_string_FILE_0.rb
+│       ├── test_string_concat_0.parse-tree-whitequark.exp
+│       ├── test_string_concat_0.rb
+│       ├── test_string_dvar_0.parse-tree-whitequark.exp
+│       ├── test_string_dvar_0.rb
+│       ├── test_string_interp_0.parse-tree-whitequark.exp
+│       ├── test_string_interp_0.rb
+│       ├── test_string_plain_0.parse-tree-whitequark.exp
+│       ├── test_string_plain_0.rb
+│       ├── test_string_plain_1.parse-tree-whitequark.exp
+│       ├── test_string_plain_1.rb
+│       ├── test_super_0.parse-tree-whitequark.exp
+│       ├── test_super_0.rb
+│       ├── test_super_1.parse-tree-whitequark.exp
+│       ├── test_super_1.rb
+│       ├── test_super_2.parse-tree-whitequark.exp
+│       ├── test_super_2.rb
+│       ├── test_super_block_0.parse-tree-whitequark.exp
+│       ├── test_super_block_0.rb
+│       ├── test_super_block_1.parse-tree-whitequark.exp
+│       ├── test_super_block_1.rb
+│       ├── test_symbol_interp_0.parse-tree-whitequark.exp
+│       ├── test_symbol_interp_0.rb
+│       ├── test_symbol_plain_0.parse-tree-whitequark.exp
+│       ├── test_symbol_plain_0.rb
+│       ├── test_symbol_plain_1.parse-tree-whitequark.exp
+│       ├── test_symbol_plain_1.rb
+│       ├── test_ternary_0.parse-tree-whitequark.exp
+│       ├── test_ternary_0.rb
+│       ├── test_ternary_ambiguous_symbol_0.parse-tree-whitequark.exp
+│       ├── test_ternary_ambiguous_symbol_0.rb
+│       ├── test_true_0.parse-tree-whitequark.exp
+│       ├── test_true_0.rb
+│       ├── test_unary_num_pow_precedence_0.parse-tree-whitequark.exp
+│       ├── test_unary_num_pow_precedence_0.rb
+│       ├── test_unary_num_pow_precedence_1.parse-tree-whitequark.exp
+│       ├── test_unary_num_pow_precedence_1.rb
+│       ├── test_unary_num_pow_precedence_2.parse-tree-whitequark.exp
+│       ├── test_unary_num_pow_precedence_2.rb
+│       ├── test_undef_0.parse-tree-whitequark.exp
+│       ├── test_undef_0.rb
+│       ├── test_unknown_percent_str_0.rb
+│       ├── test_unless_0.parse-tree-whitequark.exp
+│       ├── test_unless_0.rb
+│       ├── test_unless_1.parse-tree-whitequark.exp
+│       ├── test_unless_1.rb
+│       ├── test_unless_else_0.parse-tree-whitequark.exp
+│       ├── test_unless_else_0.rb
+│       ├── test_unless_else_1.parse-tree-whitequark.exp
+│       ├── test_unless_else_1.rb
+│       ├── test_unless_mod_0.parse-tree-whitequark.exp
+│       ├── test_unless_mod_0.rb
+│       ├── test_until_0.parse-tree-whitequark.exp
+│       ├── test_until_0.rb
+│       ├── test_until_1.parse-tree-whitequark.exp
+│       ├── test_until_1.rb
+│       ├── test_until_mod_0.parse-tree-whitequark.exp
+│       ├── test_until_mod_0.rb
+│       ├── test_until_post_0.parse-tree-whitequark.exp
+│       ├── test_until_post_0.rb
+│       ├── test_var_and_asgn_0.parse-tree-whitequark.exp
+│       ├── test_var_and_asgn_0.rb
+│       ├── test_var_op_asgn_0.parse-tree-whitequark.exp
+│       ├── test_var_op_asgn_0.rb
+│       ├── test_var_op_asgn_1.parse-tree-whitequark.exp
+│       ├── test_var_op_asgn_1.rb
+│       ├── test_var_op_asgn_2.parse-tree-whitequark.exp
+│       ├── test_var_op_asgn_2.rb
+│       ├── test_var_op_asgn_3.parse-tree-whitequark.exp
+│       ├── test_var_op_asgn_3.rb
+│       ├── test_var_op_asgn_cmd_0.parse-tree-whitequark.exp
+│       ├── test_var_op_asgn_cmd_0.rb
+│       ├── test_var_op_asgn_keyword_invalid_0.rb
+│       ├── test_var_or_asgn_0.parse-tree-whitequark.exp
+│       ├── test_var_or_asgn_0.rb
+│       ├── test_when_multi_0.parse-tree-whitequark.exp
+│       ├── test_when_multi_0.rb
+│       ├── test_when_splat_0.parse-tree-whitequark.exp
+│       ├── test_when_splat_0.rb
+│       ├── test_when_then_0.parse-tree-whitequark.exp
+│       ├── test_when_then_0.rb
+│       ├── test_while_0.parse-tree-whitequark.exp
+│       ├── test_while_0.rb
+│       ├── test_while_1.parse-tree-whitequark.exp
+│       ├── test_while_1.rb
+│       ├── test_while_mod_0.parse-tree-whitequark.exp
+│       ├── test_while_mod_0.rb
+│       ├── test_while_post_0.parse-tree-whitequark.exp
+│       ├── test_while_post_0.rb
+│       ├── test_xstring_interp_0.parse-tree-whitequark.exp
+│       ├── test_xstring_interp_0.rb
+│       ├── test_xstring_plain_0.parse-tree-whitequark.exp
+│       ├── test_xstring_plain_0.rb
+│       ├── test_yield_0.parse-tree-whitequark.exp
+│       ├── test_yield_0.rb
+│       ├── test_yield_1.parse-tree-whitequark.exp
+│       ├── test_yield_1.rb
+│       ├── test_yield_2.parse-tree-whitequark.exp
+│       ├── test_yield_2.rb
+│       ├── test_yield_3.parse-tree-whitequark.exp
+│       ├── test_yield_3.rb
+│       ├── test_yield_block_0.rb
+│       ├── test_yield_block_1.rb
+│       ├── test_zsuper_0.parse-tree-whitequark.exp
+│       └── test_zsuper_0.rb
+├── third_party
+│   ├── BUILD
+│   ├── README.md
+│   ├── blake2.BUILD
+│   ├── clang.BUILD
+│   ├── concurrentqueue.BUILD
+│   ├── cpp_subprocess.BUILD
+│   ├── crcpp.BUILD
+│   ├── cxxopts.BUILD
+│   ├── emscripten-clang.BUILD
+│   ├── emscripten-toolchain.BUILD
+│   ├── externals.bzl
+│   ├── gems
+│   │   ├── BUILD
+│   │   ├── build_defs.BUILD
+│   │   ├── gemfile.bzl
+│   │   ├── gems.BUILD
+│   │   ├── known_gems.bzl
+│   │   └── rules.bzl
+│   ├── gtest.BUILD
+│   ├── jemalloc.BUILD
+│   ├── libb2.BUILD
+│   ├── libprotobuf-mutator.BUILD
+│   ├── licenses
+│   │   ├── BUILD
+│   │   ├── README
+│   │   ├── abseil.txt
+│   │   ├── blake2.txt
+│   │   ├── crcpp.txt
+│   │   ├── cxxopts.txt
+│   │   ├── googletest.txt
+│   │   ├── jemalloc.txt
+│   │   ├── libb2.txt
+│   │   ├── licenses.h
+│   │   ├── lizard.txt
+│   │   ├── lmdb.txt
+│   │   ├── msgpack-c.txt
+│   │   ├── pdqsort.txt
+│   │   ├── progressbar.txt
+│   │   ├── protobuf.txt
+│   │   ├── protobufmutator.txt
+│   │   ├── rang.txt
+│   │   ├── rapidjson.txt
+│   │   ├── spdlog.txt
+│   │   ├── statsd-c-client.txt
+│   │   ├── tools
+│   │   │   └── generate_licenses.cc
+│   │   ├── typedruby.txt
+│   │   └── yamlcpp.txt
+│   ├── lizard.BUILD
+│   ├── lmdb.BUILD
+│   ├── msgpack.BUILD
+│   ├── openssl
+│   │   ├── BUILD
+│   │   ├── darwin.BUILD
+│   │   └── linux.BUILD
+│   ├── parser
+│   │   ├── BUILD
+│   │   ├── README.md
+│   │   ├── cc
+│   │   │   ├── capi.cc
+│   │   │   ├── context.cc
+│   │   │   ├── driver.cc
+│   │   │   ├── grammars
+│   │   │   │   └── typedruby.ypp
+│   │   │   ├── lexer.rl
+│   │   │   ├── literal.cc
+│   │   │   ├── state_stack.cc
+│   │   │   └── token.cc
+│   │   ├── codegen
+│   │   │   ├── builder.rb
+│   │   │   └── generate_diagnostics.cc
+│   │   └── include
+│   │       └── ruby_parser
+│   │           ├── builder.hh
+│   │           ├── capi.hh
+│   │           ├── context.hh
+│   │           ├── diagnostic.hh
+│   │           ├── driver.hh
+│   │           ├── lexer.hh
+│   │           ├── literal.hh
+│   │           ├── node.hh
+│   │           ├── pool.hh
+│   │           ├── state_stack.hh
+│   │           └── token.hh
+│   ├── pdqsort.BUILD
+│   ├── progressbar
+│   │   ├── BUILD
+│   │   ├── README
+│   │   ├── progressbar
+│   │   │   ├── progressbar.h
+│   │   │   └── statusbar.h
+│   │   └── src
+│   │       ├── progressbar.c
+│   │       └── statusbar.c
+│   ├── progressbar.BUILD
+│   ├── rang.BUILD
+│   ├── rapidjson.BUILD
+│   ├── ruby
+│   │   ├── BUILD
+│   │   ├── build-ruby.bzl
+│   │   └── ruby.BUILD
+│   ├── spdlog.BUILD
+│   ├── statsd.BUILD
+│   ├── yaml_cpp.BUILD
+│   └── zlib.BUILD
+├── tools
+│   ├── BUILD
+│   ├── bazel
+│   ├── buildstamp
+│   │   └── get_workspace_status
+│   ├── clang.bzl
+│   ├── config
+│   │   └── BUILD
+│   ├── scripts
+│   │   ├── build_compilation_db.sh
+│   │   ├── cfg-view.sh
+│   │   ├── check_using_namespace_std.sh
+│   │   ├── ci_checks.sh
+│   │   ├── format_build_files.sh
+│   │   ├── format_cxx.sh
+│   │   ├── format_website.sh
+│   │   ├── fuzz.sh
+│   │   ├── fuzz_minimize_all.sh
+│   │   ├── fuzz_minimize_crash.sh
+│   │   ├── generate_compdb_targets.sh
+│   │   ├── import_whitequark.rb
+│   │   ├── import_whitequark.sh
+│   │   ├── lint_cxx.sh
+│   │   ├── lint_sh.sh
+│   │   ├── make_worktree.sh
+│   │   ├── regen-emscripten-cache.sh
+│   │   ├── try_fast_path_tests.sh
+│   │   ├── update-sorbet.run.sh
+│   │   ├── update_exp_files.sh
+│   │   └── update_testdata_exp.sh
+│   └── toolchain
+│       ├── webasm-darwin
+│       │   ├── BUILD
+│       │   ├── ar.sh
+│       │   ├── cc_toolchain_config.bzl
+│       │   ├── em_cache_existing.tar.gz
+│       │   └── emcc.sh
+│       └── webasm-linux
+│           ├── BUILD
+│           ├── ar.sh
+│           ├── cc_toolchain_config.bzl
+│           ├── em_cache_existing.tar.gz
+│           └── emcc.sh
+└── website
+    ├── README.md
+    ├── blog
+    │   ├── 2019-05-16-state-of-sorbet-spring-2019.md
+    │   ├── 2019-06-20-open-sourcing-sorbet.md
+    │   └── 2019-12-20-announcing-sorbet-0.5.md
+    ├── core
+    │   ├── Footer.js
+    │   └── PageSection.js
+    ├── docs
+    │   ├── abstract.md
+    │   ├── adopting.md
+    │   ├── attached-class.md
+    │   ├── class-of.md
+    │   ├── class-types.md
+    │   ├── cli.md
+    │   ├── error-reference.md
+    │   ├── exhaustiveness.md
+    │   ├── faq.md
+    │   ├── final.md
+    │   ├── flow-sensitive.md
+    │   ├── gradual.md
+    │   ├── intersection-types.md
+    │   ├── legal
+    │   │   └── trademark-policy.md
+    │   ├── metaprogramming-plugins.md
+    │   ├── metrics.md
+    │   ├── nilable-types.md
+    │   ├── non-forcing-constants.md
+    │   ├── noreturn.md
+    │   ├── override-checking.md
+    │   ├── overview.md
+    │   ├── procs.md
+    │   ├── quickref.md
+    │   ├── rbi.md
+    │   ├── runtime.md
+    │   ├── sealed.md
+    │   ├── self-type.md
+    │   ├── shapes.md
+    │   ├── sigs.md
+    │   ├── static.md
+    │   ├── stdlib-generics.md
+    │   ├── talks
+    │   │   ├── curry-on-2019.md
+    │   │   ├── jvm-ls-2019.md
+    │   │   ├── ruby-conf-2019.md
+    │   │   ├── ruby-kaigi-2018.md
+    │   │   ├── ruby-kaigi-2019.md
+    │   │   └── strange-loop-2018.md
+    │   ├── tconfiguration.md
+    │   ├── tenum.md
+    │   ├── troubleshooting.md
+    │   ├── tstruct.md
+    │   ├── tuples.md
+    │   ├── type-aliases.md
+    │   ├── type-annotations.md
+    │   ├── type-assertions.md
+    │   ├── union-types.md
+    │   └── untyped.md
+    ├── i18n
+    ├── package.json
+    ├── pages
+    │   └── en
+    │       ├── community.js
+    │       └── index.js
+    ├── sidebars.json
+    ├── siteConfig.js
+    ├── static
+    │   ├── blog
+    │   │   └── 2019
+    │   │       └── 05
+    │   │           └── 16
+    │   │               ├── State-of-Sorbet-May-2019
+    │   │               │   └── index.html
+    │   │               └── State-of-Sorbet-May-2019.html
+    │   ├── css
+    │   │   ├── PageSection.css
+    │   │   ├── custom.css
+    │   │   └── overrides.css
+    │   ├── docs
+    │   │   ├── attr_reader.html
+    │   │   ├── bad-rbi.html
+    │   │   ├── include-kernel.html
+    │   │   ├── index.html
+    │   │   ├── rake.html
+    │   │   ├── ruby-3.html
+    │   │   └── why-nil.html
+    │   ├── img
+    │   │   ├── atrium-logo.jpg
+    │   │   ├── autocompleteAndDocs1.gif
+    │   │   ├── coinbase-logo.png
+    │   │   ├── czi-logo.svg
+    │   │   ├── editor_autocomplete.gif
+    │   │   ├── editor_error_squiggles.gif
+    │   │   ├── editor_go_to_definition.gif
+    │   │   ├── factorial-logo.png
+    │   │   ├── favicon.ico
+    │   │   ├── gusto-logo.jpg
+    │   │   ├── kickstarter-logo.png
+    │   │   ├── shopify-logo.svg
+    │   │   ├── sorbet-logo-card@2x.png
+    │   │   ├── sorbet-logo-purple-sparkles.svg
+    │   │   ├── sorbet-logo-white-sparkles.svg
+    │   │   ├── sorbet-logo.svg
+    │   │   ├── sourcegraph_github.gif
+    │   │   ├── stripe-logo.svg
+    │   │   ├── talk-thumb.png
+    │   │   ├── testimonial_once_every_never.png
+    │   │   ├── testimonial_pair_programming.png
+    │   │   └── vonage-logo.png
+    │   ├── js
+    │   │   └── error-reference.js
+    │   ├── slack
+    │   │   └── index.html
+    │   └── talks
+    │       └── index.html
+    └── style-guide.md
