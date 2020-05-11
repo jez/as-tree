@@ -103,6 +103,7 @@ of files to print better than `tree` can alone.
 
 ## TODO(jez)
 
+- Set up CI (should build under both Bazel and Cargo)
 - rustfmt / buildifier / shellcheck in CI
 - tests for CLI options
 - [ ] Color output according to LS_COLORS environment variable. Prior art:
