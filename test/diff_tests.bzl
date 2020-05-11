@@ -8,8 +8,8 @@ def diff_tests(input_files):
             name = genrule_name,
             srcs = [input_file],
             outs = [actual_file],
-            tools = ["//src:as-tree"],
-            cmd = "$(location //src:as-tree) < $(location {input_file}) > $(location {actual_file})".format(
+            tools = ["//main:as-tree"],
+            cmd = "$(location //main:as-tree) < $(location {input_file}) > $(location {actual_file})".format(
                 input_file = input_file,
                 actual_file = actual_file,
             ),
