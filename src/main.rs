@@ -44,6 +44,18 @@ impl PathTrie {
 
 impl fmt::Display for PathTrie {
     fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
+        if self.trie.is_empty() {
+            return write!(out, "\n");
+        }
+
+        if let Some((path, it)) = self.trie.iter().next() {
+            if path.is_absolute() || path == &PathBuf::from(".") {
+                write!(out, "{}\n", path.display())?;
+                return it._fmt(out, "");
+            }
+        }
+
+        write!(out, ".\n")?;
         self._fmt(out, "")
     }
 }
@@ -113,9 +125,7 @@ fn main() -> io::Result<()> {
     let options = parse_options_or_die();
 
     let trie = match options.filename {
-        None => {
-            drain_input_to_path_trie(&mut io::stdin().lock())
-        }
+        None => drain_input_to_path_trie(&mut io::stdin().lock()),
         Some(filename) => {
             let file = File::open(filename)?;
             let mut reader = BufReader::new(file);
@@ -123,7 +133,7 @@ fn main() -> io::Result<()> {
         }
     };
 
-    print!(".\n{}", trie);
+    print!("{}", trie);
 
     io::Result::Ok(())
 }
