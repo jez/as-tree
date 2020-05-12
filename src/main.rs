@@ -1,3 +1,4 @@
+extern crate ansi_term;
 extern crate lscolors;
 
 use std::collections::BTreeMap;
@@ -14,6 +15,13 @@ use lscolors::{LsColors, Style};
 pub struct PathTrie {
     // We rely on the sorted iteration order
     trie: BTreeMap<PathBuf, PathTrie>,
+}
+
+fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
+    lscolors
+        .style_for_path(&path)
+        .map(Style::to_ansi_term_style)
+        .unwrap_or_default()
 }
 
 impl PathTrie {
@@ -40,10 +48,7 @@ impl PathTrie {
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
-            let ansi_style = lscolors
-                .style_for_path(&current_path)
-                .map(Style::to_ansi_term_style)
-                .unwrap_or_default();
+            let ansi_style = ansi_style_for_path(&lscolors, &current_path);
             if idx != self.trie.len() - 1 {
                 write!(
                     out,
@@ -76,20 +81,14 @@ impl fmt::Display for PathTrie {
         let lscolors = LsColors::from_env().unwrap_or_default();
 
         if let Some((path, it)) = self.trie.iter().next() {
-            let ansi_style = lscolors
-                .style_for_path(path)
-                .map(Style::to_ansi_term_style)
-                .unwrap_or_default();
+            let ansi_style = ansi_style_for_path(&lscolors, path);
             if path.is_absolute() || path == &PathBuf::from(".") {
                 write!(out, "{}\n", ansi_style.paint(path.to_string_lossy()))?;
                 return it._fmt(out, "", &lscolors, path.to_owned());
             }
         }
 
-        let ansi_style = lscolors
-            .style_for_path(".")
-            .map(Style::to_ansi_term_style)
-            .unwrap_or_default();
+        let ansi_style = ansi_style_for_path(&lscolors, Path::new("."));
         write!(out, "{}\n", ansi_style.paint("."))?;
         self._fmt(out, "", &lscolors, PathBuf::from("."))
     }

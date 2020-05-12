@@ -11,6 +11,7 @@ name = "as-tree"
 path = "src/main.rs"
 
 [dependencies]
+ansi_term = "0.12"
 lscolors = "0.7"
 
 [raze]
