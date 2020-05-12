@@ -21,6 +21,7 @@ def raze_fetch_remote_crates():
         url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/ansi_term/ansi_term-0.12.1.crate",
         type = "tar.gz",
         strip_prefix = "ansi_term-0.12.1",
+        sha256 = "d52a9bb7ec0cf484c551830a7ce27bd20d67eac647e1befb56b0be4ee39a55d2",
 
         build_file = Label("//third_party/cargo/remote:ansi_term-0.12.1.BUILD"),
     )
@@ -30,6 +31,7 @@ def raze_fetch_remote_crates():
         url = "https://crates-io.s3-us-west-1.amazonaws.com/crates/lscolors/lscolors-0.7.0.crate",
         type = "tar.gz",
         strip_prefix = "lscolors-0.7.0",
+        sha256 = "1f77452267149eac960ded529fe5f5460ddf792845a1d71b5d0cfcee5642e47e",
 
         build_file = Label("//third_party/cargo/remote:lscolors-0.7.0.BUILD"),
     )

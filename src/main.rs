@@ -1,3 +1,5 @@
+extern crate lscolors;
+
 use std::collections::BTreeMap;
 use std::env;
 use std::fmt;
@@ -5,6 +7,8 @@ use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::{Path, PathBuf};
 use std::process::exit;
+
+use lscolors::{LsColors, Style};
 
 #[derive(Debug, Default)]
 pub struct PathTrie {
@@ -23,17 +27,39 @@ impl PathTrie {
         }
     }
 
-    fn _fmt(&self, out: &mut fmt::Formatter, outer_prefix: &str) -> fmt::Result {
-        let normal_prefix = format!("{}│   ", outer_prefix);
-        let last_prefix = format!("{}    ", outer_prefix);
+    // TODO(jez) Put these three parameters into a helper struct
+    fn _fmt(
+        &self,
+        out: &mut fmt::Formatter,
+        prefix: &str,
+        lscolors: &LsColors,
+        parent_path: PathBuf,
+    ) -> fmt::Result {
+        let normal_prefix = format!("{}│   ", prefix);
+        let last_prefix = format!("{}    ", prefix);
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
+            let current_path = parent_path.join(path);
+            let ansi_style = lscolors
+                .style_for_path(&current_path)
+                .map(Style::to_ansi_term_style)
+                .unwrap_or_default();
             if idx != self.trie.len() - 1 {
-                write!(out, "{}├── {}\n", outer_prefix, path.display())?;
-                it._fmt(out, &normal_prefix)?;
+                write!(
+                    out,
+                    "{}├── {}\n",
+                    prefix,
+                    ansi_style.paint(path.to_string_lossy())
+                )?;
+                it._fmt(out, &normal_prefix, lscolors, current_path)?;
             } else {
-                write!(out, "{}└── {}\n", outer_prefix, path.display())?;
-                it._fmt(out, &last_prefix)?;
+                write!(
+                    out,
+                    "{}└── {}\n",
+                    prefix,
+                    ansi_style.paint(path.to_string_lossy())
+                )?;
+                it._fmt(out, &last_prefix, lscolors, current_path)?;
             }
         }
 
@@ -47,15 +73,25 @@ impl fmt::Display for PathTrie {
             return write!(out, "\n");
         }
 
+        let lscolors = LsColors::from_env().unwrap_or_default();
+
         if let Some((path, it)) = self.trie.iter().next() {
+            let ansi_style = lscolors
+                .style_for_path(path)
+                .map(Style::to_ansi_term_style)
+                .unwrap_or_default();
             if path.is_absolute() || path == &PathBuf::from(".") {
-                write!(out, "{}\n", path.display())?;
-                return it._fmt(out, "");
+                write!(out, "{}\n", ansi_style.paint(path.to_string_lossy()))?;
+                return it._fmt(out, "", &lscolors, path.to_owned());
             }
         }
 
-        write!(out, ".\n")?;
-        self._fmt(out, "")
+        let ansi_style = lscolors
+            .style_for_path(".")
+            .map(Style::to_ansi_term_style)
+            .unwrap_or_default();
+        write!(out, "{}\n", ansi_style.paint("."))?;
+        self._fmt(out, "", &lscolors, PathBuf::from("."))
     }
 }
 
