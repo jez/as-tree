@@ -56,10 +56,18 @@ make install
 Print a list of paths as a tree of paths.
 
 Usage:
-  as-tree [<file>]
+  as-tree [options] [<filename>]
 
 Arguments:
-  <file>      The file to read from [default: stdin]
+  <filename>        The file to read from. When omitted, reads from stdin.
+
+Options:
+  --color (always|auto|never)
+                    Whether to colorize the output [default: auto]
+  -h, --help        Print this help message
+
+Example:
+  find . -name '*.txt' | as-tree
 ```
 
 ## Example
