@@ -96,10 +96,9 @@ fn main() -> io::Result<()> {
         }
     };
 
-    let lscolors = if options.color {
-        LsColors::from_env().unwrap_or_default()
-    } else {
-        LsColors::empty()
+    let lscolors = match &options.colorize {
+        options::Colorize::Never => LsColors::empty(),
+        options::Colorize::Always => LsColors::from_env().unwrap_or_default(),
     };
 
     trie.print(&lscolors);

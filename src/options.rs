@@ -1,11 +1,22 @@
 use std::env;
 use std::process::exit;
 
+#[derive(Debug)]
+pub enum Colorize {
+    Never,
+    Always,
+}
+
+impl Default for Colorize {
+    fn default() -> Self {
+        Colorize::Never
+    }
+}
+
 #[derive(Debug, Default)]
 pub struct Options {
     pub filename: Option<String>,
-    // TODO(jez) Infer whether to use color from isatty
-    pub color: bool,
+    pub colorize: Colorize,
 }
 
 const USAGE: &'static str = "\
@@ -52,9 +63,9 @@ pub fn parse_options_or_die() -> Options {
         if arg == "--color" {
             if let Some(color) = argv.next() {
                 if color == "always" {
-                    options.color = true;
+                    options.colorize = Colorize::Always;
                 } else if color == "never" {
-                    options.color = false;
+                    options.colorize = Colorize::Never;
                 } else {
                     die("Unrecognized option: --color", &color);
                 }
