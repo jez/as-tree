@@ -25,7 +25,7 @@ it will print:
 
 This tool is particularly useful when used with `find` or `fd` to produce such
 a list of files. It's similar in spirit to `tree`, but `find` and `fd` tend to
-be more powerful when it comes to controling which files to list.
+be more powerful when it comes to controlling which files to list.
 
 Inspired by [this feature request](https://github.com/sharkdp/fd/issues/283).
 
@@ -37,7 +37,7 @@ This project is written in Rust and builds under both Bazel and Cargo.
 
 To install from source using Cargo:
 
-```
+```shell
 cargo install -f --git https://github.com/jez/as-tree
 ```
 
