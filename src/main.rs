@@ -23,8 +23,6 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
         .unwrap_or_default()
 }
 
-// fn paint_path(lscolors: &LsColors, path: &Path) -> String {}
-
 impl PathTrie {
     pub fn insert(&mut self, path: &Path) {
         let mut cur = self;
@@ -42,9 +40,8 @@ impl PathTrie {
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
-            // let painted = paint_path(options, lscolors, path);
             let style = ansi_style_for_path(&lscolors, &current_path);
-            let painted = style.paint(path.to_string_lossy()).to_string();
+            let painted = style.paint(path.to_string_lossy());
             if idx != self.trie.len() - 1 {
                 println!("{}├── {}", prefix, painted);
                 it._print(&normal_prefix, lscolors, current_path);
@@ -63,9 +60,8 @@ impl PathTrie {
 
         if let Some((path, it)) = self.trie.iter().next() {
             if path.is_absolute() || path == &PathBuf::from(".") {
-                // let painted = paint_path(options, lscolors, options)
                 let style = ansi_style_for_path(&lscolors, &path);
-                let painted = style.paint(path.to_string_lossy()).to_string();
+                let painted = style.paint(path.to_string_lossy());
                 println!("{}", painted);
                 it._print("", &lscolors, path.to_owned());
                 return;
@@ -95,7 +91,10 @@ Usage:
   as-tree [<file>]
 
 Arguments:
-  <file>      The file to read from [default: stdin]
+  <file>                  The file to read from [default: stdin]
+
+Options:
+  --color=(always|never)  Whether to colorize the output [default: false]
 ";
 
 #[derive(Debug, Default)]
@@ -106,6 +105,11 @@ struct Options {
 }
 
 fn parse_options_or_die() -> Options {
+    fn die(msg: &str, arg: &str) -> ! {
+        eprint!("{} '{}'\n\n{}", msg, arg, USAGE);
+        exit(1);
+    }
+
     let mut argv = env::args();
 
     if argv.next().is_none() {
@@ -114,10 +118,9 @@ fn parse_options_or_die() -> Options {
     }
 
     let mut options = Options::default();
-    for arg in argv {
+    while let Some(arg) = argv.next() {
         if arg.is_empty() {
-            eprint!("Unrecognized argument: {}\n\n{}", arg, USAGE);
-            exit(1);
+            die("Unrecognized argument:", &arg);
         }
 
         if arg == "-h" || arg == "--help" {
@@ -125,18 +128,36 @@ fn parse_options_or_die() -> Options {
             exit(0);
         }
 
-        if arg == "--color=true" {
+        if arg == "--color=always" {
             options.color = true;
+            continue;
+        } else if arg == "--color=never" {
+            options.color = false;
+            continue;
+        }
+
+        if arg == "--color" {
+            if let Some(color) = argv.next() {
+                if color == "always" {
+                    options.color = true;
+                    continue;
+                } else if color == "never" {
+                    options.color = false;
+                    continue;
+                } else {
+                    die("Unrecognized option: --color", &color);
+                }
+            } else {
+                die("-> Unrecognized option:", &arg);
+            }
         }
 
         if &arg[..1] == "-" {
-            eprint!("Unrecognized option: {}\n\n{}", arg, USAGE);
-            exit(1);
+            die("Unrecognized option:", &arg);
         }
 
         if options.filename.is_some() {
-            eprint!("Extra argument: {}\n\n{}", arg, USAGE);
-            exit(1);
+            die("Extra argument:", &arg);
         }
 
         options.filename = Some(arg.to_string());
