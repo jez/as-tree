@@ -27,6 +27,7 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
 struct FmtContext<'a> {
     lscolors: &'a LsColors,
     parent_path: PathBuf,
+    prefix: &'a str,
 }
 
 impl PathTrie {
@@ -41,24 +42,30 @@ impl PathTrie {
     }
 
     // TODO(jez) Put these three parameters into a helper struct
-    fn _fmt(&self, ctx: &FmtContext, out: &mut fmt::Formatter, prefix: &str) -> fmt::Result {
-        let normal_prefix = format!("{}│   ", prefix);
-        let last_prefix = format!("{}    ", prefix);
+    fn _fmt(&self, ctx: &FmtContext, out: &mut fmt::Formatter) -> fmt::Result {
+        let normal_prefix = format!("{}│   ", ctx.prefix);
+        let last_prefix = format!("{}    ", ctx.prefix);
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = ctx.parent_path.join(path);
             let style = ansi_style_for_path(ctx.lscolors, &current_path);
             let painted = style.paint(path.to_string_lossy());
-            let ctx = FmtContext {
-                lscolors: ctx.lscolors,
-                parent_path: current_path,
-            };
             if idx != self.trie.len() - 1 {
-                write!(out, "{}├── {}\n", prefix, painted)?;
-                it._fmt(&ctx, out, &normal_prefix)?;
+                let ctx = FmtContext {
+                    lscolors: ctx.lscolors,
+                    parent_path: current_path,
+                    prefix: &normal_prefix,
+                };
+                write!(out, "{}├── {}\n", ctx.prefix, painted)?;
+                it._fmt(&ctx, out)?;
             } else {
-                write!(out, "{}└── {}\n", prefix, painted)?;
-                it._fmt(&ctx, out, &last_prefix)?;
+                let ctx = FmtContext {
+                    lscolors: ctx.lscolors,
+                    parent_path: current_path,
+                    prefix: &last_prefix,
+                };
+                write!(out, "{}└── {}\n", ctx.prefix, painted)?;
+                it._fmt(&ctx, out)?;
             }
         }
 
@@ -77,22 +84,24 @@ impl fmt::Display for PathTrie {
             let ctx = FmtContext {
                 lscolors: &lscolors,
                 parent_path: path.to_owned(),
+                prefix: "",
             };
             let style = ansi_style_for_path(ctx.lscolors, path);
 
             if path.is_absolute() || path == &PathBuf::from(".") {
                 write!(out, "{}\n", style.paint(path.to_string_lossy()))?;
-                return it._fmt(&ctx, out, "");
+                return it._fmt(&ctx, out);
             }
         }
 
         let ctx = FmtContext {
             lscolors: &lscolors,
             parent_path: PathBuf::from("."),
+            prefix: "",
         };
         let style = ansi_style_for_path(ctx.lscolors, Path::new("."));
         write!(out, "{}\n", style.paint("."))?;
-        self._fmt(&ctx, out, "")
+        self._fmt(&ctx, out)
     }
 }
 
