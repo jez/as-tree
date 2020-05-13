@@ -13,6 +13,7 @@ path = "src/main.rs"
 [dependencies]
 ansi_term = "0.12"
 lscolors = "0.7"
+atty = "0.2"
 
 [raze]
 # The WORKSPACE relative path to the Cargo.toml working directory.

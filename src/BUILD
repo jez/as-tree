@@ -7,6 +7,7 @@ rust_binary(
     deps = [
         "//third_party/cargo:ansi_term",
         "//third_party/cargo:lscolors",
+        "//third_party/cargo:atty",
     ],
     visibility = ["//visibility:public"],
 )

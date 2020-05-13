@@ -13,6 +13,10 @@ alias(
     actual = "@raze__ansi_term__0_12_1//:ansi_term",
 )
 alias(
+    name = "atty",
+    actual = "@raze__atty__0_2_14//:atty",
+)
+alias(
     name = "lscolors",
     actual = "@raze__lscolors__0_7_0//:lscolors",
 )

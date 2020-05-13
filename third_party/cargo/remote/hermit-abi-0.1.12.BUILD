@@ -23,29 +23,22 @@ load(
 )
 
 
-# Unsupported target "build-script-build" with type "custom-build" omitted
 
 rust_library(
-    name = "winapi",
+    name = "hermit_abi",
     crate_root = "src/lib.rs",
     crate_type = "lib",
     edition = "2015",
     srcs = glob(["**/*.rs"]),
     deps = [
+        "@raze__libc__0_2_70//:libc",
     ],
     rustc_flags = [
         "--cap-lints=allow",
     ],
-    version = "0.3.8",
+    version = "0.1.12",
     crate_features = [
-        "consoleapi",
-        "errhandlingapi",
-        "fileapi",
-        "handleapi",
-        "minwinbase",
-        "minwindef",
-        "processenv",
-        "winbase",
+        "default",
     ],
 )
 
