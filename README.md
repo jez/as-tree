@@ -38,9 +38,7 @@ This project is written in Rust and builds under both Bazel and Cargo.
 To install from source using Cargo:
 
 ```
-git clone https://github.com/jez/as-tree
-cd as-tree
-cargo install --path .
+cargo install -f --git https://github.com/jez/as-tree
 ```
 
 To install from source using Bazel:
