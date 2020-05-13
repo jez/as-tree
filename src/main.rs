@@ -3,7 +3,6 @@ extern crate lscolors;
 
 use std::collections::BTreeMap;
 use std::env;
-use std::fmt;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::{Path, PathBuf};
@@ -24,6 +23,8 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
         .unwrap_or_default()
 }
 
+// fn paint_path(lscolors: &LsColors, path: &Path) -> String {}
+
 impl PathTrie {
     pub fn insert(&mut self, path: &Path) {
         let mut cur = self;
@@ -35,52 +36,45 @@ impl PathTrie {
         }
     }
 
-    fn _fmt(
-        &self,
-        out: &mut fmt::Formatter,
-        prefix: &str,
-        lscolors: &LsColors,
-        parent_path: PathBuf,
-    ) -> fmt::Result {
+    fn _print(&self, prefix: &str, lscolors: &LsColors, parent_path: PathBuf) {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
+            // let painted = paint_path(options, lscolors, path);
             let style = ansi_style_for_path(&lscolors, &current_path);
-            let painted = style.paint(path.to_string_lossy());
+            let painted = style.paint(path.to_string_lossy()).to_string();
             if idx != self.trie.len() - 1 {
-                write!(out, "{}├── {}\n", prefix, painted)?;
-                it._fmt(out, &normal_prefix, lscolors, current_path)?;
+                println!("{}├── {}", prefix, painted);
+                it._print(&normal_prefix, lscolors, current_path);
             } else {
-                write!(out, "{}└── {}\n", prefix, painted)?;
-                it._fmt(out, &last_prefix, lscolors, current_path)?;
+                println!("{}└── {}", prefix, painted);
+                it._print(&last_prefix, lscolors, current_path);
             }
         }
-
-        fmt::Result::Ok(())
     }
-}
 
-impl fmt::Display for PathTrie {
-    fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
+    fn print(&self, lscolors: &LsColors) {
         if self.trie.is_empty() {
-            return write!(out, "\n");
+            println!("");
+            return;
         }
 
-        let lscolors = LsColors::from_env().unwrap_or_default();
-
         if let Some((path, it)) = self.trie.iter().next() {
-            let style = ansi_style_for_path(&lscolors, path);
             if path.is_absolute() || path == &PathBuf::from(".") {
-                write!(out, "{}\n", style.paint(path.to_string_lossy()))?;
-                return it._fmt(out, "", &lscolors, path.to_owned());
+                // let painted = paint_path(options, lscolors, options)
+                let style = ansi_style_for_path(&lscolors, &path);
+                let painted = style.paint(path.to_string_lossy()).to_string();
+                println!("{}", painted);
+                it._print("", &lscolors, path.to_owned());
+                return;
             }
         }
 
         let style = ansi_style_for_path(&lscolors, Path::new("."));
-        write!(out, "{}\n", style.paint("."))?;
-        self._fmt(out, "", &lscolors, PathBuf::from("."))
+        println!("{}", style.paint("."));
+        self._print("", &lscolors, PathBuf::from("."));
     }
 }
 
@@ -107,6 +101,8 @@ Arguments:
 #[derive(Debug, Default)]
 struct Options {
     pub filename: Option<String>,
+    // TODO(jez) Infer whether to use color from isatty
+    pub color: bool,
 }
 
 fn parse_options_or_die() -> Options {
@@ -129,6 +125,10 @@ fn parse_options_or_die() -> Options {
             exit(0);
         }
 
+        if arg == "--color=true" {
+            options.color = true;
+        }
+
         if &arg[..1] == "-" {
             eprint!("Unrecognized option: {}\n\n{}", arg, USAGE);
             exit(1);
@@ -148,7 +148,7 @@ fn parse_options_or_die() -> Options {
 fn main() -> io::Result<()> {
     let options = parse_options_or_die();
 
-    let trie = match options.filename {
+    let trie = match &options.filename {
         None => drain_input_to_path_trie(&mut io::stdin().lock()),
         Some(filename) => {
             let file = File::open(filename)?;
@@ -157,7 +157,13 @@ fn main() -> io::Result<()> {
         }
     };
 
-    print!("{}", trie);
+    let lscolors = if options.color {
+        LsColors::from_env().unwrap_or_default()
+    } else {
+        LsColors::empty()
+    };
+
+    trie.print(&lscolors);
 
     io::Result::Ok(())
 }
