@@ -1,15 +1,15 @@
 extern crate ansi_term;
 extern crate atty;
 extern crate lscolors;
+mod options;
 
+use lscolors::{LsColors, Style};
+use options::Options;
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::{Path, PathBuf};
-
-use lscolors::{LsColors, Style};
-
-pub mod options;
+use structopt::StructOpt;
 
 #[derive(Debug, Default)]
 pub struct PathTrie {
@@ -86,7 +86,7 @@ fn drain_input_to_path_trie<T: BufRead>(input: &mut T) -> PathTrie {
 }
 
 fn main() -> io::Result<()> {
-    let options = options::parse_options_or_die();
+    let options = Options::from_args();
 
     let trie = match &options.filename {
         None => {

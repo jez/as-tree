@@ -1,7 +1,9 @@
-use std::env;
-use std::process::exit;
+use std::fmt;
+use std::path::PathBuf;
+use std::str::FromStr;
+use structopt::StructOpt;
 
-#[derive(Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Colorize {
     Always,
     Auto,
@@ -14,81 +16,72 @@ impl Default for Colorize {
     }
 }
 
-#[derive(Debug, Default)]
+impl FromStr for Colorize {
+    type Err = String;
+
+    fn from_str(value: &str) -> Result<Colorize, Self::Err> {
+        match value {
+            "always" => Ok(Colorize::Always),
+            "auto" => Ok(Colorize::Auto),
+            "never" => Ok(Colorize::Never),
+            _ => Err(format!(
+                "color option can only be [always|auto|never], found : {}",
+                value
+            )),
+        }
+    }
+}
+
+impl fmt::Display for Colorize {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Colorize::Auto => "auto".fmt(f),
+            Colorize::Always => "always".fmt(f),
+            Colorize::Never => "never".fmt(f),
+        }
+    }
+}
+
+/// Print a list of paths as a tree of paths.
+///
+/// Example :
+///   find . -name '*.txt' | as-tree
+#[derive(Clone, Debug, Default, StructOpt)]
 pub struct Options {
-    pub filename: Option<String>,
+    /// The file to read from. When omitted, reads from stdin.
+    pub filename: Option<PathBuf>,
+    /// Whether to colorize the output
+    #[structopt(short, long = "color", default_value)]
     pub colorize: Colorize,
 }
 
-const USAGE: &'static str = "\
-Print a list of paths as a tree of paths.
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-Usage:
-  as-tree [options] [<filename>]
-
-Arguments:
-  <filename>        The file to read from. When omitted, reads from stdin.
-
-Options:
-  --color (always|auto|never)
-                    Whether to colorize the output [default: auto]
-  -h, --help        Print this help message
-
-Example:
-  find . -name '*.txt' | as-tree
-";
-
-pub fn parse_options_or_die() -> Options {
-    fn die(msg: &str, arg: &str) -> ! {
-        eprint!("{} '{}'\n\n{}", msg, arg, USAGE);
-        exit(1);
+    #[test]
+    fn correctly_parse() {
+        let opts = Options::from_iter_safe("as-tree file".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree file -c never".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree file --color auto".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree --color never file".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree -c never".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree --color auto".split_whitespace());
+        assert!(opts.is_ok());
+        let opts = Options::from_iter_safe("as-tree --color never".split_whitespace());
+        assert!(opts.is_ok());
     }
 
-    let mut argv = env::args();
-
-    if argv.next().is_none() {
-        eprint!("{}", USAGE);
-        exit(1);
+    #[test]
+    fn incorrect_parse() {
+        let opts = Options::from_iter_safe("as-tree file file".split_whitespace());
+        assert!(opts.is_err());
     }
-
-    let mut options = Options::default();
-    while let Some(arg) = argv.next() {
-        if arg.is_empty() {
-            die("Unrecognized argument:", &arg);
-        }
-
-        if arg == "-h" || arg == "--help" {
-            print!("{}", USAGE);
-            exit(0);
-        }
-
-        if arg == "--color" {
-            if let Some(color) = argv.next() {
-                if color == "always" {
-                    options.colorize = Colorize::Always;
-                } else if color == "auto" {
-                    options.colorize = Colorize::Auto;
-                } else if color == "never" {
-                    options.colorize = Colorize::Never;
-                } else {
-                    die("Unrecognized option: --color", &color);
-                }
-            } else {
-                die("-> Unrecognized option:", &arg);
-            }
-            continue;
-        }
-
-        if &arg[..1] == "-" {
-            die("Unrecognized option:", &arg);
-        }
-
-        if options.filename.is_some() {
-            die("Extra argument:", &arg);
-        }
-
-        options.filename = Some(arg.to_string());
-    }
-
-    return options;
 }
