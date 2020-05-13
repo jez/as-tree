@@ -3,13 +3,14 @@ use std::process::exit;
 
 #[derive(Debug)]
 pub enum Colorize {
-    Never,
     Always,
+    Auto,
+    Never,
 }
 
 impl Default for Colorize {
     fn default() -> Self {
-        Colorize::Never
+        Colorize::Auto
     }
 }
 
@@ -26,11 +27,12 @@ Usage:
   as-tree [options] [<filename>]
 
 Arguments:
-  <filename>              The file to read from. When omitted, reads from stdin.
+  <filename>        The file to read from. When omitted, reads from stdin.
 
 Options:
-  --color (always|never)  Whether to colorize the output [default: never]
-  -h, --help              Print this help message
+  --color (always|auto|never)
+                    Whether to colorize the output [default: auto]
+  -h, --help        Print this help message
 
 Example:
   find . -name '*.txt' | as-tree
@@ -64,6 +66,8 @@ pub fn parse_options_or_die() -> Options {
             if let Some(color) = argv.next() {
                 if color == "always" {
                     options.colorize = Colorize::Always;
+                } else if color == "auto" {
+                    options.colorize = Colorize::Auto;
                 } else if color == "never" {
                     options.colorize = Colorize::Never;
                 } else {

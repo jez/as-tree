@@ -1,4 +1,5 @@
 extern crate ansi_term;
+extern crate atty;
 extern crate lscolors;
 
 use std::collections::BTreeMap;
@@ -88,7 +89,12 @@ fn main() -> io::Result<()> {
     let options = options::parse_options_or_die();
 
     let trie = match &options.filename {
-        None => drain_input_to_path_trie(&mut io::stdin().lock()),
+        None => {
+            if atty::is(atty::Stream::Stdin) {
+                eprintln!("Warning: reading from stdin, which is a tty.");
+            }
+            drain_input_to_path_trie(&mut io::stdin().lock())
+        }
         Some(filename) => {
             let file = File::open(filename)?;
             let mut reader = BufReader::new(file);
@@ -97,8 +103,15 @@ fn main() -> io::Result<()> {
     };
 
     let lscolors = match &options.colorize {
-        options::Colorize::Never => LsColors::empty(),
         options::Colorize::Always => LsColors::from_env().unwrap_or_default(),
+        options::Colorize::Auto => {
+            if atty::is(atty::Stream::Stdout) {
+                LsColors::from_env().unwrap_or_default()
+            } else {
+                LsColors::empty()
+            }
+        }
+        options::Colorize::Never => LsColors::empty(),
     };
 
     trie.print(&lscolors);
