@@ -24,6 +24,10 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
         .unwrap_or_default()
 }
 
+struct FmtContext {
+    lscolors: LsColors,
+}
+
 impl PathTrie {
     pub fn insert(&mut self, path: &Path) {
         let mut cur = self;
@@ -38,9 +42,9 @@ impl PathTrie {
     // TODO(jez) Put these three parameters into a helper struct
     fn _fmt(
         &self,
+        ctx: &FmtContext,
         out: &mut fmt::Formatter,
         prefix: &str,
-        lscolors: &LsColors,
         parent_path: PathBuf,
     ) -> fmt::Result {
         let normal_prefix = format!("{}│   ", prefix);
@@ -48,23 +52,14 @@ impl PathTrie {
 
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
-            let style = ansi_style_for_path(&lscolors, &current_path);
+            let style = ansi_style_for_path(&ctx.lscolors, &current_path);
+            let painted = style.paint(path.to_string_lossy());
             if idx != self.trie.len() - 1 {
-                write!(
-                    out,
-                    "{}├── {}\n",
-                    prefix,
-                    style.paint(path.to_string_lossy())
-                )?;
-                it._fmt(out, &normal_prefix, lscolors, current_path)?;
+                write!(out, "{}├── {}\n", prefix, painted)?;
+                it._fmt(ctx, out, &normal_prefix, current_path)?;
             } else {
-                write!(
-                    out,
-                    "{}└── {}\n",
-                    prefix,
-                    style.paint(path.to_string_lossy())
-                )?;
-                it._fmt(out, &last_prefix, lscolors, current_path)?;
+                write!(out, "{}└── {}\n", prefix, painted)?;
+                it._fmt(ctx, out, &last_prefix, current_path)?;
             }
         }
 
@@ -79,18 +74,19 @@ impl fmt::Display for PathTrie {
         }
 
         let lscolors = LsColors::from_env().unwrap_or_default();
+        let ctx = FmtContext { lscolors };
 
         if let Some((path, it)) = self.trie.iter().next() {
-            let style = ansi_style_for_path(&lscolors, path);
+            let style = ansi_style_for_path(&ctx.lscolors, path);
             if path.is_absolute() || path == &PathBuf::from(".") {
                 write!(out, "{}\n", style.paint(path.to_string_lossy()))?;
-                return it._fmt(out, "", &lscolors, path.to_owned());
+                return it._fmt(&ctx, out, "", path.to_owned());
             }
         }
 
-        let style = ansi_style_for_path(&lscolors, Path::new("."));
+        let style = ansi_style_for_path(&ctx.lscolors, Path::new("."));
         write!(out, "{}\n", style.paint("."))?;
-        self._fmt(out, "", &lscolors, PathBuf::from("."))
+        self._fmt(&ctx, out, "", PathBuf::from("."))
     }
 }
 
