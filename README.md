@@ -1,5 +1,7 @@
 # as-tree
 
+[![Build Status](https://travis-ci.org/jez/as-tree.svg?branch=master)](https://travis-ci.org/jez/as-tree)
+
 Print a list of paths as a tree of paths.
 
 For example, given:
