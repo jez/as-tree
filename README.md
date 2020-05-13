@@ -38,7 +38,7 @@ To install from source using Cargo:
 ```
 git clone https://github.com/jez/as-tree
 cd as-tree
-cargo install
+cargo install --path .
 ```
 
 To install from source using Bazel:
