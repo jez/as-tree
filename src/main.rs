@@ -35,7 +35,6 @@ impl PathTrie {
         }
     }
 
-    // TODO(jez) Put these three parameters into a helper struct
     fn _fmt(
         &self,
         out: &mut fmt::Formatter,
@@ -49,21 +48,12 @@ impl PathTrie {
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
+            let painted = style.paint(path.to_string_lossy());
             if idx != self.trie.len() - 1 {
-                write!(
-                    out,
-                    "{}├── {}\n",
-                    prefix,
-                    style.paint(path.to_string_lossy())
-                )?;
+                write!(out, "{}├── {}\n", prefix, painted)?;
                 it._fmt(out, &normal_prefix, lscolors, current_path)?;
             } else {
-                write!(
-                    out,
-                    "{}└── {}\n",
-                    prefix,
-                    style.paint(path.to_string_lossy())
-                )?;
+                write!(out, "{}└── {}\n", prefix, painted)?;
                 it._fmt(out, &last_prefix, lscolors, current_path)?;
             }
         }
