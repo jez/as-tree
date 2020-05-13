@@ -2,13 +2,13 @@ extern crate ansi_term;
 extern crate lscolors;
 
 use std::collections::BTreeMap;
-use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::{Path, PathBuf};
-use std::process::exit;
 
 use lscolors::{LsColors, Style};
+
+pub mod options;
 
 #[derive(Debug, Default)]
 pub struct PathTrie {
@@ -84,85 +84,8 @@ fn drain_input_to_path_trie<T: BufRead>(input: &mut T) -> PathTrie {
     return trie;
 }
 
-const USAGE: &'static str = "\
-Print a list of paths as a tree of paths.
-
-Usage:
-  as-tree [options] [<filename>]
-
-Arguments:
-  <filename>              The file to read from. When omitted, reads from stdin.
-
-Options:
-  --color (always|never)  Whether to colorize the output [default: never]
-  -h, --help              Print this help message
-
-Example:
-  find . -name '*.txt' | as-tree
-";
-
-#[derive(Debug, Default)]
-struct Options {
-    pub filename: Option<String>,
-    // TODO(jez) Infer whether to use color from isatty
-    pub color: bool,
-}
-
-fn parse_options_or_die() -> Options {
-    fn die(msg: &str, arg: &str) -> ! {
-        eprint!("{} '{}'\n\n{}", msg, arg, USAGE);
-        exit(1);
-    }
-
-    let mut argv = env::args();
-
-    if argv.next().is_none() {
-        eprint!("{}", USAGE);
-        exit(1);
-    }
-
-    let mut options = Options::default();
-    while let Some(arg) = argv.next() {
-        if arg.is_empty() {
-            die("Unrecognized argument:", &arg);
-        }
-
-        if arg == "-h" || arg == "--help" {
-            print!("{}", USAGE);
-            exit(0);
-        }
-
-        if arg == "--color" {
-            if let Some(color) = argv.next() {
-                if color == "always" {
-                    options.color = true;
-                } else if color == "never" {
-                    options.color = false;
-                } else {
-                    die("Unrecognized option: --color", &color);
-                }
-            } else {
-                die("-> Unrecognized option:", &arg);
-            }
-            continue;
-        }
-
-        if &arg[..1] == "-" {
-            die("Unrecognized option:", &arg);
-        }
-
-        if options.filename.is_some() {
-            die("Extra argument:", &arg);
-        }
-
-        options.filename = Some(arg.to_string());
-    }
-
-    return options;
-}
-
 fn main() -> io::Result<()> {
-    let options = parse_options_or_die();
+    let options = options::parse_options_or_die();
 
     let trie = match &options.filename {
         None => drain_input_to_path_trie(&mut io::stdin().lock()),
