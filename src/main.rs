@@ -88,13 +88,17 @@ const USAGE: &'static str = "\
 Print a list of paths as a tree of paths.
 
 Usage:
-  as-tree [<file>]
+  as-tree [options] [<filename>]
 
 Arguments:
-  <file>                  The file to read from [default: stdin]
+  <filename>              The file to read from. When omitted, reads from stdin.
 
 Options:
-  --color=(always|never)  Whether to colorize the output [default: false]
+  --color (always|never)  Whether to colorize the output [default: never]
+  -h, --help              Print this help message
+
+Example:
+  find . -name '*.txt' | as-tree
 ";
 
 #[derive(Debug, Default)]
@@ -128,28 +132,19 @@ fn parse_options_or_die() -> Options {
             exit(0);
         }
 
-        if arg == "--color=always" {
-            options.color = true;
-            continue;
-        } else if arg == "--color=never" {
-            options.color = false;
-            continue;
-        }
-
         if arg == "--color" {
             if let Some(color) = argv.next() {
                 if color == "always" {
                     options.color = true;
-                    continue;
                 } else if color == "never" {
                     options.color = false;
-                    continue;
                 } else {
                     die("Unrecognized option: --color", &color);
                 }
             } else {
                 die("-> Unrecognized option:", &arg);
             }
+            continue;
         }
 
         if &arg[..1] == "-" {
