@@ -15,6 +15,12 @@ ansi_term = "0.12"
 lscolors = "0.7"
 atty = "0.2"
 
+# These two options plus strip'ing the binary was measured to cut the size by
+# about 173KB (-44%)
+[profile.release]
+lto = true
+panic = "abort"
+
 [raze]
 # The WORKSPACE relative path to the Cargo.toml working directory.
 workspace_path = "//third_party/cargo"
