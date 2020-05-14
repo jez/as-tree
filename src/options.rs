@@ -1,11 +1,28 @@
 use std::env;
 use std::process::exit;
+use std::str::FromStr;
 
 #[derive(Debug)]
 pub enum Colorize {
     Always,
     Auto,
     Never,
+}
+
+impl FromStr for Colorize {
+    type Err = ();
+
+    fn from_str(color: &str) -> Result<Self, Self::Err> {
+        if color == "always" {
+            return Ok(Colorize::Always);
+        } else if color == "auto" {
+            return Ok(Colorize::Auto);
+        } else if color == "never" {
+            return Ok(Colorize::Never);
+        } else {
+            return Err(());
+        }
+    }
 }
 
 impl Default for Colorize {
@@ -64,14 +81,9 @@ pub fn parse_options_or_die() -> Options {
 
         if arg == "--color" {
             if let Some(color) = argv.next() {
-                if color == "always" {
-                    options.colorize = Colorize::Always;
-                } else if color == "auto" {
-                    options.colorize = Colorize::Auto;
-                } else if color == "never" {
-                    options.colorize = Colorize::Never;
-                } else {
-                    die("Unrecognized option: --color", &color);
+                match color.parse() {
+                    Ok(colorize) => options.colorize = colorize,
+                    Err(()) => die("Unrecognized option: --color", &color),
                 }
             } else {
                 die("-> Unrecognized option:", &arg);
