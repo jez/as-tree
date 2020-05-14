@@ -2,6 +2,8 @@ use std::env;
 use std::process::exit;
 use std::str::FromStr;
 
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
 #[derive(Debug)]
 pub enum Colorize {
     Always,
@@ -50,6 +52,7 @@ Options:
   --color (always|auto|never)
                     Whether to colorize the output [default: auto]
   -h, --help        Print this help message
+  -v, --version     Print the version and exit
 
 Example:
   find . -name '*.txt' | as-tree
@@ -76,6 +79,11 @@ pub fn parse_options_or_die() -> Options {
 
         if arg == "-h" || arg == "--help" {
             print!("{}", USAGE);
+            exit(0);
+        }
+
+        if arg == "-v" || arg == "--version" {
+            println!("{}", VERSION);
             exit(0);
         }
 
