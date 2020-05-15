@@ -4,10 +4,10 @@ set -euo pipefail
 
 as_tree="$1"
 
-"$as_tree" -h
+"$as_tree" -v
 
 echo
 echo ---------
 echo
 
-"$as_tree" --help
+"$as_tree" --version

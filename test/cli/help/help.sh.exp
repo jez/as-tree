@@ -1,1 +1,35 @@
-bazel-out/host/bin/src/as_tree
+Print a list of paths as a tree of paths.
+
+Usage:
+  as-tree [options] [<filename>]
+
+Arguments:
+  <filename>        The file to read from. When omitted, reads from stdin.
+
+Options:
+  --color (always|auto|never)
+                    Whether to colorize the output [default: auto]
+  -h, --help        Print this help message
+  -v, --version     Print the version and exit
+
+Example:
+  find . -name '*.txt' | as-tree
+
+---------
+
+Print a list of paths as a tree of paths.
+
+Usage:
+  as-tree [options] [<filename>]
+
+Arguments:
+  <filename>        The file to read from. When omitted, reads from stdin.
+
+Options:
+  --color (always|auto|never)
+                    Whether to colorize the output [default: auto]
+  -h, --help        Print this help message
+  -v, --version     Print the version and exit
+
+Example:
+  find . -name '*.txt' | as-tree
