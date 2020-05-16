@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-script="$1"
-expect="$2"
+run_sh="$1"
+run_sh_exp="$2"
 
-diff -u "$expect" <("$script")
+diff -u "$run_sh_exp" <("$run_sh")

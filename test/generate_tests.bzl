@@ -85,33 +85,34 @@ def fixture_tests(input_files):
 def cli_tests(input_files):
     tests = []
     updates = []
-    for input_file in input_files:
-        sh_binary_name = input_file[:-3]
-        sh_binary_tool = ":{}".format(sh_binary_name)
+    for run_sh_file in input_files:
+        input_folder, _slash, _file = run_sh_file.rpartition('/')
+
+        sh_binary_name = run_sh_file[:-3]
         native.sh_binary(
             name = sh_binary_name,
-            srcs = [input_file],
+            srcs = [run_sh_file],
+            data = native.glob([
+                "{}/**/*.txt".format(input_folder)
+            ]) + ["//src:as-tree"],
         )
 
-        genrule_name = "gen_{}.actual".format(input_file)
-        actual_file = "{}.actual".format(input_file)
-        native.genrule(
-            name = genrule_name,
-            srcs = [],
-            tools = [sh_binary_tool, "//src:as-tree"],
-            outs = [actual_file],
-            cmd = "$(location {sh_binary_tool}) $(location //src:as-tree) > $(location {actual_file})".format(
-                sh_binary_tool = sh_binary_tool,
-                actual_file = actual_file,
-            ),
-            testonly = True,
-
-            # This is manual to avoid being caught with `//...`
-            tags = ["manual"],
+        test_name = "test/{}".format(run_sh_file)
+        run_sh_exp_file = "{}.exp".format(run_sh_file)
+        native.sh_test(
+            name = test_name,
+            srcs = ["run_and_diff_one.sh"],
+            args = [
+                "$(location {})".format(sh_binary_name),
+                "$(location {})".format(run_sh_exp_file),
+            ],
+            data = [
+                run_sh_exp_file,
+                ":{}".format(sh_binary_name),
+            ],
+            size = "small",
         )
-
-        (test_name, exp_file) = _diff_one(input_file, actual_file)
-        # update_name = _update_one(input_file, actual_file, exp_file)
+        # update_name = _update_one(run_sh_file, actual_file, run_sh_exp_file)
 
         tests.append(test_name)
         # updates.append(update_name)

@@ -2,12 +2,10 @@
 
 set -euo pipefail
 
-as_tree="$1"
-
-"$as_tree" -v
+src/as_tree -v
 
 echo
 echo ---------
 echo
 
-"$as_tree" --version
+src/as_tree --version
