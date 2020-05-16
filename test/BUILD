@@ -1,5 +1,4 @@
-load(":fixture_tests.bzl", "fixture_tests")
-load(":cli_tests.bzl", "cli_tests")
+load(":generate_tests.bzl", "fixture_tests", "cli_tests")
 
 fixture_tests(
     input_files = glob(["fixture/**/*.txt"])
