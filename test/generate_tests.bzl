@@ -66,10 +66,10 @@ def fixture_tests(input_files):
         )
 
         (test_name, exp_file) = _diff_one(input_file, actual_file)
-        update_name = _update_one(input_file, actual_file, exp_file)
+        # update_name = _update_one(input_file, actual_file, exp_file)
 
         tests.append(test_name)
-        updates.append(update_name)
+        # updates.append(update_name)
 
     native.test_suite(
         name = "fixture",
@@ -111,10 +111,10 @@ def cli_tests(input_files):
         )
 
         (test_name, exp_file) = _diff_one(input_file, actual_file)
-        update_name = _update_one(input_file, actual_file, exp_file)
+        # update_name = _update_one(input_file, actual_file, exp_file)
 
         tests.append(test_name)
-        updates.append(update_name)
+        # updates.append(update_name)
 
     native.test_suite(
         name = "cli",
