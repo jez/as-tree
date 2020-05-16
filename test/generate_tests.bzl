@@ -32,7 +32,7 @@ def fixture_tests(input_files):
         input_txt_exp_file = "{}.exp".format(input_txt_file)
         native.sh_test(
             name = test_name,
-            srcs = ["run_and_diff_one_fixture.sh"],
+            srcs = ["run_one_fixture.sh"],
             args = [
                 "$(location {})".format(input_txt_file),
                 "$(location {})".format(input_txt_exp_file),
@@ -80,7 +80,7 @@ def cli_tests(input_files):
         run_sh_exp_file = "{}.exp".format(run_sh_file)
         native.sh_test(
             name = test_name,
-            srcs = ["run_and_diff_one_cli.sh"],
+            srcs = ["run_one_cli.sh"],
             args = [
                 "$(location {})".format(sh_binary_name),
                 "$(location {})".format(run_sh_exp_file),
