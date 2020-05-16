@@ -5,7 +5,7 @@ fixture_tests(
 )
 
 cli_tests(
-    input_files = glob(["cli/**/*.sh"])
+    input_files = glob(["cli/**/run.sh"])
 )
 
 test_suite(
