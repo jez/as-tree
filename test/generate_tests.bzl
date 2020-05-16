@@ -1,28 +1,11 @@
-def _update_one(input_file, actual_file, exp_file):
-    update_name = "update_test/{}".format(input_file)
-    native.sh_test(
-        name = update_name,
-        srcs = ["update_one.sh"],
-        args = [
-            "$(location {})".format(actual_file),
-            "$(location {})".format(exp_file),
-        ],
-        data = [
-            actual_file,
-            exp_file,
-        ],
-        size = "small",
-        tags = [
-            # Avoid being caught with `//...`
-            "manual",
-            # Forces the test to be run locally, without sandboxing
-            "local",
-            # Unconditionally run this rule, and don't run in the sandbox
-            "external",
-        ],
-    )
-
-    return update_name
+_update_tags = [
+    # Avoid being caught with `//...`
+    "manual",
+    # Forces the test to be run locally, without sandboxing
+    "local",
+    # Unconditionally run this rule, and don't run in the sandbox
+    "external",
+]
 
 def fixture_tests(input_files):
     tests = []
@@ -34,6 +17,7 @@ def fixture_tests(input_files):
             name = test_name,
             srcs = ["run_one_fixture.sh"],
             args = [
+                "test",
                 "$(location {})".format(input_txt_file),
                 "$(location {})".format(input_txt_exp_file),
             ],
@@ -44,11 +28,26 @@ def fixture_tests(input_files):
             ],
             size = "small",
         )
-
-        # update_name = _update_one(input_txt_file, actual_file, exp_file)
-
         tests.append(test_name)
-        # updates.append(update_name)
+
+        update_name = "update_test/{}".format(input_txt_file)
+        native.sh_test(
+            name = update_name,
+            srcs = ["run_one_fixture.sh"],
+            args = [
+                "update",
+                "$(location {})".format(input_txt_file),
+                "$(location {})".format(input_txt_exp_file),
+            ],
+            data = [
+                "//src:as-tree",
+                input_txt_file,
+                input_txt_exp_file,
+            ],
+            tags = _update_tags,
+            size = "small",
+        )
+        updates.append(update_name)
 
     native.test_suite(
         name = "fixture",
@@ -82,6 +81,7 @@ def cli_tests(input_files):
             name = test_name,
             srcs = ["run_one_cli.sh"],
             args = [
+                "test",
                 "$(location {})".format(sh_binary_name),
                 "$(location {})".format(run_sh_exp_file),
             ],
@@ -91,10 +91,25 @@ def cli_tests(input_files):
             ],
             size = "small",
         )
-        # update_name = _update_one(run_sh_file, actual_file, run_sh_exp_file)
-
         tests.append(test_name)
-        # updates.append(update_name)
+
+        update_name = "update_test/{}".format(run_sh_file)
+        native.sh_test(
+            name = update_name,
+            srcs = ["run_one_cli.sh"],
+            args = [
+                "update",
+                "$(location {})".format(sh_binary_name),
+                "$(location {})".format(run_sh_exp_file),
+            ],
+            data = [
+                run_sh_exp_file,
+                ":{}".format(sh_binary_name),
+            ],
+            tags = _update_tags,
+            size = "small",
+        )
+        updates.append(update_name)
 
     native.test_suite(
         name = "cli",

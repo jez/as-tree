@@ -2,7 +2,15 @@
 
 set -euo pipefail
 
-run_sh="$1"
-run_sh_exp="$2"
+mode="$1"
+run_sh="$2"
+run_sh_exp="$3"
 
-diff -u "$run_sh_exp" <("$run_sh")
+if [ "$mode" = "test" ]; then
+  diff -u "$run_sh_exp" <("$run_sh")
+elif [ "$mode" = "update" ]; then
+  "$run_sh" > "$run_sh_exp"
+else
+  echo "Invalid mode: $mode"
+  exit 1
+fi
