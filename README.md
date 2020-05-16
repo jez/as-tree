@@ -129,7 +129,6 @@ cargo raze
 ## TODO(jez)
 
 - rustfmt / buildifier / shellcheck in CI
-- tests for CLI options
 - [ ] Only use box drawing characters if the locale supports it
   - See `man locale`, `LC_CTYPE=C tree`
 - [ ] Collapse consecutive singleton tries into one level
