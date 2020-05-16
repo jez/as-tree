@@ -50,12 +50,12 @@ def fixture_tests(input_files):
         updates.append(update_name)
 
     native.test_suite(
-        name = "fixture",
+        name = "test/fixture",
         tests = tests,
     )
 
     native.test_suite(
-        name = "fixture_update",
+        name = "update_test/fixture",
         tests = updates,
         tags = ["manual"],
     )
@@ -112,12 +112,12 @@ def cli_tests(input_files):
         updates.append(update_name)
 
     native.test_suite(
-        name = "cli",
+        name = "test/cli",
         tests = tests,
     )
 
     native.test_suite(
-        name = "cli_update",
+        name = "update_test/cli",
         tests = updates,
         tags = ["manual"],
     )

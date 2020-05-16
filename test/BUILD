@@ -10,10 +10,10 @@ cli_tests(
 
 test_suite(
     name = "test",
-    tests = ["fixture", "cli"],
+    tests = ["test/fixture", "test/cli"],
 )
 
 test_suite(
     name = "update",
-    tests = ["fixture_update", "cli_update"],
+    tests = ["update_test/fixture", "update_test/cli"],
 )
