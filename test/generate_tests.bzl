@@ -1,5 +1,5 @@
 def _diff_one(input_file, actual_file):
-    test_name = "test_{}".format(input_file)
+    test_name = "test/{}".format(input_file)
     exp_file = "{}.exp".format(input_file)
     native.sh_test(
         name = test_name,
@@ -19,7 +19,7 @@ def _diff_one(input_file, actual_file):
     return (test_name, exp_file)
 
 def _update_one(input_file, actual_file, exp_file):
-    update_name = "update_{}".format(input_file)
+    update_name = "update_test/{}".format(input_file)
     native.sh_test(
         name = update_name,
         srcs = ["update_one.sh"],
@@ -48,7 +48,7 @@ def fixture_tests(input_files):
     tests = []
     updates = []
     for input_file in input_files:
-        genrule_name = "gen_{}.actual".format(input_file)
+        genrule_name = "gen_test/{}.actual".format(input_file)
         actual_file = "{}.actual".format(input_file)
         native.genrule(
             name = genrule_name,
