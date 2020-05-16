@@ -1,23 +1,3 @@
-def _diff_one(input_file, actual_file):
-    test_name = "test/{}".format(input_file)
-    exp_file = "{}.exp".format(input_file)
-    native.sh_test(
-        name = test_name,
-        srcs = ["diff_one.sh"],
-        args = [
-            "$(location {})".format(exp_file),
-            "$(location {})".format(actual_file),
-        ],
-        data = [
-            exp_file,
-            actual_file,
-        ],
-        size = "small",
-        tags = [],
-    )
-
-    return (test_name, exp_file)
-
 def _update_one(input_file, actual_file, exp_file):
     update_name = "update_test/{}".format(input_file)
     native.sh_test(
@@ -47,16 +27,16 @@ def _update_one(input_file, actual_file, exp_file):
 def fixture_tests(input_files):
     tests = []
     updates = []
-    for input_file in input_files:
-        genrule_name = "gen_test/{}.actual".format(input_file)
-        actual_file = "{}.actual".format(input_file)
+    for input_txt_file in input_files:
+        genrule_name = "gen_test/{}.actual".format(input_txt_file)
+        actual_file = "{}.actual".format(input_txt_file)
         native.genrule(
             name = genrule_name,
-            srcs = [input_file],
+            srcs = [input_txt_file],
             outs = [actual_file],
             tools = ["//src:as-tree"],
-            cmd = "$(location //src:as-tree) < $(location {input_file}) > $(location {actual_file})".format(
-                input_file = input_file,
+            cmd = "$(location //src:as-tree) < $(location {input_txt_file}) > $(location {actual_file})".format(
+                input_txt_file = input_txt_file,
                 actual_file = actual_file,
             ),
             testonly = True,
@@ -65,8 +45,23 @@ def fixture_tests(input_files):
             tags = ["manual"],
         )
 
-        (test_name, exp_file) = _diff_one(input_file, actual_file)
-        # update_name = _update_one(input_file, actual_file, exp_file)
+        test_name = "test/{}".format(input_txt_file)
+        exp_file = "{}.exp".format(input_txt_file)
+        native.sh_test(
+            name = test_name,
+            srcs = ["diff_one.sh"],
+            args = [
+                "$(location {})".format(exp_file),
+                "$(location {})".format(actual_file),
+            ],
+            data = [
+                exp_file,
+                actual_file,
+            ],
+            size = "small",
+            tags = [],
+        )
+        # update_name = _update_one(input_txt_file, actual_file, exp_file)
 
         tests.append(test_name)
         # updates.append(update_name)
