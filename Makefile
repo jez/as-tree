@@ -12,4 +12,4 @@ prefix := $(HOME)/.local
 .PHONY: install
 install: build
 	mkdir -p "$(prefix)/bin" && \
-		install bazel-bin/main/as_tree "$(prefix)/bin/as-tree"
+		install bazel-bin/src/as_tree "$(prefix)/bin/as-tree"
