@@ -25,6 +25,10 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
 }
 
 impl PathTrie {
+    fn contains_singleton_dir(&self) -> bool {
+        self.trie.len() == 1 && self.trie.iter().next().unwrap().1.trie.len() > 0
+    }
+
     pub fn insert(&mut self, path: &Path) {
         let mut cur = self;
         for comp in path.iter() {
@@ -35,7 +39,14 @@ impl PathTrie {
         }
     }
 
-    fn _print(&self, prefix: &str, lscolors: &LsColors, parent_path: PathBuf) {
+    fn _print(
+        &self,
+        top: bool,
+        prefix: &str,
+        join_with_parent: bool,
+        lscolors: &LsColors,
+        parent_path: PathBuf,
+    ) {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
 
@@ -43,13 +54,34 @@ impl PathTrie {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
             let painted = style.paint(path.to_string_lossy());
-            if idx != self.trie.len() - 1 {
-                println!("{}├── {}", prefix, painted);
-                it._print(&normal_prefix, lscolors, current_path);
+
+            let contains_singleton_dir = it.contains_singleton_dir();
+            let newline = if contains_singleton_dir { "" } else { "\n" };
+            let is_last = idx == self.trie.len() - 1;
+
+            let next_prefix = if join_with_parent {
+                let joiner = if top || parent_path == PathBuf::from("/") {
+                    ""
+                } else {
+                    "/"
+                };
+                print!("{}{}{}", style.paint(joiner), painted, newline);
+                prefix
+            } else if !is_last {
+                print!("{}├── {}{}", prefix, painted, newline);
+                &normal_prefix
             } else {
-                println!("{}└── {}", prefix, painted);
-                it._print(&last_prefix, lscolors, current_path);
-            }
+                print!("{}└── {}{}", prefix, painted, newline);
+                &last_prefix
+            };
+
+            it._print(
+                false,
+                next_prefix,
+                contains_singleton_dir,
+                lscolors,
+                current_path,
+            )
         }
     }
 
@@ -59,19 +91,16 @@ impl PathTrie {
             return;
         }
 
-        if let Some((path, it)) = self.trie.iter().next() {
-            if path.is_absolute() || path == &PathBuf::from(".") {
-                let style = ansi_style_for_path(&lscolors, &path);
-                let painted = style.paint(path.to_string_lossy());
-                println!("{}", painted);
-                it._print("", &lscolors, path.to_owned());
-                return;
-            }
+        // This works because PathBuf::from(".").join(PathBuf::from("/")) == PathBuf::from("/")
+        let current_path = PathBuf::from(".");
+        let contains_singleton_dir = self.contains_singleton_dir();
+
+        if !contains_singleton_dir {
+            let style = ansi_style_for_path(&lscolors, &current_path);
+            println!("{}", style.paint(current_path.to_string_lossy()));
         }
 
-        let style = ansi_style_for_path(&lscolors, Path::new("."));
-        println!("{}", style.paint("."));
-        self._print("", &lscolors, PathBuf::from("."));
+        self._print(true, "", contains_singleton_dir, &lscolors, current_path)
     }
 }
 
