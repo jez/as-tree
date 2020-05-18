@@ -367,9 +367,8 @@
 │   ├── Plugins.h
 │   ├── SubprocessTextPlugin.cc
 │   └── SubprocessTextPlugin.h
-├── rbi
-│   └── tools
-│       └── generate_procs.cc
+├── rbi/tools
+│   └── generate_procs.cc
 ├── resolver
 │   ├── CorrectTypeAlias.cc
 │   ├── CorrectTypeAlias.h
@@ -481,19 +480,18 @@
     │   │   └── token.cc
     │   ├── codegen
     │   │   └── generate_diagnostics.cc
-    │   └── include
-    │       └── ruby_parser
-    │           ├── builder.hh
-    │           ├── capi.hh
-    │           ├── context.hh
-    │           ├── diagnostic.hh
-    │           ├── driver.hh
-    │           ├── lexer.hh
-    │           ├── literal.hh
-    │           ├── node.hh
-    │           ├── pool.hh
-    │           ├── state_stack.hh
-    │           └── token.hh
+    │   └── include/ruby_parser
+    │       ├── builder.hh
+    │       ├── capi.hh
+    │       ├── context.hh
+    │       ├── diagnostic.hh
+    │       ├── driver.hh
+    │       ├── lexer.hh
+    │       ├── literal.hh
+    │       ├── node.hh
+    │       ├── pool.hh
+    │       ├── state_stack.hh
+    │       └── token.hh
     └── progressbar
         ├── progressbar
         │   ├── progressbar.h

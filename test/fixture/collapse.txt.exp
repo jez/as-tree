@@ -1,11 +1,8 @@
-.
-└── test
-    └── cli
-        └── color
-            ├── dir1
-            │   ├── bar.txt
-            │   └── foo.txt
-            ├── dir2
-            │   └── qux.txt
-            ├── run.sh
-            └── run.sh.exp
+test/cli/color
+├── dir1
+│   ├── bar.txt
+│   └── foo.txt
+├── dir2
+│   └── qux.txt
+├── run.sh
+└── run.sh.exp

@@ -287,9 +287,8 @@
 │   │       │   │       ├── Gemfile
 │   │       │   │       ├── sorbet
 │   │       │   │       │   ├── config
-│   │       │   │       │   └── rbi
-│   │       │   │       │       └── hidden-definitions
-│   │       │   │       │           └── errors.txt
+│   │       │   │       │   └── rbi/hidden-definitions
+│   │       │   │       │       └── errors.txt
 │   │       │   │       └── thorough.rb
 │   │       │   └── update_hidden_methods_exp.sh
 │   │       └── snapshot
@@ -299,18 +298,16 @@
 │   │           ├── logging.sh
 │   │           ├── partial
 │   │           │   ├── bad-hash
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── config
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   └── config
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
 │   │           │   │       └── src.rb
-│   │           │   ├── bad-t
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
+│   │           │   ├── bad-t/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
 │   │           │   ├── bad_gem
 │   │           │   │   ├── expected
 │   │           │   │   │   ├── out.log
@@ -325,21 +322,18 @@
 │   │           │   │       ├── lib
 │   │           │   │       │   └── bad-gem.rb
 │   │           │   │       └── src.rb
-│   │           │   ├── codecov
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       └── Gemfile.lock
+│   │           │   ├── codecov/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   └── Gemfile.lock
 │   │           │   ├── create-config
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── config
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   └── config
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       └── Gemfile.lock
 │   │           │   ├── db_schema
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── foo.txt
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   └── foo.txt
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
@@ -347,11 +341,10 @@
 │   │           │   │       │   └── schema.rb
 │   │           │   │       └── sorbet
 │   │           │   │           └── foo.txt
-│   │           │   ├── explosive-object
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
+│   │           │   ├── explosive-object/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
 │   │           │   ├── extconf
 │   │           │   │   ├── expected
 │   │           │   │   │   └── out.log
@@ -360,22 +353,19 @@
 │   │           │   │       ├── Gemfile.lock
 │   │           │   │       └── lib
 │   │           │   │           └── extconf.rb
-│   │           │   ├── fake-object
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
-│   │           │   ├── fake-rails
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── config
-│   │           │   │           └── application.rb
+│   │           │   ├── fake-object/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
+│   │           │   ├── fake-rails/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── config
+│   │           │   │       └── application.rb
 │   │           │   ├── ignore_file_table
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       ├── config
-│   │           │   │   │       └── important_file.txt
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   ├── config
+│   │           │   │   │   └── important_file.txt
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
@@ -384,46 +374,32 @@
 │   │           │   │           ├── config
 │   │           │   │           └── important_file.txt
 │   │           │   ├── local_gem
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── rbi
-│   │           │   │   │           └── gems
-│   │           │   │   │               └── my_gem.rbi
-│   │           │   │   ├── gems
-│   │           │   │   │   └── 0.0.0
-│   │           │   │   │       └── gems
-│   │           │   │   │           └── my_gem-0.0.0
-│   │           │   │   │               ├── lib
-│   │           │   │   │               │   └── my_gem.rb
-│   │           │   │   │               └── my_gem.gemspec
+│   │           │   │   ├── expected/sorbet/rbi/gems
+│   │           │   │   │   └── my_gem.rbi
+│   │           │   │   ├── gems/0.0.0/gems/my_gem-0.0.0
+│   │           │   │   │   ├── lib
+│   │           │   │   │   │   └── my_gem.rb
+│   │           │   │   │   └── my_gem.gemspec
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       └── Gemfile.lock
 │   │           │   ├── local_rvm_gemset_gem
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── rbi
-│   │           │   │   │           └── gems
-│   │           │   │   │               └── my_gem.rbi
-│   │           │   │   ├── gems
-│   │           │   │   │   └── ruby-0.0.0@gemset
-│   │           │   │   │       └── gems
-│   │           │   │   │           └── my_gem-0.0.0
-│   │           │   │   │               ├── lib
-│   │           │   │   │               │   └── my_gem.rb
-│   │           │   │   │               └── my_gem.gemspec
+│   │           │   │   ├── expected/sorbet/rbi/gems
+│   │           │   │   │   └── my_gem.rbi
+│   │           │   │   ├── gems/ruby-0.0.0@gemset/gems/my_gem-0.0.0
+│   │           │   │   │   ├── lib
+│   │           │   │   │   │   └── my_gem.rb
+│   │           │   │   │   └── my_gem.gemspec
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       └── Gemfile.lock
-│   │           │   ├── missing-instance-methods
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
+│   │           │   ├── missing-instance-methods/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
 │   │           │   ├── non-utf-8-file
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── config
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   └── config
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
@@ -434,61 +410,51 @@
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
-│   │           │   │       ├── app
-│   │           │   │       │   └── models
-│   │           │   │       │       └── article.rb
+│   │           │   │       ├── app/models
+│   │           │   │       │   └── article.rb
 │   │           │   │       └── config
 │   │           │   │           ├── application.rb
 │   │           │   │           └── database.yml
-│   │           │   ├── rails6
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       └── Gemfile.lock
-│   │           │   ├── real_singleton_class
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
-│   │           │   ├── rspec-lots
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
-│   │           │   ├── stack_master
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
-│   │           │   ├── stupidedi
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
-│   │           │   ├── type_member
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── my_enumerable.rb
-│   │           │   ├── typed-ignore
-│   │           │   │   └── src
-│   │           │   │       ├── Gemfile
-│   │           │   │       ├── Gemfile.lock
-│   │           │   │       └── src.rb
+│   │           │   ├── rails6/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   └── Gemfile.lock
+│   │           │   ├── real_singleton_class/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
+│   │           │   ├── rspec-lots/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
+│   │           │   ├── stack_master/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
+│   │           │   ├── stupidedi/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
+│   │           │   ├── type_member/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── my_enumerable.rb
+│   │           │   ├── typed-ignore/src
+│   │           │   │   ├── Gemfile
+│   │           │   │   ├── Gemfile.lock
+│   │           │   │   └── src.rb
 │   │           │   ├── use-existing-config
-│   │           │   │   ├── expected
-│   │           │   │   │   └── sorbet
-│   │           │   │   │       └── config
+│   │           │   │   ├── expected/sorbet
+│   │           │   │   │   └── config
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       ├── Gemfile.lock
 │   │           │   │       ├── foo.rb
 │   │           │   │       └── sorbet
 │   │           │   │           └── config
-│   │           │   └── webmock
-│   │           │       └── src
-│   │           │           ├── Gemfile
-│   │           │           ├── Gemfile.lock
-│   │           │           └── webmock.rb
+│   │           │   └── webmock/src
+│   │           │       ├── Gemfile
+│   │           │       ├── Gemfile.lock
+│   │           │       └── webmock.rb
 │   │           ├── run_one.sh
 │   │           ├── snapshot.bzl
 │   │           ├── sorbet-typed.rev
@@ -499,17 +465,13 @@
 │   │           │   │   │   ├── out.log
 │   │           │   │   │   └── sorbet
 │   │           │   │   │       ├── config
-│   │           │   │   │       └── rbi
-│   │           │   │   │           └── sorbet-typed
-│   │           │   │   │               └── lib
-│   │           │   │   │                   ├── bundler
-│   │           │   │   │                   │   └── all
-│   │           │   │   │                   │       └── bundler.rbi
-│   │           │   │   │                   └── ruby
-│   │           │   │   │                       └── all
-│   │           │   │   │                           ├── gem.rbi
-│   │           │   │   │                           ├── open3.rbi
-│   │           │   │   │                           └── resolv.rbi
+│   │           │   │   │       └── rbi/sorbet-typed/lib
+│   │           │   │   │           ├── bundler/all
+│   │           │   │   │           │   └── bundler.rbi
+│   │           │   │   │           └── ruby/all
+│   │           │   │   │               ├── gem.rbi
+│   │           │   │   │               ├── open3.rbi
+│   │           │   │   │               └── resolv.rbi
 │   │           │   │   └── src
 │   │           │   │       ├── Gemfile
 │   │           │   │       └── Gemfile.lock
@@ -519,17 +481,13 @@
 │   │           │       │   ├── out.log
 │   │           │       │   └── sorbet
 │   │           │       │       ├── config
-│   │           │       │       └── rbi
-│   │           │       │           └── sorbet-typed
-│   │           │       │               └── lib
-│   │           │       │                   ├── bundler
-│   │           │       │                   │   └── all
-│   │           │       │                   │       └── bundler.rbi
-│   │           │       │                   └── ruby
-│   │           │       │                       └── all
-│   │           │       │                           ├── gem.rbi
-│   │           │       │                           ├── open3.rbi
-│   │           │       │                           └── resolv.rbi
+│   │           │       │       └── rbi/sorbet-typed/lib
+│   │           │       │           ├── bundler/all
+│   │           │       │           │   └── bundler.rbi
+│   │           │       │           └── ruby/all
+│   │           │       │               ├── gem.rbi
+│   │           │       │               ├── open3.rbi
+│   │           │       │               └── resolv.rbi
 │   │           │       └── src
 │   │           │           ├── Gemfile
 │   │           │           └── Gemfile.lock
@@ -1722,9 +1680,8 @@
 │   │   ├── lsp.h
 │   │   ├── position_assertions.cc
 │   │   └── position_assertions.h
-│   ├── lint
-│   │   └── buildifier
-│   │       └── BUILD
+│   ├── lint/buildifier
+│   │   └── BUILD
 │   ├── lsp
 │   │   ├── BUILD
 │   │   ├── ProtocolTest.cc
@@ -1994,10 +1951,9 @@
 │   │   │   ├── non_ruby_names.rb.symbol-table-raw.exp
 │   │   │   ├── superclass_implicit.rb
 │   │   │   └── superclass_implicit.rb.symbol-table-raw.exp
-│   │   ├── disabled
-│   │   │   └── whitequark
-│   │   │       ├── parse_dedenting_heredoc_13.rb
-│   │   │       └── parse_encoding_.rb
+│   │   ├── disabled/whitequark
+│   │   │   ├── parse_dedenting_heredoc_13.rb
+│   │   │   └── parse_encoding_.rb
 │   │   ├── error_recovery_send_after_end.rb
 │   │   ├── error_recovery_send_after_end.rb.parse-tree.exp
 │   │   ├── infer
@@ -4279,19 +4235,18 @@
 │   │   ├── codegen
 │   │   │   ├── builder.rb
 │   │   │   └── generate_diagnostics.cc
-│   │   └── include
-│   │       └── ruby_parser
-│   │           ├── builder.hh
-│   │           ├── capi.hh
-│   │           ├── context.hh
-│   │           ├── diagnostic.hh
-│   │           ├── driver.hh
-│   │           ├── lexer.hh
-│   │           ├── literal.hh
-│   │           ├── node.hh
-│   │           ├── pool.hh
-│   │           ├── state_stack.hh
-│   │           └── token.hh
+│   │   └── include/ruby_parser
+│   │       ├── builder.hh
+│   │       ├── capi.hh
+│   │       ├── context.hh
+│   │       ├── diagnostic.hh
+│   │       ├── driver.hh
+│   │       ├── lexer.hh
+│   │       ├── literal.hh
+│   │       ├── node.hh
+│   │       ├── pool.hh
+│   │       ├── state_stack.hh
+│   │       └── token.hh
 │   ├── pdqsort.BUILD
 │   ├── progressbar
 │   │   ├── BUILD
@@ -4417,20 +4372,16 @@
     │   └── untyped.md
     ├── i18n
     ├── package.json
-    ├── pages
-    │   └── en
-    │       ├── community.js
-    │       └── index.js
+    ├── pages/en
+    │   ├── community.js
+    │   └── index.js
     ├── sidebars.json
     ├── siteConfig.js
     ├── static
-    │   ├── blog
-    │   │   └── 2019
-    │   │       └── 05
-    │   │           └── 16
-    │   │               ├── State-of-Sorbet-May-2019
-    │   │               │   └── index.html
-    │   │               └── State-of-Sorbet-May-2019.html
+    │   ├── blog/2019/05/16
+    │   │   ├── State-of-Sorbet-May-2019
+    │   │   │   └── index.html
+    │   │   └── State-of-Sorbet-May-2019.html
     │   ├── css
     │   │   ├── PageSection.css
     │   │   ├── custom.css
