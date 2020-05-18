@@ -1,0 +1,8 @@
+.
+./dir2
+./dir2/qux.txt
+./run.sh.exp
+./run.sh
+./dir1
+./dir1/foo.txt
+./dir1/bar.txt
