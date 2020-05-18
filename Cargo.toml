@@ -1,6 +1,6 @@
 [package]
 name = "as-tree"
-version = "0.11.1"
+version = "0.12.0"
 authors = ["Jake Zimmerman <zimmerman.jake@gmail.com>"]
 edition = "2018"
 
