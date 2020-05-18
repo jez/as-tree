@@ -13,9 +13,9 @@ sed -i.bak -e "s/version = \"[^\"]*\"/version = \"$version\"/" Cargo.toml src/BU
 rm Cargo.toml.bak src/BUILD.bak
 cargo generate-lockfile --offline
 
-bazel test --test_output=errors //test:update_cli/version/version.sh
+bazel test --test_output=errors //test:update_test/cli/version/run.sh
 
-git add Cargo.toml src/BUILD test/cli/version/version.sh.exp
+git add Cargo.toml Cargo.lock src/BUILD test/cli/version/run.sh.exp
 
 git commit -m "Release version $version"
 git tag "$version"
