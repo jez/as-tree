@@ -131,7 +131,5 @@ cargo raze
 - rustfmt / buildifier / shellcheck in CI
 - [ ] Only use box drawing characters if the locale supports it
   - See `man locale`, `LC_CTYPE=C tree`
-- [ ] Collapse consecutive singleton tries into one level
-  - `tree` also does this
 - [ ] Add a `-0` flag to support files with newlines in their name
   - Seriously why is this allowed?
