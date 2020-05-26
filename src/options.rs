@@ -2,7 +2,7 @@ use std::env;
 use std::process::exit;
 use std::str::FromStr;
 
-const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[derive(Debug)]
 pub enum Colorize {
@@ -16,13 +16,13 @@ impl FromStr for Colorize {
 
     fn from_str(color: &str) -> Result<Self, Self::Err> {
         if color == "always" {
-            return Ok(Colorize::Always);
+            Ok(Colorize::Always)
         } else if color == "auto" {
-            return Ok(Colorize::Auto);
+            Ok(Colorize::Auto)
         } else if color == "never" {
-            return Ok(Colorize::Never);
+            Ok(Colorize::Never)
         } else {
-            return Err(());
+            Err(())
         }
     }
 }
@@ -39,7 +39,7 @@ pub struct Options {
     pub colorize: Colorize,
 }
 
-const USAGE: &'static str = "\
+const USAGE: &str = "\
 Print a list of paths as a tree of paths.
 
 Usage:
@@ -110,5 +110,5 @@ pub fn parse_options_or_die() -> Options {
         options.filename = Some(arg.to_string());
     }
 
-    return options;
+    options
 }

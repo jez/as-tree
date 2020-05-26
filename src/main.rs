@@ -26,7 +26,7 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
 
 impl PathTrie {
     fn contains_singleton_dir(&self) -> bool {
-        self.trie.len() == 1 && self.trie.iter().next().unwrap().1.trie.len() > 0
+        self.trie.len() == 1 && !self.trie.iter().next().unwrap().1.trie.is_empty()
     }
 
     pub fn insert(&mut self, path: &Path) {
@@ -87,7 +87,7 @@ impl PathTrie {
 
     fn print(&self, lscolors: &LsColors) {
         if self.trie.is_empty() {
-            println!("");
+            println!();
             return;
         }
 
@@ -111,7 +111,7 @@ fn drain_input_to_path_trie<T: BufRead>(input: &mut T) -> PathTrie {
         trie.insert(&path_buf)
     }
 
-    return trie;
+    trie
 }
 
 fn main() -> io::Result<()> {
