@@ -15,14 +15,11 @@ impl FromStr for Colorize {
     type Err = ();
 
     fn from_str(color: &str) -> Result<Self, Self::Err> {
-        if color == "always" {
-            Ok(Colorize::Always)
-        } else if color == "auto" {
-            Ok(Colorize::Auto)
-        } else if color == "never" {
-            Ok(Colorize::Never)
-        } else {
-            Err(())
+        match color {
+            "always" => Ok(Colorize::Always),
+            "auto" => Ok(Colorize::Auto),
+            "never" => Ok(Colorize::Never),
+            _ => Err(()),
         }
     }
 }
