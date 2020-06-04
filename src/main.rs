@@ -46,6 +46,7 @@ impl PathTrie {
         join_with_parent: bool,
         lscolors: &LsColors,
         parent_path: PathBuf,
+        full_path: bool
     ) {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
@@ -53,7 +54,10 @@ impl PathTrie {
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
-            let painted = style.paint(path.to_string_lossy());
+            let painted = match full_path {
+                false => style.paint(path.to_string_lossy()),
+                true => style.paint(current_path.to_string_lossy()),
+            };
 
             let contains_singleton_dir = it.contains_singleton_dir();
             let newline = if contains_singleton_dir { "" } else { "\n" };
@@ -81,11 +85,12 @@ impl PathTrie {
                 contains_singleton_dir,
                 lscolors,
                 current_path,
+                full_path
             )
         }
     }
 
-    fn print(&self, lscolors: &LsColors) {
+    fn print(&self, lscolors: &LsColors, full_path: bool) {
         if self.trie.is_empty() {
             println!();
             return;
@@ -100,7 +105,7 @@ impl PathTrie {
             println!("{}", style.paint(current_path.to_string_lossy()));
         }
 
-        self._print(true, "", contains_singleton_dir, &lscolors, current_path)
+        self._print(true, "", contains_singleton_dir, &lscolors, current_path, full_path)
     }
 }
 
@@ -143,7 +148,7 @@ fn main() -> io::Result<()> {
         options::Colorize::Never => LsColors::empty(),
     };
 
-    trie.print(&lscolors);
+    trie.print(&lscolors, options.full_path);
 
     io::Result::Ok(())
 }

@@ -34,6 +34,7 @@ impl Default for Colorize {
 pub struct Options {
     pub filename: Option<String>,
     pub colorize: Colorize,
+    pub full_path: bool,
 }
 
 const USAGE: &str = "\
@@ -82,6 +83,11 @@ pub fn parse_options_or_die() -> Options {
         if arg == "-v" || arg == "--version" {
             println!("{}", VERSION);
             exit(0);
+        }
+
+        if arg == "-f" {
+            options.full_path = true;
+            continue;
         }
 
         if arg == "--color" {
