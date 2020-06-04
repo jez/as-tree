@@ -49,6 +49,7 @@ Arguments:
 Options:
   --color (always|auto|never)
                     Whether to colorize the output [default: auto]
+  -f                Prints the full path prefix for each file.
   -h, --help        Print this help message
   -v, --version     Print the version and exit
 
