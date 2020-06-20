@@ -1,8 +1,0 @@
-# ---- User-local options -----------------------------------------------------
-try-import .bazelrc.local
-
-# ---- Global C/C++ build options ---------------------------------------------
-
-# Using a custom C++ toolchain to get around an issue with rules_rust on macOS:
-# https://github.com/bazelbuild/rules_rust/issues/226
-build --crosstool_top=@llvm_toolchain//:toolchain

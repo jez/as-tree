@@ -4,30 +4,14 @@ version = "0.12.0"
 authors = ["Jake Zimmerman <zimmerman.jake@gmail.com>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[[bin]]
-name = "as-tree"
-path = "src/main.rs"
-
 [dependencies]
 ansi_term = "0.12"
 lscolors = "0.7"
 atty = "0.2"
+structopt = "0.3"
 
-# These two options plus strip'ing the binary was measured to cut the size by
-# about 173KB (-44%)
+[dev-dependencies]
+pretty_assertions = "0.6.1"
+
 [profile.release]
-lto = true
-panic = "abort"
-
-[raze]
-# The WORKSPACE relative path to the Cargo.toml working directory.
-workspace_path = "//third_party/cargo"
-
-# TODO(jez) Why is this needed?
-# The target to generate BUILD rules for.
-target = "x86_64-apple-darwin"
-
-# Let bazel fetch things, rather than vendor them with cargo
-genmode = "Remote"
+codegen-units = 1

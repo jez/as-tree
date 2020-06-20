@@ -1,6 +1,6 @@
 # as-tree
 
-[![Build Status](https://travis-ci.org/jez/as-tree.svg?branch=master)](https://travis-ci.org/jez/as-tree)
+![CI](https://github.com/jRimbault/as-tree/workflows/CI/badge.svg)
 
 Print a list of paths as a tree of paths.
 
@@ -33,20 +33,10 @@ Inspired by [this feature request](https://github.com/sharkdp/fd/issues/283).
 
 There are pre-built binary releases in the Releases tab.
 
-This project is written in Rust and builds under both Bazel and Cargo.
-
 To install from source using Cargo:
 
 ```shell
 cargo install -f --git https://github.com/jez/as-tree
-```
-
-To install from source using Bazel:
-
-```shell
-git clone https://github.com/jez/as-tree
-cd as-tree
-make install
 ```
 
 ## Usage
@@ -100,30 +90,8 @@ of files to print better than `tree` can alone.
 
 ## Developing
 
-Running the tests requires Bazel. The `./bazel` shell script in this repo will
-download and cache a specific version of Bazel for you. From there, Bazel knows
-how to install all the dependencies it needs to build this project (including a
-Rust toolchain).
-
 ```shell
-# Run the tests:
-./bazel test --test_output=errors //test
-
-# To add a test, create two files:
-#
-# - test/fixtures/foo.txt
-# - test/fixtures/foo.txt.exp
-#
-# The first file is the input to feed to `as-tree`, and the second is the
-# expected output of `as-tree` on that input
-
-# Update all the tests:
-./bazel test //test:update
-
-# When you add a new dependency, you'll need to add it with Bazel too:
-cargo install cargo-raze # (one time setup)
-cd third_party/cargo
-cargo raze
+cargo test
 ```
 
 ## TODO(jez)
