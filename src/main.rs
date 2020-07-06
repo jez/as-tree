@@ -1,34 +1,38 @@
 mod color;
 
+use argh::FromArgs;
 use as_tree::{PathFormat, PathTrie};
 use color::Color;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::PathBuf;
-use structopt::StructOpt;
 
 /// Print a list of paths as a tree of paths.
 ///
 /// Example :
 ///   find . -name '*.txt' | as-tree
-#[derive(Debug, Default, StructOpt)]
+#[derive(Debug, FromArgs)]
 struct Options {
-    /// The file to read from. When omitted, reads from stdin.
+    /// the file to read from. When omitted, reads from stdin
+    #[argh(positional)]
     filename: Option<PathBuf>,
-    /// Whether to colorize the output, can only be [always|auto|never]
-    #[structopt(short, long, default_value)]
-    color: Color,
-    /// Print the full path prefix for each file.
-    #[structopt(short = "f", parse(from_flag))]
-    path_format: PathFormat,
+    /// whether to colorize the output, can only be [always|auto|never]
+    #[argh(short = 'c', option)]
+    color: Option<Color>,
+    /// print the full path prefix for each file [absolute|normal]
+    #[argh(short = 'f', option)]
+    path_format: Option<PathFormat>,
 }
 
 fn main() -> io::Result<()> {
-    let options = Options::from_args();
+    let options: Options = argh::from_env();
     let trie = build_trie(options.filename)?;
-    print!(
+    println!(
         "{}",
-        trie.custom_display(options.color.into(), options.path_format)
+        trie.custom_display(
+            options.color.unwrap_or_default().into(),
+            options.path_format.unwrap_or_default()
+        )
     );
     Ok(())
 }

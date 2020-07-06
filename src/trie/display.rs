@@ -79,7 +79,7 @@ impl<'a> fmt::Display for SubTrie<'a> {
             let style = ansi_style_for_path(&self.options.colors, &current_path);
             let painted = match self.options.path_format {
                 PathFormat::Normal => path.to_string_lossy(),
-                PathFormat::Long => current_path.to_string_lossy(),
+                PathFormat::Absolute => current_path.to_string_lossy(),
             };
             let painted = style.paint(painted);
 

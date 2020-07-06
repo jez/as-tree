@@ -119,7 +119,7 @@ tools/scripts/generate_compdb_targets.sh";
     let trie: PathTrie = files.lines().collect();
     let result = format!(
         "{}",
-        trie.custom_display(LsColors::empty(), PathFormat::Long)
+        trie.custom_display(LsColors::empty(), PathFormat::Absolute)
     );
     assert_eq!(result, expected);
 }

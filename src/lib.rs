@@ -6,13 +6,13 @@ pub use trie::PathTrie;
 #[derive(Copy, Clone, Debug)]
 pub enum PathFormat {
     Normal,
-    Long,
+    Absolute,
 }
 
 impl From<bool> for PathFormat {
     fn from(value: bool) -> Self {
         if value {
-            PathFormat::Long
+            PathFormat::Absolute
         } else {
             PathFormat::Normal
         }
@@ -22,5 +22,17 @@ impl From<bool> for PathFormat {
 impl Default for PathFormat {
     fn default() -> Self {
         PathFormat::Normal
+    }
+}
+
+impl std::str::FromStr for PathFormat {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "absolute" => Ok(PathFormat::Absolute),
+            "normal" => Ok(PathFormat::Normal),
+            _ => Ok(PathFormat::Normal),
+        }
     }
 }
