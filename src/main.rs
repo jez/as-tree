@@ -5,7 +5,7 @@ use as_tree::{PathFormat, PathTrie};
 use color::Color;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 /// Print a list of paths as a tree of paths.
 ///
@@ -26,7 +26,7 @@ struct Options {
 
 fn main() -> io::Result<()> {
     let options: Options = argh::from_env();
-    let trie = build_trie(options.filename)?;
+    let trie = build_trie(options.filename.as_deref())?;
     println!(
         "{}",
         trie.custom_display(
@@ -37,7 +37,7 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn build_trie(filename: Option<PathBuf>) -> io::Result<PathTrie> {
+fn build_trie(filename: Option<&Path>) -> io::Result<PathTrie> {
     let trie = match filename {
         None => {
             if atty::is(atty::Stream::Stdin) {
