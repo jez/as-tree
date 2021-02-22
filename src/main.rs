@@ -4,7 +4,7 @@ extern crate lscolors;
 
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::io::{self, BufRead, BufReader};
+use std::io::{self, BufRead, BufReader, BufWriter, Write};
 use std::path::{Path, PathBuf};
 
 use lscolors::{LsColors, Style};
@@ -26,7 +26,7 @@ fn ansi_style_for_path(lscolors: &LsColors, path: &Path) -> ansi_term::Style {
 
 impl PathTrie {
     fn contains_singleton_dir(&self) -> bool {
-        self.trie.len() == 1 && !self.trie.iter().next().unwrap().1.trie.is_empty()
+        self.trie.len() == 1 && !self.trie.values().next().unwrap().trie.is_empty()
     }
 
     pub fn insert(&mut self, path: &Path) {
@@ -46,7 +46,8 @@ impl PathTrie {
         join_with_parent: bool,
         lscolors: &LsColors,
         parent_path: PathBuf,
-    ) {
+        output_writer: &mut impl Write,
+    ) -> io::Result<()> {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
 
@@ -65,13 +66,19 @@ impl PathTrie {
                 } else {
                     "/"
                 };
-                print!("{}{}{}", style.paint(joiner), painted, newline);
+                write!(
+                    output_writer,
+                    "{}{}{}",
+                    style.paint(joiner),
+                    painted,
+                    newline
+                )?;
                 prefix
             } else if !is_last {
-                print!("{}├── {}{}", prefix, painted, newline);
+                write!(output_writer, "{}├── {}{}", prefix, painted, newline)?;
                 &normal_prefix
             } else {
-                print!("{}└── {}{}", prefix, painted, newline);
+                write!(output_writer, "{}└── {}{}", prefix, painted, newline)?;
                 &last_prefix
             };
 
@@ -81,11 +88,13 @@ impl PathTrie {
                 contains_singleton_dir,
                 lscolors,
                 current_path,
-            )
+                output_writer,
+            )?;
         }
+        Ok(())
     }
 
-    fn print(&self, lscolors: &LsColors) {
+    fn print(&self, lscolors: &LsColors, mut output_writer: impl Write) {
         if self.trie.is_empty() {
             println!();
             return;
@@ -100,36 +109,47 @@ impl PathTrie {
             println!("{}", style.paint(current_path.to_string_lossy()));
         }
 
-        self._print(true, "", contains_singleton_dir, &lscolors, current_path)
+        self._print(
+            true,
+            "",
+            contains_singleton_dir,
+            &lscolors,
+            current_path,
+            &mut output_writer,
+        )
+        .expect("Error while trying to output text");
     }
 }
 
-fn drain_input_to_path_trie<T: BufRead>(input: &mut T) -> PathTrie {
+fn drain_inputs_to_path_trie<T: BufRead>(inputs: &mut [T]) -> PathTrie {
     let mut trie = PathTrie::default();
 
-    for path_buf in input.lines().filter_map(Result::ok).map(PathBuf::from) {
-        trie.insert(&path_buf)
-    }
+    let lines = inputs.iter_mut().flat_map(|input| input.lines());
 
+    for line in lines.filter_map(Result::ok) {
+        trie.insert(&PathBuf::from(line))
+    }
     trie
 }
 
 fn main() -> io::Result<()> {
     let options = options::parse_options_or_die();
 
-    let trie = match &options.filename {
-        None => {
-            if atty::is(atty::Stream::Stdin) {
-                eprintln!("Warning: reading from stdin, which is a tty.");
-            }
-            drain_input_to_path_trie(&mut io::stdin().lock())
+    let mut files: Vec<Box<dyn BufRead>> = if options.files.is_empty() {
+        if atty::is(atty::Stream::Stdin) {
+            eprintln!("Warning: reading from stdin, which is a tty.");
         }
-        Some(filename) => {
-            let file = File::open(filename)?;
-            let mut reader = BufReader::new(file);
-            drain_input_to_path_trie(&mut reader)
+        vec![Box::new(BufReader::new(io::stdin()))]
+    } else {
+        let mut readers: Vec<Box<dyn BufRead>> = vec![];
+        for file in options.files {
+            let file = File::open(file)?;
+            readers.push(Box::new(BufReader::new(file)));
         }
+        readers
     };
+
+    let trie = drain_inputs_to_path_trie(&mut files);
 
     let lscolors = match &options.colorize {
         options::Colorize::Always => LsColors::from_env().unwrap_or_default(),
@@ -143,7 +163,8 @@ fn main() -> io::Result<()> {
         options::Colorize::Never => LsColors::empty(),
     };
 
-    trie.print(&lscolors);
+    let output_writer = BufWriter::new(io::stdout());
+    trie.print(&lscolors, output_writer);
 
     io::Result::Ok(())
 }

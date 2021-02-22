@@ -32,7 +32,7 @@ impl Default for Colorize {
 
 #[derive(Debug, Default)]
 pub struct Options {
-    pub filename: Option<String>,
+    pub files: Vec<String>,
     pub colorize: Colorize,
 }
 
@@ -40,10 +40,10 @@ const USAGE: &str = "\
 Print a list of paths as a tree of paths.
 
 Usage:
-  as-tree [options] [<filename>]
+  as-tree [options] [<files>]
 
 Arguments:
-  <filename>        The file to read from. When omitted, reads from stdin.
+  <files...>        The files to read from. When omitted, reads from stdin.
 
 Options:
   --color (always|auto|never)
@@ -100,11 +100,7 @@ pub fn parse_options_or_die() -> Options {
             die("Unrecognized option:", &arg);
         }
 
-        if options.filename.is_some() {
-            die("Extra argument:", &arg);
-        }
-
-        options.filename = Some(arg.to_string());
+        options.files.push(arg);
     }
 
     options
