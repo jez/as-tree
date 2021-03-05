@@ -46,7 +46,7 @@ impl PathTrie {
         join_with_parent: bool,
         lscolors: &LsColors,
         parent_path: PathBuf,
-        full_path: bool
+        full_path: bool,
     ) {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
@@ -54,28 +54,37 @@ impl PathTrie {
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
+
             let painted = match full_path {
                 false => style.paint(path.to_string_lossy()),
                 true => style.paint(current_path.to_string_lossy()),
             };
 
             let contains_singleton_dir = it.contains_singleton_dir();
+            let dont_print = contains_singleton_dir && full_path;
+
             let newline = if contains_singleton_dir { "" } else { "\n" };
             let is_last = idx == self.trie.len() - 1;
 
             let next_prefix = if join_with_parent {
-                let joiner = if top || parent_path == PathBuf::from("/") {
+                let joiner = if full_path || top || parent_path == PathBuf::from("/") {
                     ""
                 } else {
                     "/"
                 };
-                print!("{}{}{}", style.paint(joiner), painted, newline);
+                if !dont_print {
+                    print!("{}{}{}", style.paint(joiner), painted, newline);
+                }
                 prefix
             } else if !is_last {
-                print!("{}├── {}{}", prefix, painted, newline);
+                if !dont_print {
+                    print!("{}├── {}{}", prefix, painted, newline);
+                }
                 &normal_prefix
             } else {
-                print!("{}└── {}{}", prefix, painted, newline);
+                if !dont_print {
+                    print!("{}└── {}{}", prefix, painted, newline);
+                }
                 &last_prefix
             };
 
@@ -85,7 +94,7 @@ impl PathTrie {
                 contains_singleton_dir,
                 lscolors,
                 current_path,
-                full_path
+                full_path,
             )
         }
     }
@@ -105,7 +114,14 @@ impl PathTrie {
             println!("{}", style.paint(current_path.to_string_lossy()));
         }
 
-        self._print(true, "", contains_singleton_dir, &lscolors, current_path, full_path)
+        self._print(
+            true,
+            "",
+            contains_singleton_dir,
+            &lscolors,
+            current_path,
+            full_path,
+        )
     }
 }
 
