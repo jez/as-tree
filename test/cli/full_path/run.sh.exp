@@ -1,12 +1,12 @@
 ----- -f -----
-test/cli/full_path
-├── dir1
-│   ├── bar.txt
-│   └── foo.txt
-├── dir2
-│   └── qux.txt
-├── dir3/dir4
-│   └── zap.txt
-├── run
-├── run.sh
-└── run.sh.exp
+./test/cli/full_path
+├── ./test/cli/full_path/dir1
+│   ├── ./test/cli/full_path/dir1/bar.txt
+│   └── ./test/cli/full_path/dir1/foo.txt
+├── ./test/cli/full_path/dir2
+│   └── ./test/cli/full_path/dir2/qux.txt
+./test/cli/full_path/dir3/dir4
+│   └── ./test/cli/full_path/dir3/dir4/zap.txt
+├── ./test/cli/full_path/run
+├── ./test/cli/full_path/run.sh
+└── ./test/cli/full_path/run.sh.exp
