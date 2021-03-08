@@ -55,13 +55,24 @@ impl PathTrie {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
 
+            let contains_singleton_dir = it.contains_singleton_dir();
+
             let painted = match full_path {
                 false => style.paint(path.to_string_lossy()),
-                true => style.paint(current_path.to_string_lossy()),
+                true => match contains_singleton_dir && !join_with_parent {
+                    false => style.paint(current_path.to_string_lossy()),
+                    true => style.paint(""),
+                },
             };
 
-            let contains_singleton_dir = it.contains_singleton_dir();
-            let dont_print = contains_singleton_dir && full_path;
+            // If this folder only contains a single dir, we skip printing it because it will be
+            // picked up and printed on the next iteration. If this is a full path (even if it
+            // contains more than one directory), we also want to skip printing, because the full
+            // path will be printed all at once (see painted above), not part by part.
+            // If this is a full path however the prefix must be printed at the very beginning.
+            let should_print = (contains_singleton_dir && !join_with_parent)
+                || !contains_singleton_dir
+                || !full_path;
 
             let newline = if contains_singleton_dir { "" } else { "\n" };
             let is_last = idx == self.trie.len() - 1;
@@ -72,17 +83,17 @@ impl PathTrie {
                 } else {
                     "/"
                 };
-                if !dont_print {
+                if should_print {
                     print!("{}{}{}", style.paint(joiner), painted, newline);
                 }
                 prefix
             } else if !is_last {
-                if !dont_print {
+                if should_print {
                     print!("{}├── {}{}", prefix, painted, newline);
                 }
                 &normal_prefix
             } else {
-                if !dont_print {
+                if should_print {
                     print!("{}└── {}{}", prefix, painted, newline);
                 }
                 &last_prefix
