@@ -34,6 +34,7 @@ impl Default for Colorize {
 pub struct Options {
     pub filename: Option<String>,
     pub colorize: Colorize,
+    pub full_path: bool,
 }
 
 const USAGE: &str = "\
@@ -48,6 +49,7 @@ Arguments:
 Options:
   --color (always|auto|never)
                     Whether to colorize the output [default: auto]
+  -f                Prints the full path prefix for each file.
   -h, --help        Print this help message
   -v, --version     Print the version and exit
 
@@ -82,6 +84,11 @@ pub fn parse_options_or_die() -> Options {
         if arg == "-v" || arg == "--version" {
             println!("{}", VERSION);
             exit(0);
+        }
+
+        if arg == "-f" {
+            options.full_path = true;
+            continue;
         }
 
         if arg == "--color" {

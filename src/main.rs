@@ -46,6 +46,7 @@ impl PathTrie {
         join_with_parent: bool,
         lscolors: &LsColors,
         parent_path: PathBuf,
+        full_path: bool,
     ) {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
@@ -53,25 +54,48 @@ impl PathTrie {
         for (idx, (path, it)) in self.trie.iter().enumerate() {
             let current_path = parent_path.join(path);
             let style = ansi_style_for_path(&lscolors, &current_path);
-            let painted = style.paint(path.to_string_lossy());
 
             let contains_singleton_dir = it.contains_singleton_dir();
+
+            let painted = match full_path {
+                false => style.paint(path.to_string_lossy()),
+                true => match contains_singleton_dir && !join_with_parent {
+                    false => style.paint(current_path.to_string_lossy()),
+                    true => style.paint(""),
+                },
+            };
+
+            // If this folder only contains a single dir, we skip printing it because it will be
+            // picked up and printed on the next iteration. If this is a full path (even if it
+            // contains more than one directory), we also want to skip printing, because the full
+            // path will be printed all at once (see painted above), not part by part.
+            // If this is a full path however the prefix must be printed at the very beginning.
+            let should_print = (contains_singleton_dir && !join_with_parent)
+                || !contains_singleton_dir
+                || !full_path;
+
             let newline = if contains_singleton_dir { "" } else { "\n" };
             let is_last = idx == self.trie.len() - 1;
 
             let next_prefix = if join_with_parent {
-                let joiner = if top || parent_path == PathBuf::from("/") {
+                let joiner = if full_path || top || parent_path == PathBuf::from("/") {
                     ""
                 } else {
                     "/"
                 };
-                print!("{}{}{}", style.paint(joiner), painted, newline);
+                if should_print {
+                    print!("{}{}{}", style.paint(joiner), painted, newline);
+                }
                 prefix
             } else if !is_last {
-                print!("{}├── {}{}", prefix, painted, newline);
+                if should_print {
+                    print!("{}├── {}{}", prefix, painted, newline);
+                }
                 &normal_prefix
             } else {
-                print!("{}└── {}{}", prefix, painted, newline);
+                if should_print {
+                    print!("{}└── {}{}", prefix, painted, newline);
+                }
                 &last_prefix
             };
 
@@ -81,11 +105,12 @@ impl PathTrie {
                 contains_singleton_dir,
                 lscolors,
                 current_path,
+                full_path,
             )
         }
     }
 
-    fn print(&self, lscolors: &LsColors) {
+    fn print(&self, lscolors: &LsColors, full_path: bool) {
         if self.trie.is_empty() {
             println!();
             return;
@@ -100,7 +125,14 @@ impl PathTrie {
             println!("{}", style.paint(current_path.to_string_lossy()));
         }
 
-        self._print(true, "", contains_singleton_dir, &lscolors, current_path)
+        self._print(
+            true,
+            "",
+            contains_singleton_dir,
+            &lscolors,
+            current_path,
+            full_path,
+        )
     }
 }
 
@@ -143,7 +175,7 @@ fn main() -> io::Result<()> {
         options::Colorize::Never => LsColors::empty(),
     };
 
-    trie.print(&lscolors);
+    trie.print(&lscolors, options.full_path);
 
     io::Result::Ok(())
 }
