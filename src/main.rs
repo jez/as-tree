@@ -4,7 +4,7 @@ extern crate lscolors;
 
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::io::{self, BufRead, BufReader};
+use std::io::{self, BufRead, BufReader, Write};
 use std::path::{Path, PathBuf};
 
 use lscolors::{LsColors, Style};
@@ -41,13 +41,14 @@ impl PathTrie {
 
     fn _print(
         &self,
+        stdout: &mut io::StdoutLock,
         top: bool,
         prefix: &str,
         join_with_parent: bool,
         lscolors: &LsColors,
         parent_path: PathBuf,
         full_path: bool,
-    ) {
+    ) -> io::Result<()> {
         let normal_prefix = format!("{}│   ", prefix);
         let last_prefix = format!("{}    ", prefix);
 
@@ -84,37 +85,42 @@ impl PathTrie {
                     "/"
                 };
                 if should_print {
-                    print!("{}{}{}", style.paint(joiner), painted, newline);
+                    write!(stdout, "{}{}{}", style.paint(joiner), painted, newline)?;
                 }
                 prefix
             } else if !is_last {
                 if should_print {
-                    print!("{}├── {}{}", prefix, painted, newline);
+                    write!(stdout, "{}├── {}{}", prefix, painted, newline)?;
                 }
                 &normal_prefix
             } else {
                 if should_print {
-                    print!("{}└── {}{}", prefix, painted, newline);
+                    write!(stdout, "{}└── {}{}", prefix, painted, newline)?;
                 }
                 &last_prefix
             };
 
             it._print(
+                stdout,
                 false,
                 next_prefix,
                 contains_singleton_dir,
                 lscolors,
                 current_path,
                 full_path,
-            )
+            )?;
         }
+
+        Ok(())
     }
 
-    fn print(&self, lscolors: &LsColors, full_path: bool) {
+    fn print(&self, lscolors: &LsColors, full_path: bool) -> io::Result<()> {
         if self.trie.is_empty() {
-            println!();
-            return;
+            return Ok(());
         }
+
+        let stdout = io::stdout();
+        let handle = &mut stdout.lock();
 
         // This works because PathBuf::from(".").join(PathBuf::from("/")) == PathBuf::from("/")
         let current_path = PathBuf::from(".");
@@ -122,10 +128,11 @@ impl PathTrie {
 
         if !contains_singleton_dir {
             let style = ansi_style_for_path(&lscolors, &current_path);
-            println!("{}", style.paint(current_path.to_string_lossy()));
+            writeln!(handle, "{}", style.paint(current_path.to_string_lossy()))?;
         }
 
         self._print(
+            handle,
             true,
             "",
             contains_singleton_dir,
@@ -175,7 +182,14 @@ fn main() -> io::Result<()> {
         options::Colorize::Never => LsColors::empty(),
     };
 
-    trie.print(&lscolors, options.full_path);
+    let result = trie.print(&lscolors, options.full_path);
 
-    io::Result::Ok(())
+    match result {
+        Err(e) if e.kind() == io::ErrorKind::BrokenPipe => {
+            // ignore broken pipe errors
+            io::Result::Ok(())
+        },
+        e@Err(_) => e,
+        _ => io::Result::Ok(())
+    }
 }
