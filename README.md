@@ -49,6 +49,20 @@ cd as-tree
 make install
 ```
 
+### On macOS
+
+You can install `as-tree` using Homebrew:
+```shell
+brew install as-tree
+```
+
+### On Arch Linux
+
+You can install `as-tree` from the [AUR](https://aur.archlinux.org/packages/as-tree/):
+```shell
+yay -S as-tree
+```
+
 ## Usage
 
 ```
