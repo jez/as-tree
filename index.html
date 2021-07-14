@@ -1,0 +1,361 @@
+<html lang="en" data-reactroot="">
+
+<head>
+    <meta charSet="utf-8" />
+    <title>as-tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Print a list of paths as a tree of paths 🌳" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="as-tree" />
+    <meta property="og:description" content="Print a list of paths as a tree of paths 🌳" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/5544532?s=400&amp;v=4" />
+    <meta property="og:image:alt" content="Gitpages" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Gitpages" />
+    <link rel="icon" type="image/png" href="http://gitpages.app/favicon-32x32.png" />
+    <style>
+        #ReactMarkdown pre {
+            background: #1e1e1e;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 12px;
+            border-radius: 10px;
+        }
+
+        .image-slant-right {
+            /* width: 40%; */
+            margin-bottom: 0px;
+            -webkit-transform: perspective(1500px) rotateY(15deg);
+            -moz-transform: perspective(1500px) rotateY(-15deg);
+            -ms-transform: perspective(1500px) rotateY(-15deg);
+            transform: perspective(1500px) rotateY(-15deg);
+            transition: transform 1s;
+        }
+
+        .image-slant-left {
+            /* width: 40%; */
+            margin-bottom: 0px;
+            -webkit-transform: perspective(1500px) rotateY(15deg);
+            -moz-transform: perspective(1500px) rotateY(15deg);
+            -ms-transform: perspective(1500px) rotateY(15deg);
+            transform: perspective(1500px) rotateY(15deg);
+            box-shadow: 1px 25px 20px #c6ced8;
+            transition: transform 1s;
+        }
+
+        .image-slant-right:hover {
+            -webkit-transform: perspective(1500px) rotateY(-5deg);
+            -moz-transform: perspective(1500px) rotateY(-5deg);
+            -ms-transform: perspective(1500px) rotateY(-5deg);
+            transform: perspective(1500px) rotateY(-5deg);
+        }
+
+        .image-slant-left:hover {
+            -webkit-transform: perspective(1500px) rotateY(5deg);
+            -moz-transform: perspective(1500px) rotateY(5deg);
+            -ms-transform: perspective(1500px) rotateY(5deg);
+            transform: perspective(1500px) rotateY(5deg);
+        }
+
+        @media (max-width: 1024px) {
+
+            .image-slant-left,
+            .image-slant-right {
+                -webkit-transform: perspective(1500px) rotateY(0deg);
+                -moz-transform: perspective(1500px) rotateY(0deg);
+                -ms-transform: perspective(1500px) rotateY(0deg);
+                transform: perspective(1500px) rotateY(0deg);
+            }
+        }
+
+        .prose code::before {
+            content: "" !important;
+        }
+
+        .prose code::after {
+            content: "" !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css" />
+</head>
+
+<body>
+    <main>
+        <div class="animate">
+            <div class="bg-white">
+                <header class="bg-yellow-700">
+                    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
+                        <div class="w-full py-3 flex items-center justify-between lg:border-none">
+                            <div class="flex items-center"><span class="text-sm sm:text-base  text-white hover:text-blue-50 font-bold tracking-wide">as-tree</span>
+                                <div class="hidden ml-10 space-x-8 lg:block"></div>
+                            </div>
+                            <div class="ml-10 space-x-4"><a href="https://github.com/jez/as-tree" class="inline-block bg-white py-2 px-4 border text-center border-transparent rounded-md text-xs sm:text-base font-medium text-blue-600 hover:bg-blue-50">View on GitHub</a></div>
+                        </div>
+                    </nav>
+                </header>
+                <div class="pt-8 bg-gray-800">
+                    <div class="mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6">
+                        <div class="text-center">
+                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-100 sm:text-5xl md:text-6xl"><span class="block">Print a list of paths as a tree of paths 🌳</span></h1>
+                            <p class="max-w-md mt-8 mx-auto text-base text-gray-400 sm:text-lg mt-2 md:text-xl md:max-w-3xl">Open source project created by Jake Zimmerman</p>
+                            <div class="sm:space-x-4 sm:flex sm:justify-center my-10 space-y-1 sm:space-y-0"><a href="https://github.com/jez/as-tree" class="block w-full sm:w-auto text-center  px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Get Started</a><a href="https://github.com/jez/as-tree/releases" class="block w-full sm:w-auto mt-2 items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-gray-700 bg-gray-200  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">View Releases</a></div>
+                            <div class="flex justify-center mt-6  space-x-2"><a href="https://gitpages.app" target="_blank"><img src="https://img.shields.io/badge/Made%20by-Gitpages-red" alt="Made by" /></a><a target="_blank"><img src="https://img.shields.io/badge/License-Other-green" alt="License" /></a></div>
+                        </div>
+                    </div>
+                    <div class="relative mt-10">
+                        <div class="absolute inset-0 flex flex-col" aria-hidden="true">
+                            <div class="flex-1"></div>
+                            <div class="flex-1 w-full bg-white"></div>
+                        </div>
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6"><img class="relative rounded-lg shadow-lg mx-auto" src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" data-aos="zoom-out" data-aos-offset="200" data-aos-duration="1000" /></div>
+                    </div>
+                </div>
+                <div class="relative py-16 bg-white overflow-hidden" data-aos="fade-up" data-aos-offset="50" data-aos-duration="500" data-aos-delay="200">
+                    <div class="relative px-4 sm:px-6 lg:px-8">
+                        <div class="text-lg max-w-prose mx-auto">
+                            <h1><span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"></span></h1>
+                        </div>
+                        <div class="mt-6 prose prose-lg text-gray-500 mx-auto ReactMarkdown" id="ReactMarkdown">
+                            <h1>as-tree</h1>
+                            <p><a href="https://travis-ci.org/jez/as-tree"><img src="https://travis-ci.org/jez/as-tree.svg?branch=master" alt="Build Status" /></a></p>
+                            <p>Print a list of paths as a tree of paths.</p>
+                            <p>For example, given:</p>
+                            <pre><code class="undefined bg-gray-200 px-1 ">dir1/foo.txt   
+dir1/bar.txt   
+dir2/qux.txt   
+</code></pre>
+                            <p>it will print:</p>
+                            <pre><code class="undefined bg-gray-200 px-1 ">.   
+├── dir1   
+│   ├── foo.txt   
+│   └── bar.txt   
+└── dir2   
+    └── qux.txt   
+</code></pre>
+                            <p>This tool is particularly useful when used with <code class="undefined bg-gray-200 px-1 ">find</code> or <code class="undefined bg-gray-200 px-1 ">fd</code> to produce such<br />
+                                <!-- -->a list of files. It&#x27;s similar in spirit to <code class="undefined bg-gray-200 px-1 ">tree</code>, but <code class="undefined bg-gray-200 px-1 ">find</code> and <code class="undefined bg-gray-200 px-1 ">fd</code> tend to<br />
+                                <!-- -->be more powerful when it comes to controlling which files to list.</p>
+                            <p>Inspired by <a href="https://github.com/sharkdp/fd/issues/283">this feature request</a>.</p>
+                            <h2>Install</h2>
+                            <p>There are pre-built binary releases in the Releases tab.</p>
+                            <p>This project is written in Rust and builds under both Bazel and Cargo.</p>
+                            <p>To install from source using Cargo:</p>
+                            <pre><div class="relative"><button data-js="copy-code"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 absolute top-2 right-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg></button><div style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:1em;margin:.5em 0;overflow:auto;background:#1e1e1e"><code class="language-shell" style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span>cargo </span><span class="token" style="color:#dcdcaa">install</span><span> -f --git https://github.com/jez/as-tree   </span></code></div></div></pre>
+                            <p>To install from source using Bazel:</p>
+                            <pre><div class="relative"><button data-js="copy-code"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 absolute top-2 right-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg></button><div style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:1em;margin:.5em 0;overflow:auto;background:#1e1e1e"><code class="language-shell" style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span class="token" style="color:#dcdcaa">git</span><span> clone https://github.com/jez/as-tree   
+</span><span></span><span class="token" style="color:#4ec9b0">cd</span><span> as-tree   
+</span><span></span><span class="token" style="color:#dcdcaa">make</span><span> </span><span class="token" style="color:#dcdcaa">install</span><span>   </span></code></div></div></pre>
+                            <h2>Usage</h2>
+                            <pre><code class="undefined bg-gray-200 px-1 ">❯ as-tree --help   
+Print a list of paths as a tree of paths.   
+   
+Usage:   
+  as-tree [options] [&lt;filename&gt;]   
+   
+Arguments:   
+  &lt;filename&gt;        The file to read from. When omitted, reads from stdin.   
+   
+Options:   
+  --color (always|auto|never)   
+                    Whether to colorize the output [default: auto]   
+  -f                Prints the full path prefix for each file.   
+  -h, --help        Print this help message   
+   
+Example:   
+  find . -name &#x27;*.txt&#x27; | as-tree   
+</code></pre>
+                            <h2>Example</h2>
+                            <p>This tool is particularly useful with tools like <code class="undefined bg-gray-200 px-1 ">fd</code> which can prune the list<br />
+                                <!-- -->of files to print better than <code class="undefined bg-gray-200 px-1 ">tree</code> can alone.</p>
+                            <pre><code class="undefined bg-gray-200 px-1 ">❯ fd --exclude test | as-tree   
+.   
+├── LICENSE.md   
+├── Makefile   
+├── README.md   
+├── WORKSPACE   
+├── bazel   
+├── main   
+│   ├── BUILD   
+│   └── main.cc   
+├── third_party   
+│   ├── BUILD   
+│   ├── externals.bzl   
+│   └── spdlog.BUILD   
+└── tools   
+    ├── BUILD   
+    ├── clang.bzl   
+    └── scripts   
+        ├── build_compilation_db.sh   
+        └── generate_compdb_targets.sh   
+</code></pre>
+                            <h2>Developing</h2>
+                            <p>Running the tests requires Bazel. The <code class="undefined bg-gray-200 px-1 ">./bazel</code> shell script in this repo will<br />
+                                <!-- -->download and cache a specific version of Bazel for you. From there, Bazel knows<br />
+                                <!-- -->how to install all the dependencies it needs to build this project (including a<br />
+                                <!-- -->Rust toolchain).</p>
+                            <pre><div class="relative"><button data-js="copy-code"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 absolute top-2 right-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg></button><div style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:1em;margin:.5em 0;overflow:auto;background:#1e1e1e"><code class="language-shell" style="color:#d4d4d4;font-size:13px;text-shadow:none;font-family:Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Courier New&quot;, monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span class="token" style="color:#6a9955"># Run the tests:   </span><span>
+</span><span>./bazel </span><span class="token" style="color:#4ec9b0">test</span><span> --test_output</span><span class="token" style="color:#d4d4d4">=</span><span>errors //test   
+</span>   
+<span></span><span class="token" style="color:#6a9955"># To add a test, create two files:   </span><span>
+</span><span></span><span class="token" style="color:#6a9955">#   </span><span>
+</span><span></span><span class="token" style="color:#6a9955"># - test/fixtures/foo.txt   </span><span>
+</span><span></span><span class="token" style="color:#6a9955"># - test/fixtures/foo.txt.exp   </span><span>
+</span><span></span><span class="token" style="color:#6a9955">#   </span><span>
+</span><span></span><span class="token" style="color:#6a9955"># The first file is the input to feed to `as-tree`, and the second is the   </span><span>
+</span><span></span><span class="token" style="color:#6a9955"># expected output of `as-tree` on that input   </span><span>
+</span>   
+<span></span><span class="token" style="color:#6a9955"># Update all the tests:   </span><span>
+</span><span>./bazel </span><span class="token" style="color:#4ec9b0">test</span><span> //test:update   
+</span>   
+<span></span><span class="token" style="color:#6a9955"># When you add a new dependency, you&#x27;ll need to add it with Bazel too:   </span><span>
+</span><span>cargo </span><span class="token" style="color:#dcdcaa">install</span><span> cargo-raze </span><span class="token" style="color:#6a9955"># (one time setup)   </span><span>
+</span><span></span><span class="token" style="color:#4ec9b0">cd</span><span> third_party/cargo   
+</span>cargo raze   
+</code></div></div></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-yellow-800">
+                    <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8 lg:py-20">
+                        <dl class="text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-3 sm:gap-8">
+                            <div class="flex flex-col" data-aos="flip-left" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="200">
+                                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-yellow-200 mb-10 sm:mb-0">Open Source</dt>
+                                <dd class="order-1 text-4xl sm:text-5xl font-extrabold text-white">100%</dd>
+                            </div>
+                            <div class="flex flex-col" data-aos="flip-left" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="350">
+                                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-yellow-200 mb-10 sm:mb-0">Stars ⭐️</dt>
+                                <dd class="order-1 text-4xl sm:text-5xl font-extrabold text-white">250+</dd>
+                            </div>
+                            <div class="flex flex-col" data-aos="flip-left" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="500">
+                                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-yellow-200 mb-10 sm:mb-0">Langugage</dt>
+                                <dd class="order-1 text-4xl sm:text-5xl font-extrabold text-white">Rust</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+                <div class="bg-white">
+                    <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+                        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+                            <div class="space-y-5 sm:space-y-4">
+                                <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl text-gray-800">Meet the project contributors</h2>
+                                <p class="text-xl text-gray-500">This project is built and maintained from people all over the world 🌎</p>
+                            </div>
+                            <div class="lg:col-span-2">
+                                <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
+                                    <li data-aos="fade-up" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="200">
+                                        <div class="flex items-center space-x-4 lg:space-x-6"><img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="https://avatars.githubusercontent.com/u/5544532?u=71161751dedd057376b6c588fcc9161824a16cb5&amp;v=4" alt="" />
+                                            <div class="font-medium text-lg leading-6 space-y-1">
+                                                <h3 class="text-gray-900">Jake Zimmerman</h3>
+                                                <p class="text-yellow-600">Working on @sorbet at Stripe.</p>
+                                                <ul class="flex space-x-5 mt-5">
+                                                    <li><a href="https://github.com/jez" class="text-gray-400 hover:text-gray-500"><span class="sr-only">LinkedIn</span><svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                                                            </svg></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-aos="fade-up" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="350">
+                                        <div class="flex items-center space-x-4 lg:space-x-6"><img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="https://avatars.githubusercontent.com/u/1621631?u=d2a5e0ace514c00e425624e24a6965085e9f1fc1&amp;v=4" alt="" />
+                                            <div class="font-medium text-lg leading-6 space-y-1">
+                                                <h3 class="text-gray-900">Christoph Müller</h3>
+                                                <p class="text-yellow-600">I am computer scientist and business owner @olyro from Germany. Interested in programming language research, modern web development and Computer Graphics.</p>
+                                                <ul class="flex space-x-5 mt-5">
+                                                    <li><a href="https://github.com/raytracer" class="text-gray-400 hover:text-gray-500"><span class="sr-only">LinkedIn</span><svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                                                            </svg></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-aos="fade-up" data-aos-offset="100" data-aos-duration="1000" data-aos-delay="500">
+                                        <div class="flex items-center space-x-4 lg:space-x-6"><img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="https://avatars.githubusercontent.com/u/26602940?u=3c52ce6393bb547c97e6380ccdee03e0c64152c6&amp;v=4" alt="" />
+                                            <div class="font-medium text-lg leading-6 space-y-1">
+                                                <h3 class="text-gray-900">0xflotus</h3>
+                                                <p class="text-yellow-600"></p>
+                                                <ul class="flex space-x-5 mt-5">
+                                                    <li><a href="https://github.com/0xflotus" class="text-gray-400 hover:text-gray-500"><span class="sr-only">LinkedIn</span><svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                                                            </svg></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-100">
+                    <div class="max-w-4xl flex items-center h-auto py-20 flex-wrap mx-auto lg:my-0 ">
+                        <div id="profile" class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white mx-6 lg:mx-0" data-aos="fade-up" data-aos-offset="100" data-aos-duration="450" data-aos-delay="100">
+                            <div class="p-4 md:p-12 text-center lg:text-left">
+                                <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"><img src="https://avatars.githubusercontent.com/u/5544532?u=71161751dedd057376b6c588fcc9161824a16cb5&amp;v=4" class=" rounded-none lg:rounded-lg shadow-2xl lg:block rounded-full" /></div>
+                                <h1 class="text-3xl font-bold pt-8 lg:pt-0">Jake Zimmerman</h1>
+                                <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+                                <p class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">Creator of as-tree</p>
+                                <p class="pt-8 text-sm">Working on @sorbet at Stripe.</p>
+                                <div class="pb-4 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-center lg:justify-start space-x-4 mt-8"><a class="link" href="https://github.com/jez" data-tippy-content="@github_handle"><svg class="h-6 fill-current text-gray-600 hover:text-green-700" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <title>GitHub</title>
+                                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 -ml-4 z-10 " data-aos="fade-up" data-aos-offset="100" data-aos-duration="450" data-aos-delay="400"><img src="https://avatars.githubusercontent.com/u/5544532?u=71161751dedd057376b6c588fcc9161824a16cb5&amp;v=4" class=" rounded-none lg:rounded-lg shadow-2xl hidden lg:block" /></div>
+                    </div>
+                </div>
+                <div class="bg-yellow-800">
+                    <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8" data-aos="zoom-out" data-aos-offset="150" data-aos-duration="450" data-aos-delay="200">
+                        <h2 class="text-3xl  tracking-tight text-gray-200 sm:text-4xl"><span class="block font-extrabold">Get started today</span></h2><button type="button" class="bg-gray-50 hidden sm:flex mx-auto mt-4 w-full md:w-auto text-gray-400 hover:text-blue-500 font-mono  py-3 sm:px-6  border border-gray-200 rounded-md items-center justify-center space-x-2 sm:space-x-4 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 focus:outline-none transition-colors duration-200" data-js="copy-button"><span class="text-black-900"><span class="hidden sm:inline text-yellow-500" aria-hidden="true">$
+                                    <!-- -->
+                                </span><span data-js="copy-button-value" class="text-gray-700 px-4 md:px-0 text-xs md:text-base">cargo install -f --git https://github.com/jez/as-tree</span></span><span class="sr-only">(click to copy to clipboard)</span><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8"></path>
+                            </svg></button>
+                        <div class="mt-8 flex justify-center">
+                            <div class="inline-flex rounded-md shadow"><a href="https://github.com/jez/as-tree" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700">View on GitHub</a></div>
+                            <div class="ml-3 inline-flex"><a href="https://github.com/jez/as-tree" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-700 bg-yellow-100 hover:bg-yellow-200">View Release</a></div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="bg-white">
+                    <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+                        <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer"></nav>
+                        <div class="mt-8 flex justify-center space-x-6"><a href="https://github.com/jez" class="text-gray-400 hover:text-gray-500"><svg fill="currentColor" viewBox="0 0 24 24" class="h-6 w-6">
+                                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                                </svg></a></div>
+                        <p class="mt-8 text-center text-base text-gray-400">as-tree is built by Jake Zimmerman. Open Source and Free for the world.</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript">
+    AOS.init({
+        once: true
+    });
+</script>
+<script type="text/javascript">
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("[data-js='copy-code']").forEach(code =>
+            code.addEventListener("click", (event) => {
+                const content = event.target.closest('div').textContent;
+                navigator.clipboard.writeText(content);
+            })
+        )
+
+        document.querySelectorAll("[data-js='copy-button']").forEach(button =>
+            button.addEventListener("click", (event) => {
+                const content = event.target.closest("[data-js='copy-button-value']").textContent;
+                navigator.clipboard.writeText(content);
+            })
+        )
+    });
+</script>
+
+</html>
