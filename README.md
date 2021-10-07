@@ -49,6 +49,11 @@ cd as-tree
 make install
 ```
 
+To install with Homebrew (on MacOS):
+```shell
+brew install as-tree
+```
+
 ## Usage
 
 ```
